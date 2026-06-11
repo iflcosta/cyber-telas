@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 120" width="400" height="120">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0066ff"/>
+      <stop offset="100%" stop-color="#0052cc"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ff88"/>
+      <stop offset="100%" stop-color="#0066ff"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Ícone / Monograma -->
+  <g transform="translate(10, 10)">
+    <rect width="100" height="100" rx="22" fill="url(#bgGrad)"/>
+    <!-- Letra C estilizada -->
+    <path d="M28 28 L28 72 L40 72 L40 52 L56 72 L72 72 L50 47 L70 28 L56 28 L40 47 L40 28 Z" fill="white"/>
+    <!-- Indicador "online" / circuit -->
+    <circle cx="78" cy="26" r="6" fill="#00ff88"/>
+    <circle cx="78" cy="26" r="10" fill="none" stroke="#00ff88" stroke-width="1.5" opacity="0.4"/>
+  </g>
+
+  <!-- Texto principal -->
+  <g transform="translate(130, 0)">
+    <text x="0" y="58" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-size="36" font-weight="500" fill="#0a1929">
+      Cyber <tspan font-weight="800" fill="#0066ff">Informática</tspan>
+    </text>
+    <!-- Tagline -->
+    <text x="0" y="82" font-family="'Inter', 'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" fill="#4a5568" letter-spacing="2">
+      CENTRO DE REMANUFATURA INDUSTRIAL
+    </text>
+    <!-- Linha decorativa -->
+    <rect x="0" y="92" width="240" height="3" rx="1.5" fill="url(#lineGrad)"/>
+  </g>
+</svg>
