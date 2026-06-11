@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from 'react';
 import { MARCAS, type MarcaId, type Faixa, formatBRL, calcularPreco, FAIXAS_PADRAO } from '@/lib/pricing';
-import { createBrowserSupabaseClient, type Modelo } from '@/lib/supabase';
+import { createBrowserSupabaseClient } from '@/lib/supabase-client';
+import type { Modelo } from '@/lib/supabase-client';
 import { Phone } from 'lucide-react';
 
 type ModelosPorMarca = Record<string, Modelo[]>;

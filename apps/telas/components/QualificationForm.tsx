@@ -2,8 +2,8 @@
 
 import { useState } from 'react';
 import { validarCNPJ, validarEmail, validarTelefone, maskCNPJ, maskTelefone } from '@/lib/validators';
-import { createBrowserSupabaseClient } from '@/lib/supabase';
-import { calcularPreco, FAIXAS_PADRAO, type Faixa } from '@/lib/pricing';
+import { createBrowserSupabaseClient } from '@/lib/supabase-client';
+import { calcularPreco, FAIXAS_PADRAO } from '@/lib/pricing';
 import { Phone } from 'lucide-react';
 
 export default function QualificationForm() {

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { createAdminClient } from '@/lib/supabase';
+import { createAdminClient } from '@/lib/supabase-server';
 import { agruparPorMarca } from '@/lib/pricing';
 import PriceCalculator from '@/components/PriceCalculator';
 import QualificationForm from '@/components/QualificationForm';
