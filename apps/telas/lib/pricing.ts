@@ -1,4 +1,4 @@
-import type { Faixa, Modelo } from './supabase';
+import type { Faixa, Modelo } from './supabase-client';
 
 export type { Faixa };
 
