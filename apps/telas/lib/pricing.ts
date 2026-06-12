@@ -1,5 +1,7 @@
 import type { Faixa, Modelo } from './supabase';
 
+export type { Faixa };
+
 // ============================================
 // Cálculo de preço baseado em faixas
 // ============================================
