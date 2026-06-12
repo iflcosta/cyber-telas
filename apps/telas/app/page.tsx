@@ -10,15 +10,20 @@ import { Phone } from 'lucide-react';
 // ============================================
 export default async function HomePage() {
   // Buscar modelos do Supabase (server-side)
+  // createAdminClient() retorna null se as env vars não estiverem configuradas
   const supabase = createAdminClient();
-  const { data: modelosRaw } = await supabase
-    .from('modelos_preco')
-    .select('*')
-    .eq('ativo', true)
-    .order('marca', { ascending: true })
-    .order('valor_display_novo', { ascending: false });
+  let modelos: any[] = [];
 
-  const modelos = modelosRaw || [];
+  if (supabase) {
+    const { data: modelosRaw } = await supabase
+      .from('modelos_preco')
+      .select('*')
+      .eq('ativo', true)
+      .order('marca', { ascending: true })
+      .order('valor_display_novo', { ascending: false });
+    modelos = modelosRaw || [];
+  }
+
   const modelosPorMarca = agruparPorMarca(modelos);
 
   return (

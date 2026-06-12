@@ -11,18 +11,23 @@ import { cookies } from 'next/headers';
 // ============================================
 // Cliente admin (service_role) - bypassa RLS
 // Use APENAS em Route Handlers onde você confia no input
+// Retorna null se as env vars não estiverem configuradas
+// (permite o build/build-time prerender passar sem Supabase)
 // ============================================
 export function createAdminClient() {
-  return createSupabaseClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    {
-      auth: {
-        autoRefreshToken: false,
-        persistSession: false,
-      },
-    }
-  );
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!url || !key) {
+    return null;
+  }
+
+  return createSupabaseClient(url, key, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  });
 }
 
 // ============================================
