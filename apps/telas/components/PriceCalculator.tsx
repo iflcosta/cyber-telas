@@ -21,7 +21,9 @@ export default function PriceCalculator({
   const supabase = useMemo(() => createBrowserSupabaseClient(), []);
 
   // Carregar faixas do Supabase na primeira renderização
+  // (se o cliente não estiver configurado, mantém as FAIXAS_PADRAO)
   useState(() => {
+    if (!supabase) return null;
     supabase
       .from('configuracao_precos')
       .select('faixas')
