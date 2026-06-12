@@ -56,6 +56,12 @@ export default function QualificationForm() {
 
     setLoading(true);
     try {
+      if (!supabase) {
+        setError('Sistema temporariamente indisponível. Tente novamente em alguns minutos.');
+        setLoading(false);
+        return;
+      }
+
       const { error: dbError } = await supabase.from('leads').insert({
         razao_social: form.razao_social,
         cnpj: form.cnpj.replace(/\D/g, ''),
