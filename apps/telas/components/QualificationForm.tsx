@@ -1,12 +1,19 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { validarCNPJ, validarEmail, validarTelefone, maskCNPJ, maskTelefone } from '@/lib/validators';
 import { createBrowserSupabaseClient } from '@/lib/supabase-client';
-import { calcularPreco, FAIXAS_PADRAO } from '@/lib/pricing';
+import { calcularPreco, parseBRL, FAIXAS_PADRAO, formatBRL } from '@/lib/pricing';
+import type { Modelo } from '@/lib/supabase-client';
 import { Phone } from 'lucide-react';
 
-export default function QualificationForm() {
+type ModelosPorMarca = Record<string, Modelo[]>;
+
+export default function QualificationForm({
+  modelosPorMarca,
+}: {
+  modelosPorMarca?: ModelosPorMarca;
+} = {}) {
   const supabase = createBrowserSupabaseClient();
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -23,6 +30,13 @@ export default function QualificationForm() {
     modelo_display: '',
     valor_display_novo: '',
   });
+
+  // Modelos filtrados pela marca selecionada (para o <datalist>).
+  // Quando o usuário troca de marca, o datalist atualiza com as opções da nova marca.
+  const modelosFiltrados = useMemo<Modelo[]>(() => {
+    if (!form.marca || !modelosPorMarca) return [];
+    return modelosPorMarca[form.marca] || [];
+  }, [form.marca, modelosPorMarca]);
 
   const handleChange = (field: string, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -51,7 +65,12 @@ export default function QualificationForm() {
       return;
     }
 
-    const valor = parseFloat(form.valor_display_novo);
+    const valor = parseBRL(form.valor_display_novo);
+    if (valor <= 0) {
+      setError('Valor do display inválido. Informe um valor positivo.');
+      setLoading(false);
+      return;
+    }
     const { preco, faixa } = calcularPreco(valor, FAIXAS_PADRAO);
 
     setLoading(true);
@@ -214,11 +233,30 @@ export default function QualificationForm() {
           <input
             type="text"
             required
+            list="form-modelos-datalist"
             placeholder="Modelo (ex: iPhone 15 Pro Max)"
             className="form-input sm:col-span-2"
             value={form.modelo_display}
-            onChange={(e) => handleChange('modelo_display', e.target.value)}
+            onChange={(e) => {
+              handleChange('modelo_display', e.target.value);
+              // Auto-preencher valor_display_novo se o modelo casar com a lista
+              const match = modelosFiltrados.find((m) => m.modelo === e.target.value);
+              if (match) {
+                setForm((prev) => ({
+                  ...prev,
+                  modelo_display: match.modelo,
+                  valor_display_novo: String(match.valor_display_novo),
+                }));
+              }
+            }}
           />
+          <datalist id="form-modelos-datalist">
+            {modelosFiltrados.map((m) => (
+              <option key={m.id} value={m.modelo}>
+                {formatBRL(m.valor_display_novo)}
+              </option>
+            ))}
+          </datalist>
         </div>
         <input
           type="number"

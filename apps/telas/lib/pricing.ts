@@ -36,6 +36,53 @@ export function formatBRL(valor: number): string {
 }
 
 /**
+ * Faz o parse de uma string de valor monetário em BRL para número.
+ *
+ * Aceita:
+ *   "1500"       → 1500
+ *   "1500,50"    → 1500.5
+ *   "1.500"      → 1500
+ *   "1.500,00"   → 1500
+ *   "1.500,99"   → 1500.99
+ *
+ * Difere de `parseFloat(str.replace(/\D/g, ''))` que converteria
+ * "1.500,00" em 150000 (R$ 150.000 — cairia em faixa errada).
+ *
+ * @returns número em reais, ou 0 se a string for vazia/inválida.
+ */
+export function parseBRL(str: string | null | undefined): number {
+  if (!str) return 0;
+  const cleaned = String(str).trim();
+  if (cleaned === '') return 0;
+
+  // Se tem vírgula, é o separador decimal BR: remove pontos (milhares) e troca vírgula por ponto
+  if (cleaned.includes(',')) {
+    const normalized = cleaned.replace(/\./g, '').replace(',', '.');
+    const n = parseFloat(normalized);
+    return Number.isFinite(n) ? n : 0;
+  }
+
+  // Sem vírgula: pode ter pontos como separador de milhar OU ser número puro.
+  // Heurística: se tem 2+ pontos OU o último grupo tem exatamente 3 dígitos,
+  // trata pontos como separador de milhar. Caso contrário, pode ser decimal.
+  const pontos = cleaned.match(/\./g) || [];
+  if (pontos.length > 1) {
+    const n = parseFloat(cleaned.replace(/\./g, ''));
+    return Number.isFinite(n) ? n : 0;
+  }
+  if (pontos.length === 1) {
+    const partes = cleaned.split('.');
+    // "1.500" → milhar. "1500.5" → decimal.
+    if (partes[1] && partes[1].length === 3) {
+      const n = parseFloat(cleaned.replace(/\./g, ''));
+      return Number.isFinite(n) ? n : 0;
+    }
+  }
+  const n = parseFloat(cleaned);
+  return Number.isFinite(n) ? n : 0;
+}
+
+/**
  * Agrupa modelos por marca para autocomplete
  */
 export function agruparPorMarca(modelos: Modelo[]): Record<string, Modelo[]> {

@@ -25,9 +25,11 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Space Grotesk', 'Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        // next/font/google injeta CSS vars (--font-inter, etc.) em <html>.
+        // Usar as vars garante que o font-family bata com a fonte self-hospedada.
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-space-grotesk)', 'var(--font-inter)', 'sans-serif'],
+        mono: ['var(--font-jetbrains-mono)', 'ui-monospace', 'monospace'],
       },
       animation: {
         'float-orb': 'float-orb 20s ease-in-out infinite',

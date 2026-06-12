@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { MARCAS, type MarcaId, type Faixa, formatBRL, calcularPreco, FAIXAS_PADRAO } from '@/lib/pricing';
+import { useState, useMemo, useEffect } from 'react';
+import { MARCAS, type MarcaId, type Faixa, formatBRL, parseBRL, calcularPreco, FAIXAS_PADRAO } from '@/lib/pricing';
 import { createBrowserSupabaseClient } from '@/lib/supabase-client';
 import type { Modelo } from '@/lib/supabase-client';
 import { Phone } from 'lucide-react';
@@ -20,21 +20,31 @@ export default function PriceCalculator({
 
   const supabase = useMemo(() => createBrowserSupabaseClient(), []);
 
-  // Carregar faixas do Supabase na primeira renderização
-  // (se o cliente não estiver configurado, mantém as FAIXAS_PADRAO)
-  useState(() => {
-    if (!supabase) return null;
-    supabase
-      .from('configuracao_precos')
-      .select('faixas')
-      .eq('id', 1)
-      .eq('ativo', true)
-      .single()
-      .then(({ data }) => {
-        if (data?.faixas) setFaixas(data.faixas as Faixa[]);
-      });
-    return null;
-  });
+  // Carregar faixas do Supabase após a primeira renderização.
+  // useEffect (não useState com side-effect) — roda só no client, uma vez,
+  // e respeita StrictMode sem causar double-fetch problemático.
+  useEffect(() => {
+    if (!supabase) return;
+    let cancelled = false;
+    (async () => {
+      try {
+        const { data } = await supabase
+          .from('configuracao_precos')
+          .select('faixas')
+          .eq('id', 1)
+          .eq('ativo', true)
+          .single();
+        if (!cancelled && data?.faixas) {
+          setFaixas(data.faixas as Faixa[]);
+        }
+      } catch {
+        // Silencia erro: mantém FAIXAS_PADRAO em uso
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [supabase]);
 
   const modelosFiltrados = useMemo(() => {
     if (!marcaSelecionada) return [];
@@ -43,12 +53,14 @@ export default function PriceCalculator({
 
   const valorDisplay = useMemo(() => {
     if (modeloSelecionado) return modeloSelecionado.valor_display_novo;
-    const num = parseFloat(valorCustom.replace(/\D/g, ''));
-    return isNaN(num) ? 0 : num;
+    // parseBRL entende "1500", "1500,50", "1.500,00" etc.
+    return parseBRL(valorCustom);
   }, [modeloSelecionado, valorCustom]);
 
   const cotacao = useMemo(() => {
-    if (valorDisplay === 0) return null;
+    // Bloqueia valores <= 0: evita que um input vazio, zero ou negativo
+    // caia no fallback "última faixa" (Flagship) do calcularPreco.
+    if (valorDisplay <= 0) return null;
     return calcularPreco(valorDisplay, faixas);
   }, [valorDisplay, faixas]);
 
@@ -204,7 +216,7 @@ export default function PriceCalculator({
               </div>
 
               <div className="mt-4 p-3 bg-white/5 rounded-lg flex gap-2 text-xs text-gray-400">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green flex-shrink-0 mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green flex-shrink-0 mt-0.5" aria-hidden="true">
                   <circle cx="12" cy="12" r="10" />
                   <line x1="12" y1="16" x2="12" y2="12" />
                   <line x1="12" y1="8" x2="12.01" y2="8" />

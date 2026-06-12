@@ -3,6 +3,7 @@ import { createAdminClient } from '@/lib/supabase-server';
 import { agruparPorMarca } from '@/lib/pricing';
 import PriceCalculator from '@/components/PriceCalculator';
 import QualificationForm from '@/components/QualificationForm';
+import ScrollReveal from '@/components/ScrollReveal';
 import { Phone } from 'lucide-react';
 
 // ============================================
@@ -44,7 +45,7 @@ export default async function HomePage() {
 
       <PriceCalculator modelosPorMarca={modelosPorMarca} />
 
-      <FormSection />
+      <FormSection modelosPorMarca={modelosPorMarca} />
 
       <Footer />
     </>
@@ -172,7 +173,7 @@ function StatsBand() {
       <div className="container">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {stats.map((stat, i) => (
-            <div key={i} className="relative reveal">
+            <ScrollReveal key={i} immediate className="relative">
               {i > 0 && <div className="hidden md:block absolute -left-4 top-1/2 -translate-y-1/2 w-px h-1/2 bg-gradient-to-b from-transparent via-cyber-blue/30 to-transparent" />}
               <div className="text-display text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text leading-none mb-2">
                 {stat.value}
@@ -180,7 +181,7 @@ function StatsBand() {
               <div className="text-xs text-gray-400 uppercase tracking-wider font-medium">
                 {stat.label}
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>
@@ -214,9 +215,10 @@ function CredentialsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {cards.map((card, i) => (
-            <article
+            <ScrollReveal
               key={i}
-              className="reveal bg-white border border-gray-200 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyber-blue hover:shadow-[0_20px_50px_-10px_rgba(0,102,255,0.2)]"
+              as="article"
+              className="bg-white border border-gray-200 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyber-blue hover:shadow-[0_20px_50px_-10px_rgba(0,102,255,0.2)]"
               style={{ transitionDelay: `${i * 0.1}s` }}
             >
               <div className="w-14 h-14 bg-gradient-to-br from-cyber-blue to-cyber-blue-hover rounded-xl flex items-center justify-center mb-6 shadow-[0_8px_20px_rgba(0,102,255,0.3)]">
@@ -237,7 +239,7 @@ function CredentialsSection() {
                                 </svg>
                                 {card.tag}
                             </span>
-                        </article>
+                        </ScrollReveal>
                     ))}
                 </div>
             </div>
@@ -274,9 +276,9 @@ function AdvantagesSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="flex flex-col gap-3">
             {advantages.map((adv, i) => (
-              <div
+              <ScrollReveal
                 key={i}
-                className="reveal flex gap-5 p-5 bg-white/[0.02] border border-white/[0.06] rounded-2xl transition-all duration-300 hover:bg-cyber-blue/5 hover:border-cyber-blue/30 hover:translate-x-1"
+                className="flex gap-5 p-5 bg-white/[0.02] border border-white/[0.06] rounded-2xl transition-all duration-300 hover:bg-cyber-blue/5 hover:border-cyber-blue/30 hover:translate-x-1"
                 style={{ transitionDelay: `${i * 0.1}s` }}
               >
                 <span className="flex-shrink-0 w-9 h-9 bg-gradient-to-br from-cyber-blue to-cyber-blue-hover rounded-md flex items-center justify-center text-white text-sm font-mono font-bold">
@@ -290,7 +292,7 @@ function AdvantagesSection() {
                     {adv.desc}
                   </p>
                 </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
 
@@ -430,9 +432,9 @@ function PricingSection({ modelos }: { modelos: any[] }) {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {faixas.map((faixa, i) => (
-            <div
+            <ScrollReveal
               key={i}
-              className="reveal bg-white border border-gray-200 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyber-blue hover:shadow-[0_10px_30px_-5px_rgba(0,102,255,0.2)]"
+              className="bg-white border border-gray-200 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyber-blue hover:shadow-[0_10px_30px_-5px_rgba(0,102,255,0.2)]"
               style={{ transitionDelay: `${i * 0.1}s` }}
             >
               <div className="text-xs font-mono text-cyber-blue font-semibold uppercase tracking-wider mb-2">
@@ -447,7 +449,7 @@ function PricingSection({ modelos }: { modelos: any[] }) {
               <div className="text-xs text-gray-600 leading-relaxed">
                 {faixa.desc}
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
 
@@ -471,7 +473,7 @@ function PricingSection({ modelos }: { modelos: any[] }) {
 // ============================================
 // Form Section (Server Component wrapper)
 // ============================================
-function FormSection() {
+function FormSection({ modelosPorMarca }: { modelosPorMarca: Record<string, any[]> }) {
   return (
     <section className="section bg-navy-900 text-white relative overflow-hidden" id="form-section">
       <div className="absolute inset-0 bg-radial-gradient from-cyber-blue/15 to-transparent" style={{
@@ -493,7 +495,7 @@ function FormSection() {
           </div>
 
           <div className="p-6 sm:p-10">
-            <QualificationForm />
+            <QualificationForm modelosPorMarca={modelosPorMarca} />
           </div>
         </div>
       </div>
