@@ -1,4 +1,4 @@
-import type { Faixa } from './supabase';
+import type { Faixa } from './supabase-client';
 
 // ============================================
 // Validações de dados brasileiros
