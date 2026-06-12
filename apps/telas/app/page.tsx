@@ -477,7 +477,7 @@ function FormSection() {
         <div className="max-w-2xl mx-auto bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden">
           <div className="p-10 sm:p-12 text-center border-b border-white/8">
             <span className="inline-block font-mono text-xs text-circuit-green uppercase tracking-widest mb-3">
-              // Portal de Parceria
+              &#47;&#47; Portal de Parceria
             </span>
             <h2 className="text-display text-3xl font-bold mb-2 tracking-tight">
               Solicite Credenciamento
@@ -510,7 +510,7 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
             <h4 className="font-mono text-xs text-cyber-blue-light uppercase tracking-widest mb-5 font-semibold">
-              // Dados Institucionais
+              &#47;&#47; Dados Institucionais
             </h4>
             <p className="font-semibold mb-1">Cyber Informática</p>
             <p className="text-sm text-gray-300 mb-1">Unidade de Engenharia de Componentes Eletrônicos S/A</p>
@@ -523,7 +523,7 @@ function Footer() {
 
           <div>
             <h4 className="font-mono text-xs text-cyber-blue-light uppercase tracking-widest mb-5 font-semibold">
-              // Segmento
+              &#47;&#47; Segmento
             </h4>
             <p className="text-sm text-gray-300 leading-relaxed">
               Serviço restrito a pessoas jurídicas do ramo de eletroeletrônicos. Atendimento exclusivo para assistências técnicas, lojistas de tecnologia e parceiros de manutenção credenciados.
@@ -532,7 +532,7 @@ function Footer() {
 
           <div>
             <h4 className="font-mono text-xs text-cyber-blue-light uppercase tracking-widest mb-5 font-semibold">
-              // Contato
+              &#47;&#47; Contato
             </h4>
             <p className="mb-3">
               <a href="tel:+5511954369269" className="inline-flex items-center gap-2 text-gray-300 hover:text-circuit-green transition-colors">
