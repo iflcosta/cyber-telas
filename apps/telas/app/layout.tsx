@@ -28,9 +28,13 @@ const jetbrainsMono = JetBrains_Mono({
 
 const SITE_URL = 'https://telas.cyberinformatica.tech';
 const OG_IMAGE = `${SITE_URL}/og-image.png`;
-const TITLE = 'Cyber Informática | Centro de Remanufatura e Laminação Industrial de Displays';
+// ============================================
+// Meta tags otimizadas (alvos: title ≤60, description ≤125)
+// Anteriores: title 77, description 153 (truncavam em X/LinkedIn/mobile)
+// ============================================
+const TITLE = 'Laminação OCA Industrial de Displays · Cyber Informática';
 const DESCRIPTION =
-  'Centro de Remanufatura e Laminação Industrial de Displays. Exclusivo para Assistências Técnicas e Lojistas de Tecnologia. Faturamento Exclusivo via CNPJ.';
+  'Laminação OCA industrial B2B. Para assistências técnicas e lojistas. Apenas CNPJ. Lotes prontos em 24h.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
