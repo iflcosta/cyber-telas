@@ -7,11 +7,12 @@ import ScrollReveal from '@/components/ScrollReveal';
 import { Phone } from 'lucide-react';
 
 // ============================================
-// ISR: re-renderiza a página a cada 60s
-// Garante dados fresh do Supabase (modelos + faixas)
-// sem derrubar a performance (CDN cacheia entre rebuilds)
+// Render dinâmico: busca Supabase a cada request
+// Garante dados fresh (modelos + faixas) sempre
+// Sem cache de fetch persistente (que estava quebrando)
 // ============================================
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 // ============================================
 // Server Component (RSC) - renderizado no servidor
