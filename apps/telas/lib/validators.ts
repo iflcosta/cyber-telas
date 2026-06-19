@@ -30,7 +30,9 @@ export function validarCNPJ(cnpj: string): boolean {
     peso = peso === 2 ? 9 : peso - 1;
   }
   const digito2 = 11 - (soma % 11) >= 10 ? 0 : 11 - (soma % 11);
-  return parseInt(cnpjLimpo[14]) === digito2;
+  // cnpjLimpo tem 14 chars (índices 0-13); [13] é o 14º char = segundo DV.
+  // Antes era [14] (off-by-one) → sempre undefined → sempre false → 100% rejeitado.
+  return parseInt(cnpjLimpo[13]) === digito2;
 }
 
 /**
@@ -58,22 +60,43 @@ export function validarTelefone(telefone: string): boolean {
 
 /**
  * Aplica máscara de CNPJ: 00.000.000/0001-00
+ *
+ * Aceita qualquer tamanho intermediário (0-14 dígitos) e formata incrementalmente.
+ * Versão antiga tinha 3 bugs: regex com tamanho exato + `>` em vez de `>=` faziam
+ * máscaras pularem em 6/9/13/14 chars. Resolvido com regex `{0,N}` flexíveis.
  */
 export function maskCNPJ(value: string): string {
-  let v = value.replace(/\D/g, '').slice(0, 14);
-  if (v.length > 12) v = v.replace(/^(\d{2})(\d{3})(\d{4})(\d{2})$/, '$1.$2.$3/$4');
-  else if (v.length > 8) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{1,4})$/, '$1.$2.$3/$4');
-  else if (v.length > 5) v = v.replace(/^(\d{2})(\d{3})(\d{3})$/, '$1.$2.$3');
-  else if (v.length > 2) v = v.replace(/^(\d{2})(\d{0,3})$/, '$1.$2');
-  return v;
+  const v = value.replace(/\D/g, '').slice(0, 14);
+  if (v.length === 0) return '';
+  // Usa regex com grupos de tamanho flexível (0-N) pra aceitar qualquer prefixo válido.
+  return v.replace(/^(\d{0,2})(\d{0,3})(\d{0,3})(\d{0,4})(\d{0,2})$/, (_m, a, b, c, d, e) => {
+    let out = a;
+    if (b) out += `.${b}`;
+    if (c) out += `.${c}`;
+    if (d) out += `/${d}`;
+    if (e) out += `-${e}`;
+    return out;
+  });
 }
 
 /**
  * Aplica máscara de telefone: (00) 00000-0000
+ *
+ * Aceita 0-11 dígitos e formata incrementalmente.
+ * Versão antiga tinha 2 bugs: regex de tamanho exato + `$3` vazio deixava
+ * um traço pendurado no meio da string.
  */
 export function maskTelefone(value: string): string {
-  let v = value.replace(/\D/g, '').slice(0, 11);
-  if (v.length > 6) v = v.replace(/^(\d{2})(\d{5})(\d{0,4})$/, '($1) $2-$3');
-  else if (v.length > 2) v = v.replace(/^(\d{2})(\d{0,5})$/, '($1) $2');
-  return v;
+  const v = value.replace(/\D/g, '').slice(0, 11);
+  if (v.length === 0) return '';
+  return v.replace(/^(\d{0,2})(\d{0,5})(\d{0,4})$/, (_m, ddd, p1, p2) => {
+    let out = '';
+    // Só abre parêntese quando DDD tem 2 dígitos. Com 1 dígito, mostra cru
+    // (assim `maskTelefone('1')` retorna `'1'`, não `'(1'`).
+    if (ddd.length === 2) out += `(${ddd}) `;
+    else out += ddd;
+    if (p1) out += p1;
+    if (p2) out += `-${p2}`;
+    return out;
+  });
 }
