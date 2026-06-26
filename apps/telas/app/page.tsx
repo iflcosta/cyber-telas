@@ -88,7 +88,7 @@ function Hero() {
         <div className="max-w-3xl mx-auto text-center">
           <span className="inline-flex items-center gap-2 px-5 py-2 bg-cyber-blue/10 border border-cyber-blue/30 rounded-full text-cyber-blue-light font-mono text-xs font-medium tracking-widest uppercase mb-8 backdrop-blur">
             <span className="w-1.5 h-1.5 bg-circuit-green rounded-full shadow-[0_0_8px_rgba(0,255,136,0.5)]" />
-            Cyber Informática · Exclusivo B2B
+            Cyber Informática · Laminação OCA Industrial
           </span>
 
           <h1 className="text-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
@@ -97,27 +97,40 @@ function Hero() {
           </h1>
 
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-                    Para <strong className="text-white">Assistências Técnicas</strong> e <strong className="text-white">Lojistas de Tecnologia</strong>.
-                    Faturamento exclusivo via CNPJ. Recupere displays originais com custo de atacado e margem de 60-70%.
+                    Para <strong className="text-white">Assistências Técnicas</strong>, <strong className="text-white">Lojistas de Tecnologia</strong> e <strong className="text-white">consumidores finais</strong>.
+                    Empresas faturam via CNPJ com margem de 60-70%. Pessoas físicas recebem cotação direta via WhatsApp.
                 </p>
 
-                <a
-                    href="#form-section"
-                    className="btn-primary text-base"
-                >
-                    Solicitar Credenciamento
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                    </svg>
-                </a>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
+                    <a
+                        href="#form-section"
+                        className="btn-primary text-base"
+                    >
+                        Solicitar Credenciamento
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                    <a
+                        href="https://wa.me/5511954369269?text=Ol%C3%A1!%20Vim%20do%20site%20e%20sou%20pessoa%20f%C3%ADsica.%20Quero%20cotar%20lamina%C3%A7%C3%A3o%20OCA%20para%20meu%20aparelho."
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/15 text-white font-semibold rounded-full hover:bg-white/10 hover:border-circuit-green transition-all text-base"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-circuit-green">
+                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        </svg>
+                        Sou pessoa física
+                    </a>
+                </div>
 
                 <div className="mt-12 pt-8 border-t border-white/8 flex flex-wrap justify-center gap-6 sm:gap-12 text-sm text-gray-300">
                     <div className="flex items-center gap-2">
                         <span className="w-8 h-8 bg-circuit-green/10 border border-circuit-green/30 rounded-lg flex items-center justify-center">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                         </span>
-                        <span><strong className="text-white">Exclusivo</strong> CNPJ</span>
+                        <span><strong className="text-white">Faturamento</strong> CNPJ</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <span className="w-8 h-8 bg-circuit-green/10 border border-circuit-green/30 rounded-lg flex items-center justify-center">
@@ -130,6 +143,12 @@ function Hero() {
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                         </span>
                         <span>Atendimento <strong className="text-white">Nacional</strong></span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <span className="w-8 h-8 bg-circuit-green/10 border border-circuit-green/30 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                        </span>
+                        <span>Cotação <strong className="text-white">direta</strong></span>
                     </div>
                 </div>
             </div>
@@ -495,7 +514,7 @@ function Footer() {
           <img src="/logo-horizontal-footer.png" alt="Cyber Informática" className="h-16 w-auto" />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div>
             <h4 className="font-mono text-xs text-cyber-blue-light uppercase tracking-widest mb-5 font-semibold">
               &#47;&#47; Dados Institucionais
@@ -505,17 +524,40 @@ function Footer() {
             <p className="text-sm text-gray-300 mb-3">Endereço Industrial: mediante credenciamento</p>
             <span className="inline-flex items-center gap-2 px-3.5 py-2 bg-circuit-green/10 border border-circuit-green/30 rounded-full text-xs font-semibold text-circuit-green mt-2">
               <span className="w-1.5 h-1.5 bg-circuit-green rounded-full shadow-[0_0_8px_rgba(0,255,136,0.5)]" />
-              Serviço restrito a pessoas jurídicas
+              Faturamento principal via CNPJ
             </span>
           </div>
 
           <div>
             <h4 className="font-mono text-xs text-cyber-blue-light uppercase tracking-widest mb-5 font-semibold">
-              &#47;&#47; Segmento
+              &#47;&#47; Para Empresas
             </h4>
-            <p className="text-sm text-gray-300 leading-relaxed">
-              Serviço restrito a pessoas jurídicas do ramo de eletroeletrônicos. Atendimento exclusivo para assistências técnicas, lojistas de tecnologia e parceiros de manutenção credenciados.
+            <p className="text-sm text-gray-300 leading-relaxed mb-3">
+              Atendimento prioritário para assistências técnicas, lojistas de
+              tecnologia e parceiros de manutenção credenciados. Faturamento
+              mensal via CNPJ com condições PJ.
             </p>
+            <a href="#form-section" className="text-sm text-circuit-green hover:underline">
+              Solicitar credenciamento →
+            </a>
+          </div>
+
+          <div>
+            <h4 className="font-mono text-xs text-cyber-blue-light uppercase tracking-widest mb-5 font-semibold">
+              &#47;&#47; Para Você
+            </h4>
+            <p className="text-sm text-gray-300 leading-relaxed mb-3">
+              Pessoa física também pode solicitar cotação direta via WhatsApp.
+              Avaliamos modelo, valor e prazo do aparelho individualmente.
+            </p>
+            <a
+              href="https://wa.me/5511954369269?text=Ol%C3%A1!%20Vim%20do%20site%20e%20sou%20pessoa%20f%C3%ADsica.%20Quero%20cotar%20lamina%C3%A7%C3%A3o%20OCA."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm text-circuit-green hover:underline"
+            >
+              Falar no WhatsApp →
+            </a>
           </div>
 
           <div>
@@ -546,7 +588,7 @@ function Footer() {
         <div className="pt-8 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
           <div className="text-center sm:text-left">
             <p>© 2026 Cyber Informática · Centro de Remanufatura e Laminação Industrial de Displays. Todos os direitos reservados.</p>
-            <p className="mt-1">Este site não comercializa com consumidores finais. Serviço exclusivamente B2B.</p>
+            <p className="mt-1">Atendemos empresas (CNPJ, faturamento mensal) e pessoas físicas (cotação direta via WhatsApp). Cadastro sujeito a verificação cadastral.</p>
           </div>
           <nav aria-label="Documentos legais" className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
             <Link
