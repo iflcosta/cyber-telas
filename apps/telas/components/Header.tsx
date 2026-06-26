@@ -21,7 +21,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: '#advantages', label: 'Vantagens', sectionId: 'advantages' },
   { href: '#logistics', label: 'Logística', sectionId: 'logistics' },
   { href: '#pricing', label: 'Preços', sectionId: 'pricing' },
-  { href: '#catalog', label: 'Catálogo', sectionId: 'catalog' },
+  { href: '#cotacao', label: 'Cotação', sectionId: 'cotacao' },
   { href: '#form-section', label: 'Credenciamento', sectionId: 'form-section' },
 ];
 

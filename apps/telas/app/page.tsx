@@ -568,16 +568,16 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
             assistência técnica. Cliente final paga <strong>70%</strong> dessa
             referência (economiza 30% vs. troca completa), lojista credenciado paga
             <strong> 35%</strong>, e lojista premium (parceria estratégica) paga
-            <strong> 25%</strong>. Tabela completa por modelo no PDF do catálogo.
+            <strong> 25%</strong>. Tabela detalhada por modelo via WhatsApp (lojistas).
           </div>
         </div>
 
         <div className="text-center mt-10">
           <a
-            href="#catalog"
+            href="#cotacao"
             className="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-cyber-blue text-cyber-blue font-semibold rounded-lg hover:bg-cyber-blue hover:text-white transition-all"
           >
-            Baixar catálogo completo (.pdf)
+            Ver cotação para pessoa física
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>

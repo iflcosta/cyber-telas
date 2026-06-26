@@ -29,9 +29,11 @@ GRAY_700 = colors.HexColor('#374151')
 GRAY_500 = colors.HexColor('#6b7280')
 GRAY_200 = colors.HexColor('#e5e7eb')
 
+# PDF e gerado LOCALMENTE em assets/ (workspace root).
+# NAO e deployado no site — Iago envia manualmente aos lojistas via WhatsApp.
 OUTPUT = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
-    'apps', 'telas', 'public', 'catalogo-cyber.pdf'
+    'assets', 'catalogo-cyber.pdf'
 )
 
 # ============================================================================
