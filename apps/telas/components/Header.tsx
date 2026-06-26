@@ -21,7 +21,7 @@ const NAV_ITEMS: NavItem[] = [
   { href: '#advantages', label: 'Vantagens', sectionId: 'advantages' },
   { href: '#logistics', label: 'Logística', sectionId: 'logistics' },
   { href: '#pricing', label: 'Preços', sectionId: 'pricing' },
-  { href: '#price-calculator', label: 'Calculadora', sectionId: 'price-calculator' },
+  { href: '#catalog', label: 'Catálogo', sectionId: 'catalog' },
   { href: '#form-section', label: 'Credenciamento', sectionId: 'form-section' },
 ];
 
@@ -100,6 +100,53 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-[rgba(5,10,20,0.85)] backdrop-blur-xl border-b border-cyber-blue/15">
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyber-blue to-circuit-green opacity-50" />
 
+      {/* ============================================================
+          Sub-bar acima do header — contexto de persona (B2B + B2C)
+          Facilita a navegação deixando claro pra quem é cada caminho.
+          Mobile: mostra só os 2 atalhos. Desktop: horário também.
+          ============================================================ */}
+      <div className="bg-cyber-blue/[0.06] border-b border-cyber-blue/15">
+        <div className="container">
+          <div className="flex items-center justify-between h-9 text-[11px] sm:text-xs">
+            <div className="flex items-center gap-3 sm:gap-5 text-gray-400">
+              <span className="hidden sm:inline-flex items-center gap-1.5">
+                <span className="w-1 h-1 bg-circuit-green rounded-full shadow-[0_0_6px_rgba(0,255,136,0.5)]" />
+                Atendimento ativo
+              </span>
+              <a
+                href="#form-section"
+                onClick={(e) => { e.preventDefault(); handleNavClick('#form-section'); }}
+                className="inline-flex items-center gap-1.5 text-gray-200 hover:text-circuit-green transition-colors font-medium"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyber-blue-light">
+                  <path d="M3 7h18M3 12h18M3 17h18"/>
+                </svg>
+                <span>Lojistas e Assistências</span>
+              </a>
+              <span className="hidden sm:inline text-white/15">·</span>
+              <a
+                href="https://wa.me/5511954369269?text=Ol%C3%A1!%20Vim%20do%20site%20e%20sou%20pessoa%20f%C3%ADsica.%20Quero%20cotar%20lamina%C3%A7%C3%A3o%20OCA%20para%20meu%20aparelho."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-gray-300 hover:text-circuit-green transition-colors"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-circuit-green">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+                <span>Pessoa Física</span>
+              </a>
+            </div>
+            <div className="hidden md:flex items-center gap-4 text-gray-500">
+              <span>Seg-Sex · 08h às 18h</span>
+              <span className="text-white/15">·</span>
+              <a href="mailto:contato@cyberinformatica.tech" className="hover:text-circuit-green transition-colors">
+                contato@cyberinformatica.tech
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="container">
         <div className="flex items-center justify-between py-3 lg:py-4 gap-4 lg:gap-6">
           {/* Logo */}
@@ -175,14 +222,14 @@ export default function Header() {
         <>
           {/* Backdrop */}
           <div
-            className="lg:hidden fixed inset-0 top-[64px] sm:top-[80px] bg-black/60 backdrop-blur-sm z-40 animate-fade-up"
+            className="lg:hidden fixed inset-0 top-[108px] sm:top-[124px] bg-black/60 backdrop-blur-sm z-40 animate-fade-up"
             onClick={() => setOpen(false)}
             aria-hidden="true"
           />
           {/* Painel */}
           <div
             id="mobile-drawer"
-            className="lg:hidden fixed inset-x-0 top-[64px] sm:top-[80px] z-40 bg-navy-950 border-b border-cyber-blue/30 animate-fade-up"
+            className="lg:hidden fixed inset-x-0 top-[108px] sm:top-[124px] z-40 bg-navy-950 border-b border-cyber-blue/30 animate-fade-up"
             role="dialog"
             aria-modal="true"
             aria-label="Menu de navegação"
