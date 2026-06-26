@@ -29,6 +29,10 @@ export interface ModelPrice {
 // APPLE
 // ============================================================
 const APPLE_IPHONE: ModelPrice[] = [
+  { model: 'iPhone 17 Pro Max',  full: 4000, lojista: 1500 },
+  { model: 'iPhone 17 Pro',      full: 3600, lojista: 1250 },
+  { model: 'iPhone 17 Air',      full: 3200, lojista: 1100 },
+  { model: 'iPhone 17',          full: 2800, lojista: 1000 },
   { model: 'iPhone 16 Pro Max',  full: 3500, lojista: 1200 },
   { model: 'iPhone 16 Pro',      full: 3200, lojista: 1100 },
   { model: 'iPhone 16 Plus',     full: 2800, lojista: 1000 },
