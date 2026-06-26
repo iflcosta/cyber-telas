@@ -4,7 +4,7 @@ import { agruparPorMarca } from '@/lib/pricing';
 import PriceCalculator from '@/components/PriceCalculator';
 import QualificationForm from '@/components/QualificationForm';
 import ScrollReveal from '@/components/ScrollReveal';
-import { Phone } from 'lucide-react';
+import Header from '@/components/Header';
 
 // ============================================
 // Render dinâmico: busca Supabase a cada request
@@ -37,7 +37,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <Topbar />
+      <Header />
 
       <Hero />
 
@@ -57,33 +57,6 @@ export default async function HomePage() {
 
       <Footer />
     </>
-  );
-}
-
-// ============================================
-// Topbar
-// ============================================
-function Topbar() {
-  return (
-    <header className="sticky top-0 z-50 bg-[rgba(5,10,20,0.85)] backdrop-blur-xl border-b border-cyber-blue/15">
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyber-blue to-circuit-green opacity-50" />
-
-      <div className="container">
-        <div className="flex items-center justify-between py-4 gap-6">
-          <Link href="/" className="flex items-center gap-3 flex-shrink-1 min-w-0">
-            <img src="/logo-horizontal-header.png" alt="Cyber Informática" className="h-16 sm:h-20 w-auto" />
-          </Link>
-          <a
-            href="tel:+5511954369269"
-            className="inline-flex items-center gap-2 px-4 py-2 bg-cyber-blue/8 border border-cyber-blue/25 text-white text-sm font-semibold rounded-full hover:bg-cyber-blue/15 hover:border-circuit-green transition-all whitespace-nowrap"
-          >
-            <span className="w-2 h-2 bg-circuit-green rounded-full shadow-[0_0_8px_rgba(0,255,136,0.5)] animate-pulse-ring" />
-            <Phone className="w-4 h-4 text-circuit-green" />
-            <span className="hidden sm:inline">(11) 95436-9269</span>
-          </a>
-        </div>
-      </div>
-    </header>
   );
 }
 
@@ -267,7 +240,7 @@ function AdvantagesSection() {
   ];
 
   return (
-    <section className="section bg-navy-950 text-white relative overflow-hidden">
+    <section id="advantages" className="section bg-navy-950 text-white relative overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyber-blue to-circuit-green" />
 
       <div className="container relative">
@@ -426,7 +399,7 @@ function PricingSection({ modelos }: { modelos: any[] }) {
   ];
 
   return (
-    <section className="section bg-gray-50">
+    <section id="pricing" className="section bg-gray-50">
       <div className="container">
         <div className="section-head max-w-3xl mx-auto text-center mb-12">
           <span className="section-eyebrow">Tabela de Preços</span>
