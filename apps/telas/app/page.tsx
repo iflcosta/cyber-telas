@@ -105,7 +105,7 @@ function Hero() {
 
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
                     Para <strong className="text-white">Assistências Técnicas</strong>, <strong className="text-white">Lojistas de Tecnologia</strong> e <strong className="text-white">consumidores finais</strong>.
-                    Empresas faturam via CNPJ com margem de 60-70%. Pessoas físicas recebem cotação direta via WhatsApp.
+                    <strong className="text-circuit-green"> Cliente final paga só 70%</strong> do que gastaria na troca completa. Lojistas credenciados, <strong className="text-circuit-green">35%</strong>. Parceiros estratégicos, <strong className="text-circuit-green">25%</strong>.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
@@ -165,24 +165,35 @@ function Hero() {
 }
 
 // ============================================
-// Stats Band
+// Stats Band — 3 niveis de preco + credenciamento
 // ============================================
 function StatsBand() {
   const stats = [
-    { value: '60-70%', label: 'Margem de Lucro' },
-    { value: 'R$ 120', label: 'Custo por Display' },
-    { value: '500+', label: 'Parceiros Ativos' },
-    { value: '24h', label: 'Análise de CNPJ' },
+    { value: '70%',  label: 'Cliente Final',        tone: 'default' as const },
+    { value: '35%',  label: 'Lojista Credenciado',  tone: 'cool' as const },
+    { value: '25%',  label: 'Lojista Premium',      tone: 'premium' as const },
+    { value: '24h',  label: 'Análise de CNPJ',      tone: 'default' as const },
   ];
 
   return (
     <section className="bg-navy-900 border-y border-cyber-blue/15 py-12">
       <div className="container">
+        <div className="text-center mb-8">
+          <span className="font-mono text-xs text-cyber-blue-light uppercase tracking-widest">
+            {'//'} Três níveis de preço · Uma única tecnologia
+          </span>
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {stats.map((stat, i) => (
             <ScrollReveal key={i} immediate className="relative">
               {i > 0 && <div className="hidden md:block absolute -left-4 top-1/2 -translate-y-1/2 w-px h-1/2 bg-gradient-to-b from-transparent via-cyber-blue/30 to-transparent" />}
-              <div className="text-display text-3xl sm:text-4xl lg:text-5xl font-bold gradient-text leading-none mb-2">
+              <div className={`text-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-none mb-2 ${
+                stat.tone === 'premium'
+                  ? 'text-circuit-green'
+                  : stat.tone === 'cool'
+                  ? 'text-cyber-blue-light'
+                  : 'gradient-text'
+              }`}>
                 {stat.value}
               </div>
               <div className="text-xs text-gray-400 uppercase tracking-wider font-medium">
@@ -191,6 +202,10 @@ function StatsBand() {
             </ScrollReveal>
           ))}
         </div>
+        <p className="text-center text-xs text-gray-500 mt-6 max-w-2xl mx-auto">
+          Percentuais aplicados sobre o valor de troca completa da tela (peça + mão
+          de obra) em assistência técnica. Cliente final economiza 30% comparado à troca completa.
+        </p>
       </div>
     </section>
   );
@@ -260,9 +275,9 @@ function CredentialsSection() {
 function AdvantagesSection() {
   const advantages = [
     { n: '01', title: 'Sem Investimento em Maquinário', desc: 'Elimine o investimento de dezenas de milhares de reais. Utilize nossa infraestrutura fabril completa.' },
-    { n: '02', title: 'Margem de 60% a 70%', desc: 'Custo de R$ 120 vs. R$ 400 em tela paralela. Sua margem salta para níveis premium.' },
+    { n: '02', title: 'Três Níveis de Preço', desc: 'Cliente final paga 70% da troca completa. Lojistas credenciados, 35%. Parceiros estratégicos, 25%.' },
     { n: '03', title: 'Display Original Preservado', desc: 'Recupere o display original do cliente. Sem retorno por touch falho ou brilho irregular.' },
-    { n: '04', title: 'Pagamento PJ em 60 Dias', desc: 'Condições flexíveis para lojistas e parceiros de manutenção com prazos estendidos.' },
+    { n: '04', title: 'Pagamento PJ Flexível', desc: 'Condições de 14, 30 ou 60 dias conforme volume. Prazos estendidos para parceiros premium.' },
   ];
 
   return (
@@ -308,21 +323,21 @@ function AdvantagesSection() {
 
             <div className="relative">
               <div className="font-mono text-xs text-cyber-blue-light uppercase tracking-widest mb-2">
-                Comparativo de Custo
+                Cliente Final Economiza
               </div>
               <div className="text-display text-5xl sm:text-6xl font-bold gradient-text leading-none mb-2">
-                3x mais margem
+                30%
               </div>
               <p className="text-gray-300 mb-6 text-sm">
-                Laminação terceirizada vs. tela paralela importada
+                Paga só 70% do que gastaria na troca completa em assistência.
               </p>
 
               <div className="space-y-2">
                 {[
-                  { label: 'Custo de Reposição', val: 'R$ 120,00', positive: true },
-                  { label: 'Margem de Lucro', val: '60% a 70%', positive: true },
-                  { label: 'Risco de Garantia', val: 'Praticamente Nulo', positive: true },
-                  { label: 'Display do Cliente', val: 'Preservado', positive: true },
+                  { label: 'Cliente Final',     val: '70% da troca', positive: true },
+                  { label: 'Lojista',           val: '35% da troca', positive: true },
+                  { label: 'Lojista Premium',   val: '25% da troca', positive: true },
+                  { label: 'Display do Cliente', val: 'Preservado',  positive: true },
                 ].map((row, i) => (
                   <div key={i} className="flex justify-between items-center px-4 py-3 bg-white/[0.04] rounded-md text-sm">
                     <span className="text-gray-300">{row.label}</span>
