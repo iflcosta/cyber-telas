@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { createAdminClient } from '@/lib/supabase-server';
 import { agruparPorMarca } from '@/lib/pricing';
-import PriceCalculator from '@/components/PriceCalculator';
+import CatalogSection from '@/components/CatalogSection';
 import QualificationForm from '@/components/QualificationForm';
 import ScrollReveal from '@/components/ScrollReveal';
 import Header from '@/components/Header';
@@ -51,7 +51,7 @@ export default async function HomePage() {
 
       <PricingSection modelos={modelos} />
 
-      <PriceCalculator modelosPorMarca={modelosPorMarca} />
+      <CatalogSection />
 
       <FormSection modelosPorMarca={modelosPorMarca} />
 
@@ -436,10 +436,10 @@ function PricingSection({ modelos }: { modelos: any[] }) {
 
         <div className="text-center mt-10">
           <a
-            href="#price-calculator"
+            href="#catalog"
             className="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-cyber-blue text-cyber-blue font-semibold rounded-lg hover:bg-cyber-blue hover:text-white transition-all"
           >
-            Calcular preço do seu modelo
+            Baixar catálogo completo (.pdf)
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>

@@ -27,8 +27,11 @@ apps/telas/
 │   ├── admin/                  # Painel admin (em breve)
 │   └── api/                    # API routes (em breve)
 ├── components/
-│   ├── PriceCalculator.tsx     # Calculador de preço (Client)
-│   └── QualificationForm.tsx   # Form de cadastro (Client)
+│   ├── CatalogSection.tsx      # CTA para download do catálogo .pdf (Client)
+│   ├── CookieConsent.tsx       # Banner LGPD
+│   ├── Header.tsx              # Nav sticky + sub-bar persona (Client)
+│   ├── QualificationForm.tsx   # Form de cadastro (Client)
+│   └── ScrollReveal.tsx        # IntersectionObserver wrapper (Client)
 ├── lib/
 │   ├── supabase.ts             # Cliente Supabase + tipos
 │   ├── pricing.ts              # Cálculo de preço + marcas
