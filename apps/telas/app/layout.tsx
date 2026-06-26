@@ -1,6 +1,35 @@
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
+import CookieConsent from '@/components/CookieConsent';
 import './globals.css';
+
+// ============================================
+// LGPD consent default — inline no head (não usa next/script por questão de ordem)
+// É pequeno e executa antes de qualquer tag de analytics.
+// ============================================
+const consentDefaultScript = `
+(function(){
+  try {
+    var KEY='lgpd-consent';
+    var raw=localStorage.getItem(KEY);
+    var granted={analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',functionality_storage:'granted',security_storage:'granted'};
+    window.dataLayer=window.dataLayer||[];
+    window.gtag=window.gtag||function(){window.dataLayer.push(arguments);};
+    if(raw){
+      var c=JSON.parse(raw);
+      if(c && c.v===1){
+        granted.analytics_storage=c.analytics?'granted':'denied';
+        granted.ad_storage=c.marketing?'granted':'denied';
+        granted.ad_user_data=c.marketing?'granted':'denied';
+        granted.ad_personalization=c.marketing?'granted':'denied';
+        gtag('consent','update',granted);
+        return;
+      }
+    }
+    gtag('consent','default',Object.assign({wait_for_update:500},granted));
+  } catch(e) {}
+})();
+`;
 
 // ============================================
 // next/font/google — self-hosted, zero FOUT, mata warning do ESLint
@@ -173,8 +202,15 @@ export default function RootLayout({
       lang="pt-BR"
       className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}
     >
+      <head>
+        {/* LGPD consent mode default — DEVE rodar antes de qualquer tag de analytics */}
+        <script
+          dangerouslySetInnerHTML={{ __html: consentDefaultScript }}
+        />
+      </head>
       <body>
         {children}
+        <CookieConsent />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

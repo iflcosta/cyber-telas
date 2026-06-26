@@ -6,6 +6,11 @@
   html {
     scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
+    /* Avisa o browser que o site é dark → controles nativos (select, scrollbar,
+       campos de data) adotam tema escuro automaticamente. Sem isso, <select>
+       aberto mostra opções em fundo branco com texto cinza do sistema,
+       ficando ilegível quando o site é escuro. */
+    color-scheme: dark;
   }
 
   body {
@@ -21,6 +26,14 @@
   svg:not([width]):not([height]) {
     width: 1em;
     height: 1em;
+  }
+
+  /* Belt-and-suspenders: garante estilo nas <option> abertas.
+     O Chrome moderno respeita; Firefox também. Safari ignora color
+     em <option> mas usa o background, e color-scheme: dark já cobre. */
+  select option {
+    background-color: #0a1929; /* navy-900 */
+    color: #ffffff;
   }
 }
 

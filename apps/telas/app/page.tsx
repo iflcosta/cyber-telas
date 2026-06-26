@@ -570,9 +570,26 @@ function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-white/8 text-center text-xs text-gray-500">
-          <p>© 2026 Cyber Informática · Centro de Remanufatura e Laminação Industrial de Displays. Todos os direitos reservados.</p>
-          <p className="mt-2">Este site não comercializa com consumidores finais. Serviço exclusivamente B2B.</p>
+        <div className="pt-8 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+          <div className="text-center sm:text-left">
+            <p>© 2026 Cyber Informática · Centro de Remanufatura e Laminação Industrial de Displays. Todos os direitos reservados.</p>
+            <p className="mt-1">Este site não comercializa com consumidores finais. Serviço exclusivamente B2B.</p>
+          </div>
+          <nav aria-label="Documentos legais" className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+            <Link
+              href="/politica-privacidade"
+              className="text-gray-400 hover:text-circuit-green transition-colors"
+            >
+              Política de Privacidade
+            </Link>
+            <span className="hidden sm:inline text-white/15">·</span>
+            <Link
+              href="/termos-de-uso"
+              className="text-gray-400 hover:text-circuit-green transition-colors"
+            >
+              Termos de Uso
+            </Link>
+          </nav>
         </div>
       </div>
     </footer>
