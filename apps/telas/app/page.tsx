@@ -1,6 +1,13 @@
 import Link from 'next/link';
 import { createAdminClient } from '@/lib/supabase-server';
 import { agruparPorMarca } from '@/lib/pricing';
+import {
+  PRICING_TIERS,
+  CUSTOMER_LEVEL_DESCRIPTIONS,
+  type CustomerLevel,
+  calcularPrecoTier,
+  formatPriceRange,
+} from '@/lib/pricing-tiers';
 import CatalogSection from '@/components/CatalogSection';
 import QualificationForm from '@/components/QualificationForm';
 import ScrollReveal from '@/components/ScrollReveal';
@@ -406,15 +413,13 @@ function LogisticsSection() {
 }
 
 // ============================================
-// Pricing Section (Tabela de Faixas)
+// Pricing Section (Tabela de Faixas — 3 níveis de preço)
 // ============================================
-function PricingSection({ modelos }: { modelos: any[] }) {
-  const faixas = [
-    { min: 0, max: 500, preco: 80, label: 'Econômico', desc: 'Moto G, Galaxy A, iPhone XR' },
-    { min: 500, max: 1000, preco: 120, label: 'Intermediário', desc: 'iPhone 11, Galaxy S21' },
-    { min: 1000, max: 2000, preco: 180, label: 'Premium', desc: 'iPhone 14, Galaxy S23' },
-    { min: 2000, max: 3500, preco: 250, label: 'Top', desc: 'iPhone 15 Pro, S24 Ultra' },
-    { min: 3500, max: 999999, preco: 320, label: 'Flagship', desc: 'iPhone 15 Pro Max' },
+function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
+  const levels: { id: CustomerLevel; badge: string; sub: string; tone: 'default' | 'cool' | 'premium' }[] = [
+    { id: 'final',           badge: 'Cliente Final',    sub: '70% da troca completa',    tone: 'default' },
+    { id: 'lojista',         badge: 'Lojista',          sub: '35% da troca completa',    tone: 'cool' },
+    { id: 'lojista-premium', badge: 'Lojista Premium',  sub: '25% da troca completa',    tone: 'premium' },
   ];
 
   return (
@@ -423,34 +428,133 @@ function PricingSection({ modelos }: { modelos: any[] }) {
         <div className="section-head max-w-3xl mx-auto text-center mb-12">
           <span className="section-eyebrow">Tabela de Preços</span>
           <h2 className="section-title text-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-navy-900 leading-tight mb-4">
-            Preço baseado no modelo do display
+            Três níveis de preço, uma única tecnologia
           </h2>
           <p className="section-description text-lg text-gray-600">
-            5 faixas progressivas. Quanto mais alto o valor do display, maior sua economia.
+            O preço do nosso serviço é calculado como um percentual do que você pagaria
+            pela troca completa da tela em uma assistência técnica (peça + mão de obra).
+            Quem credencia, quem compra em volume e quem é parceiro estratégico tem
+            condições diferentes.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-          {faixas.map((faixa, i) => (
-            <ScrollReveal
-              key={i}
-              className="bg-white border border-gray-200 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-cyber-blue hover:shadow-[0_10px_30px_-5px_rgba(0,102,255,0.2)]"
-              style={{ transitionDelay: `${i * 0.1}s` }}
+        {/* Legenda dos 3 níveis */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-10">
+          {levels.map((lvl) => (
+            <div
+              key={lvl.id}
+              className={`rounded-xl px-5 py-4 border ${
+                lvl.tone === 'premium'
+                  ? 'bg-circuit-green/10 border-circuit-green/30'
+                  : lvl.tone === 'cool'
+                  ? 'bg-cyber-blue/5 border-cyber-blue/20'
+                  : 'bg-white border-gray-200'
+              }`}
             >
-              <div className="text-xs font-mono text-cyber-blue font-semibold uppercase tracking-wider mb-2">
-                {faixa.label}
+              <div className="flex items-baseline justify-between gap-2 mb-1">
+                <span className={`text-xs font-mono uppercase tracking-wider ${
+                  lvl.tone === 'premium' ? 'text-circuit-green-dark' : 'text-cyber-blue'
+                }`}>
+                  {lvl.badge}
+                </span>
+                <span className="text-xs text-gray-500">{lvl.sub}</span>
               </div>
-              <div className="text-display text-4xl font-bold gradient-text mb-1">
-                R$ {faixa.preco}
-              </div>
-              <div className="text-xs text-gray-500 mb-3">
-                por unidade
-              </div>
-              <div className="text-xs text-gray-600 leading-relaxed">
-                {faixa.desc}
-              </div>
-            </ScrollReveal>
+              <p className="text-sm text-gray-700 leading-snug">
+                {CUSTOMER_LEVEL_DESCRIPTIONS[lvl.id]}
+              </p>
+            </div>
           ))}
+        </div>
+
+        {/* Tabela por faixa */}
+        <div className="max-w-5xl mx-auto bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)]">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead className="bg-navy-950 text-white">
+                <tr>
+                  <th className="text-left px-6 py-4 font-mono text-xs uppercase tracking-widest">Faixa</th>
+                  <th className="text-left px-6 py-4 font-mono text-xs uppercase tracking-widest hidden md:table-cell">Referência</th>
+                  <th className="text-right px-6 py-4 font-mono text-xs uppercase tracking-widest">Cliente Final</th>
+                  <th className="text-right px-6 py-4 font-mono text-xs uppercase tracking-widest">Lojista</th>
+                  <th className="text-right px-6 py-4 font-mono text-xs uppercase tracking-widest">
+                    <span className="inline-flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 bg-circuit-green rounded-full" />
+                      Premium
+                    </span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {PRICING_TIERS.map((tier, i) => (
+                  <tr
+                    key={tier.id}
+                    className={`border-t border-gray-100 ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}
+                  >
+                    <td className="px-6 py-5">
+                      <div className="text-display text-base font-semibold text-navy-900">
+                        {tier.label}
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1 md:hidden">
+                        Ref: {formatPriceRange(tier.refMin, tier.refMax)}
+                      </div>
+                      <div className="text-xs text-gray-600 mt-1 leading-snug hidden md:block">
+                        {tier.tagline}
+                      </div>
+                    </td>
+                    <td className="px-6 py-5 hidden md:table-cell">
+                      <div className="text-sm font-medium text-gray-700">
+                        {formatPriceRange(tier.refMin, tier.refMax)}
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1 leading-snug">
+                        {tier.tagline}
+                      </div>
+                    </td>
+                    <td className="px-6 py-5 text-right">
+                      <div className="text-display text-lg font-semibold text-navy-900">
+                        {formatPriceRange(
+                          calcularPrecoTier(tier.refMin, 'final'),
+                          isFinite(tier.refMax) ? calcularPrecoTier(tier.refMax, 'final') : Number.POSITIVE_INFINITY,
+                        )}
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        por unidade
+                      </div>
+                    </td>
+                    <td className="px-6 py-5 text-right">
+                      <div className="text-display text-lg font-semibold text-cyber-blue">
+                        {formatPriceRange(
+                          calcularPrecoTier(tier.refMin, 'lojista'),
+                          isFinite(tier.refMax) ? calcularPrecoTier(tier.refMax, 'lojista') : Number.POSITIVE_INFINITY,
+                        )}
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        por unidade
+                      </div>
+                    </td>
+                    <td className="px-6 py-5 text-right bg-circuit-green/5">
+                      <div className="text-display text-lg font-semibold text-circuit-green-dark">
+                        {formatPriceRange(
+                          calcularPrecoTier(tier.refMin, 'lojista-premium'),
+                          isFinite(tier.refMax) ? calcularPrecoTier(tier.refMax, 'lojista-premium') : Number.POSITIVE_INFINITY,
+                        )}
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">
+                        por unidade
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 text-xs text-gray-500 leading-relaxed">
+            <strong className="text-navy-900">Como ler:</strong> a referência é o valor
+            médio de mercado para troca completa da tela (peça + mão de obra) em
+            assistência técnica. Cliente final paga <strong>70%</strong> dessa
+            referência (economiza 30% vs. troca completa), lojista credenciado paga
+            <strong> 35%</strong>, e lojista premium (parceria estratégica) paga
+            <strong> 25%</strong>. Tabela completa por modelo no PDF do catálogo.
+          </div>
         </div>
 
         <div className="text-center mt-10">
