@@ -12,6 +12,7 @@ import CatalogSection from '@/components/CatalogSection';
 import QualificationForm from '@/components/QualificationForm';
 import ScrollReveal from '@/components/ScrollReveal';
 import Header from '@/components/Header';
+import SchemaOrg from '@/components/SchemaOrg';
 
 // ============================================
 // Render dinâmico: busca Supabase a cada request
@@ -44,6 +45,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <SchemaOrg />
       <Header />
 
       <Hero />
