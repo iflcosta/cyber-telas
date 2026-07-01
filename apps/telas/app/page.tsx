@@ -106,7 +106,7 @@ function Hero() {
           </h1>
 
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-                    <strong className="text-circuit-green">Display original preservado em 24h.</strong>{' '}Laminação OCA industrial <strong className="text-white">a partir de R$ 175</strong> por unidade, para assistências técnicas, lojistas e pessoa física.
+                    <strong className="text-circuit-green">Display original preservado em 24h.</strong>{' '}Laminação OCA industrial para assistências técnicas, lojistas e pessoa física.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
