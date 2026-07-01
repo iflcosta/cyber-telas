@@ -175,17 +175,6 @@ const jsonLd = {
       serviceType: 'Laminação OCA Industrial de Displays',
       provider: { '@id': `${SITE_URL}/#business` },
       areaServed: { '@type': 'Country', name: 'Brasil' },
-      hasOfferCatalog: {
-        '@type': 'OfferCatalog',
-        name: 'Tabela de Faixas de Preço',
-        itemListElement: [
-          { '@type': 'Offer', name: 'Econômico', price: '80.00', priceCurrency: 'BRL' },
-          { '@type': 'Offer', name: 'Intermediário', price: '120.00', priceCurrency: 'BRL' },
-          { '@type': 'Offer', name: 'Premium', price: '180.00', priceCurrency: 'BRL' },
-          { '@type': 'Offer', name: 'Top', price: '250.00', priceCurrency: 'BRL' },
-          { '@type': 'Offer', name: 'Flagship', price: '320.00', priceCurrency: 'BRL' },
-        ],
-      },
       description:
         'Remanufatura e laminação OCA sob vácuo para displays de smartphones. Processamento de lotes para assistências técnicas e lojistas de tecnologia. Exclusivo B2B.',
     },

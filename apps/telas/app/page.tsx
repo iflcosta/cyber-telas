@@ -107,7 +107,7 @@ function Hero() {
 
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
                     Para <strong className="text-white">Assistências Técnicas</strong>, <strong className="text-white">Lojistas de Tecnologia</strong> e <strong className="text-white">consumidores finais</strong>.
-                    <strong className="text-circuit-green"> Cliente final paga só 70%</strong> do que gastaria na troca completa. Lojistas credenciados, <strong className="text-circuit-green">35%</strong>. Parceiros estratégicos, <strong className="text-circuit-green">25%</strong>.
+                    <strong className="text-circuit-green"> Cliente Final: a partir de R$ 175</strong> por unidade. Lojistas credenciados: <strong className="text-circuit-green">a partir de R$ 87</strong> por unidade. Para grandes volumes, condições diferenciadas via análise.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
@@ -171,10 +171,10 @@ function Hero() {
 // ============================================
 function StatsBand() {
   const stats = [
-    { value: '70%',  label: 'Cliente Final',        tone: 'default' as const },
-    { value: '35%',  label: 'Lojista Credenciado',  tone: 'cool' as const },
-    { value: '25%',  label: 'Lojista Premium',      tone: 'premium' as const },
-    { value: '24h',  label: 'Análise de CNPJ',      tone: 'default' as const },
+    { value: 'R$ 175', label: 'Cliente Final · a partir de', tone: 'default' as const },
+    { value: 'R$ 87', label: 'Lojista · a partir de',       tone: 'cool' as const },
+    { value: '60-70%', label: 'Margem do Parceiro',          tone: 'premium' as const },
+    { value: '24h',    label: 'Análise de CNPJ',             tone: 'default' as const },
   ];
 
   return (
@@ -182,7 +182,7 @@ function StatsBand() {
       <div className="container">
         <div className="text-center mb-8">
           <span className="font-mono text-xs text-cyber-blue-light uppercase tracking-widest">
-            {'//'} Três níveis de preço · Uma única tecnologia
+            {'//'} Dois níveis claros de preço · Mais uma curadoria estratégica
           </span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -205,8 +205,8 @@ function StatsBand() {
           ))}
         </div>
         <p className="text-center text-xs text-gray-500 mt-6 max-w-2xl mx-auto">
-          Percentuais aplicados sobre o valor de troca completa da tela (peça + mão
-          de obra) em assistência técnica. Cliente final economiza 30% comparado à troca completa.
+          Valores aplicados ao serviço completo de laminação OCA industrial.
+          Referência: troca completa em assistência técnica (peça + mão de obra).
         </p>
       </div>
     </section>
@@ -277,9 +277,9 @@ function CredentialsSection() {
 function AdvantagesSection() {
   const advantages = [
     { n: '01', title: 'Sem Investimento em Maquinário', desc: 'Elimine o investimento de dezenas de milhares de reais. Utilize nossa infraestrutura fabril completa.' },
-    { n: '02', title: 'Três Níveis de Preço', desc: 'Cliente final paga 70% da troca completa. Lojistas credenciados, 35%. Parceiros estratégicos, 25%.' },
+    { n: '02', title: 'Dois Níveis de Preço', desc: 'Cliente Final: a partir de R$ 175 por unidade. Lojistas credenciados: a partir de R$ 87 por unidade. Para grandes volumes, condições diferenciadas via análise.' },
     { n: '03', title: 'Display Original Preservado', desc: 'Recupere o display original do cliente. Sem retorno por touch falho ou brilho irregular.' },
-    { n: '04', title: 'Pagamento PJ Flexível', desc: 'Condições de 14, 30 ou 60 dias conforme volume. Prazos estendidos para parceiros premium.' },
+    { n: '04', title: 'Pagamento PJ Flexível', desc: 'Condições de 14, 30 ou 60 dias conforme volume. Prazos estendidos para grandes volumes.' },
   ];
 
   return (
@@ -325,21 +325,21 @@ function AdvantagesSection() {
 
             <div className="relative">
               <div className="font-mono text-xs text-cyber-blue-light uppercase tracking-widest mb-2">
-                Cliente Final Economiza
+                Cliente Final
               </div>
               <div className="text-display text-5xl sm:text-6xl font-bold gradient-text leading-none mb-2">
-                30%
+                R$ 175
               </div>
               <p className="text-gray-300 mb-6 text-sm">
-                Paga só 70% do que gastaria na troca completa em assistência.
+                Valor inicial para smartphones de entrada. Tabela completa por modelo abaixo.
               </p>
 
               <div className="space-y-2">
                 {[
-                  { label: 'Cliente Final',     val: '70% da troca', positive: true },
-                  { label: 'Lojista',           val: '35% da troca', positive: true },
-                  { label: 'Lojista Premium',   val: '25% da troca', positive: true },
-                  { label: 'Display do Cliente', val: 'Preservado',  positive: true },
+                  { label: 'Cliente Final',        val: 'a partir de R$ 175', positive: true },
+                  { label: 'Lojista Credenciado',  val: 'a partir de R$ 87', positive: true },
+                  { label: 'Margem do Parceiro',   val: '60-70%',             positive: true },
+                  { label: 'Display do Cliente',   val: 'Preservado',         positive: true },
                 ].map((row, i) => (
                   <div key={i} className="flex justify-between items-center px-4 py-3 bg-white/[0.04] rounded-md text-sm">
                     <span className="text-gray-300">{row.label}</span>
@@ -430,13 +430,12 @@ function LogisticsSection() {
 }
 
 // ============================================
-// Pricing Section (Tabela de Faixas — 3 níveis de preço)
+// Pricing Section (Tabela de Faixas — 2 níveis públicos + curadoria)
 // ============================================
 function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
-  const levels: { id: CustomerLevel; badge: string; sub: string; tone: 'default' | 'cool' | 'premium' }[] = [
-    { id: 'final',           badge: 'Cliente Final',    sub: '70% da troca completa',    tone: 'default' },
-    { id: 'lojista',         badge: 'Lojista',          sub: '35% da troca completa',    tone: 'cool' },
-    { id: 'lojista-premium', badge: 'Lojista Premium',  sub: '25% da troca completa',    tone: 'premium' },
+  const levels: { id: CustomerLevel; badge: string; sub: string; tone: 'default' | 'cool' }[] = [
+    { id: 'final',   badge: 'Cliente Final', sub: 'A partir de R$ 175 por unidade', tone: 'default' },
+    { id: 'lojista', badge: 'Lojista',       sub: 'A partir de R$ 87 por unidade', tone: 'cool' },
   ];
 
   return (
@@ -445,33 +444,29 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
         <div className="section-head max-w-3xl mx-auto text-center mb-12">
           <span className="section-eyebrow">Tabela de Preços</span>
           <h2 className="section-title text-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-navy-900 leading-tight mb-4">
-            Três níveis de preço, uma única tecnologia
+            Dois níveis de preço, uma única tecnologia
           </h2>
           <p className="section-description text-lg text-gray-600">
             O preço do nosso serviço é calculado como um percentual do que você pagaria
             pela troca completa da tela em uma assistência técnica (peça + mão de obra).
-            Quem credencia, quem compra em volume e quem é parceiro estratégico tem
-            condições diferentes.
+            Cliente final e lojistas credenciados têm tabelas diferentes. Para grandes
+            volumes, condições diferenciadas via análise.
           </p>
         </div>
 
-        {/* Legenda dos 3 níveis */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto mb-10">
+        {/* Legenda dos 2 níveis */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-10">
           {levels.map((lvl) => (
             <div
               key={lvl.id}
               className={`rounded-xl px-5 py-4 border ${
-                lvl.tone === 'premium'
-                  ? 'bg-circuit-green/10 border-circuit-green/30'
-                  : lvl.tone === 'cool'
+                lvl.tone === 'cool'
                   ? 'bg-cyber-blue/5 border-cyber-blue/20'
                   : 'bg-white border-gray-200'
               }`}
             >
               <div className="flex items-baseline justify-between gap-2 mb-1">
-                <span className={`text-xs font-mono uppercase tracking-wider ${
-                  lvl.tone === 'premium' ? 'text-circuit-green-dark' : 'text-cyber-blue'
-                }`}>
+                <span className="text-xs font-mono uppercase tracking-wider text-cyber-blue">
                   {lvl.badge}
                 </span>
                 <span className="text-xs text-gray-500">{lvl.sub}</span>
@@ -493,12 +488,6 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
                   <th className="text-left px-6 py-4 font-mono text-xs uppercase tracking-widest hidden md:table-cell">Referência</th>
                   <th className="text-right px-6 py-4 font-mono text-xs uppercase tracking-widest">Cliente Final</th>
                   <th className="text-right px-6 py-4 font-mono text-xs uppercase tracking-widest">Lojista</th>
-                  <th className="text-right px-6 py-4 font-mono text-xs uppercase tracking-widest">
-                    <span className="inline-flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 bg-circuit-green rounded-full" />
-                      Premium
-                    </span>
-                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -548,17 +537,6 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
                         por unidade
                       </div>
                     </td>
-                    <td className="px-6 py-5 text-right bg-circuit-green/5">
-                      <div className="text-display text-lg font-semibold text-circuit-green-dark">
-                        {formatPriceRange(
-                          calcularPrecoTier(tier.refMin, 'lojista-premium'),
-                          isFinite(tier.refMax) ? calcularPrecoTier(tier.refMax, 'lojista-premium') : Number.POSITIVE_INFINITY,
-                        )}
-                      </div>
-                      <div className="text-xs text-gray-500 mt-1">
-                        por unidade
-                      </div>
-                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -569,8 +547,8 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
             médio de mercado para troca completa da tela (peça + mão de obra) em
             assistência técnica. Cliente final paga <strong>70%</strong> dessa
             referência (economiza 30% vs. troca completa), lojista credenciado paga
-            <strong> 35%</strong>, e lojista premium (parceria estratégica) paga
-            <strong> 25%</strong>. Tabela detalhada por modelo via WhatsApp (lojistas).
+            <strong> 35%</strong> (a partir de R$ 87). Para grandes volumes, condições
+            diferenciadas via análise CNPJ.
           </div>
         </div>
 
