@@ -106,8 +106,7 @@ function Hero() {
           </h1>
 
           <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-                    Para <strong className="text-white">Assistências Técnicas</strong>, <strong className="text-white">Lojistas de Tecnologia</strong> e <strong className="text-white">consumidores finais</strong>.
-                    <strong className="text-circuit-green"> Cliente Final: a partir de R$ 175</strong> por unidade. Lojistas credenciados: <strong className="text-circuit-green">a partir de R$ 87</strong> por unidade. Para grandes volumes, condições diferenciadas via análise.
+                    <strong className="text-circuit-green">Display original preservado em 24h.</strong>{' '}Laminação OCA industrial <strong className="text-white">a partir de R$ 175</strong> por unidade, para assistências técnicas, lojistas e pessoa física.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
@@ -277,7 +276,7 @@ function CredentialsSection() {
 function AdvantagesSection() {
   const advantages = [
     { n: '01', title: 'Sem Investimento em Maquinário', desc: 'Elimine o investimento de dezenas de milhares de reais. Utilize nossa infraestrutura fabril completa.' },
-    { n: '02', title: 'Dois Níveis de Preço', desc: 'Cliente Final: a partir de R$ 175 por unidade. Lojistas credenciados: a partir de R$ 87 por unidade. Para grandes volumes, condições diferenciadas via análise.' },
+    { n: '02', title: 'Dois Níveis de Preço', desc: 'R$ 175 por unidade para o cliente final. R$ 87 para lojistas credenciados.' },
     { n: '03', title: 'Display Original Preservado', desc: 'Recupere o display original do cliente. Sem retorno por touch falho ou brilho irregular.' },
     { n: '04', title: 'Pagamento PJ Flexível', desc: 'Condições de 14, 30 ou 60 dias conforme volume. Prazos estendidos para grandes volumes.' },
   ];
@@ -447,10 +446,8 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
             Dois níveis de preço, uma única tecnologia
           </h2>
           <p className="section-description text-lg text-gray-600">
-            O preço do nosso serviço é calculado como um percentual do que você pagaria
-            pela troca completa da tela em uma assistência técnica (peça + mão de obra).
-            Cliente final e lojistas credenciados têm tabelas diferentes. Para grandes
-            volumes, condições diferenciadas via análise.
+            Calculado como percentual da troca completa em assistência técnica (peça + mão de obra).
+            Cliente final e lojista têm tabelas próprias.
           </p>
         </div>
 
@@ -544,11 +541,8 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
           </div>
           <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 text-xs text-gray-500 leading-relaxed">
             <strong className="text-navy-900">Como ler:</strong> a referência é o valor
-            médio de mercado para troca completa da tela (peça + mão de obra) em
-            assistência técnica. Cliente final paga <strong>70%</strong> dessa
-            referência (economiza 30% vs. troca completa), lojista credenciado paga
-            <strong> 35%</strong> (a partir de R$ 87). Para grandes volumes, condições
-            diferenciadas via análise CNPJ.
+            médio de mercado da troca completa em assistência (peça + mão de obra).
+            Cliente final paga <strong>70%</strong>, lojista credenciado paga <strong>35%</strong>.
           </div>
         </div>
 
