@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 import CookieConsent from '@/components/CookieConsent';
+import UTMTracker from '@/components/UTMTracker';
 import './globals.css';
 
 // ============================================
@@ -167,7 +168,11 @@ const jsonLd = {
           closes: '18:00',
         },
       ],
-      sameAs: [],
+      sameAs: [
+        'https://www.cyberinformatica.tech',
+        'https://www.instagram.com/cyberinfo.brag',
+        'https://www.facebook.com/cyberinformatica',
+      ],
     },
     {
       '@type': 'Service',
@@ -186,6 +191,9 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // GA4 ID via env var. Se vazio, não carrega gtag.js.
+  const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID;
+
   return (
     <html
       lang="pt-BR"
@@ -196,8 +204,22 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{ __html: consentDefaultScript }}
         />
+        {/* GA4 — só carrega se GA4_ID estiver configurado. Consent mode acima
+            garante que analytics_storage fica 'denied' até o usuário aceitar. */}
+        {GA4_ID && (
+          <>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`} />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `gtag('config', '${GA4_ID}', { anonymize_ip: true });`,
+              }}
+            />
+          </>
+        )}
       </head>
       <body>
+        {/* UTM tracker — popula sessionStorage a partir dos params da URL */}
+        <UTMTracker />
         {children}
         <CookieConsent />
         <script

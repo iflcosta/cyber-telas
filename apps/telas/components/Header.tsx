@@ -8,6 +8,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Menu, X, Phone } from 'lucide-react';
+import TrackedWhatsAppLink from './TrackedWhatsAppLink';
 
 type NavItem = {
   href: string;
@@ -124,17 +125,20 @@ export default function Header() {
                 <span>Lojistas e Assistências</span>
               </a>
               <span className="hidden sm:inline text-white/15">·</span>
-              <a
-                href="https://wa.me/5511954369269?text=Ol%C3%A1!%20Vim%20do%20site%20e%20sou%20pessoa%20f%C3%ADsica.%20Quero%20cotar%20lamina%C3%A7%C3%A3o%20OCA%20para%20meu%20aparelho."
+              <TrackedWhatsAppLink
+                phone="5511954369269"
+                message="Olá! Vim do site e sou pessoa física. Quero cotar laminação OCA para o meu aparelho."
+                source="header_pf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-gray-300 hover:text-circuit-green transition-colors"
+                ariaLabel="WhatsApp pessoa física"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-circuit-green">
                   <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
                 </svg>
                 <span>Pessoa Física</span>
-              </a>
+              </TrackedWhatsAppLink>
             </div>
             <div className="hidden md:flex items-center gap-4 text-gray-500">
               <span>Seg-Sex · 08h às 18h</span>
@@ -260,14 +264,29 @@ export default function Header() {
               </ul>
 
               <div className="mt-4 pt-4 border-t border-white/8">
+                <TrackedWhatsAppLink
+                  phone="5511954369269"
+                  message="Olá! Vim do site e quero saber mais sobre credenciamento."
+                  source="header_credenciamento"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-primary w-full justify-center text-sm"
+                  ariaLabel="Falar no WhatsApp sobre credenciamento"
+                >
+                  Falar no WhatsApp
+                </TrackedWhatsAppLink>
+              </div>
+
+              {/* Cross-link pro site principal */}
+              <div className="mt-3 pt-3 border-t border-white/8">
                 <a
-                  href="https://wa.me/5511954369269?text=Ol%C3%A1!%20Vim%20do%20site%20e%20quero%20saber%20mais%20sobre%20credenciamento."
+                  href="https://www.cyberinformatica.tech"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
-                  className="btn-primary w-full justify-center text-sm"
+                  className="block w-full px-4 py-3 text-sm text-gray-400 hover:text-circuit-green transition-colors text-center"
                 >
-                  Falar no WhatsApp
+                  ← Loja física · PC, notebook e celular
                 </a>
               </div>
             </nav>

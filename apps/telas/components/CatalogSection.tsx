@@ -27,8 +27,9 @@ import {
   findTier,
   type PricingTier,
 } from '@/lib/pricing-tiers';
+import TrackedWhatsAppLink from './TrackedWhatsAppLink';
 
-const WHATSAPP_BASE = 'https://wa.me/5511954369269?text=';
+const WHATSAPP_BASE = 'https://wa.me/5511954369269';
 const WHATSAPP_FALLBACK_MSG =
   'Olá! Vim do site e quero cotar laminação OCA para o meu aparelho.';
 
@@ -173,15 +174,20 @@ export default function CatalogSection() {
                   </div>
                 </div>
 
-                <a
-                  href={whatsappUrl}
+                <TrackedWhatsAppLink
+                  phone="5511954369269"
+                  message={selected
+                    ? `Olá! Vim do site e quero cotar laminação OCA para o ${selected.brand} ${selected.model} (referência de troca em assistência R$ ${formatBRLShort(selected.full).replace('R$', 'R$ ')}).`
+                    : WHATSAPP_FALLBACK_MSG}
+                  source="catalog_modelo"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-2 w-full px-5 py-3 bg-circuit-green text-navy-950 font-bold rounded-lg hover:bg-circuit-green-light transition-all shadow-[0_8px_24px_-4px_rgba(0,255,136,0.4)]"
+                  ariaLabel="Abrir WhatsApp com este modelo selecionado"
                 >
                   <MessageCircle className="w-5 h-5" />
                   Abrir WhatsApp com este modelo
-                </a>
+                </TrackedWhatsAppLink>
               </div>
             )}
 
@@ -238,15 +244,18 @@ export default function CatalogSection() {
                 cotacao exata.
               </p>
 
-              <a
-                href={`${WHATSAPP_BASE}${encodeURIComponent(WHATSAPP_FALLBACK_MSG)}`}
+              <TrackedWhatsAppLink
+                phone="5511954369269"
+                message={WHATSAPP_FALLBACK_MSG}
+                source="catalog_fallback"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-5 py-3.5 bg-circuit-green text-navy-950 font-bold rounded-lg hover:bg-circuit-green-light transition-all shadow-[0_8px_24px_-4px_rgba(0,255,136,0.4)]"
+                ariaLabel="Abrir WhatsApp para cotação"
               >
                 <MessageCircle className="w-5 h-5" />
                 Abrir WhatsApp
-              </a>
+              </TrackedWhatsAppLink>
 
               <p className="text-xs text-gray-400 mt-4">
                 Seg-Sex · 08h as 18h · Resposta em poucas horas.

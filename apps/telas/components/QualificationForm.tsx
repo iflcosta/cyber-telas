@@ -6,6 +6,7 @@ import { createBrowserSupabaseClient } from '@/lib/supabase-client';
 import { calcularPreco, parseBRL, FAIXAS_PADRAO, formatBRL } from '@/lib/pricing';
 import type { Modelo } from '@/lib/supabase-client';
 import { Phone } from 'lucide-react';
+import TrackedWhatsAppLink from './TrackedWhatsAppLink';
 
 type ModelosPorMarca = Record<string, Modelo[]>;
 
@@ -128,15 +129,18 @@ export default function QualificationForm({
         <p className="text-sm text-gray-400 mb-6">
           Preço cotado: <strong className="text-circuit-green">R$ {cotacaoFinal.preco.toFixed(2)}</strong> ({cotacaoFinal.faixa})
         </p>
-        <a
-          href={`https://wa.me/5511954369269?text=${encodeURIComponent('Olá! Acabei de preencher o formulário de credenciamento no site e gostaria de dar continuidade ao processo.')}`}
+        <TrackedWhatsAppLink
+          phone="5511954369269"
+          message="Olá! Acabei de preencher o formulário de credenciamento no site e gostaria de dar continuidade ao processo."
+          source="form_pos_submit"
           target="_blank"
           rel="noopener noreferrer"
           className="btn-primary w-full justify-center"
+          ariaLabel="Continuar conversa no WhatsApp Business"
         >
           <Phone className="w-5 h-5" />
           Continuar no WhatsApp Business
-        </a>
+        </TrackedWhatsAppLink>
       </div>
     );
   }

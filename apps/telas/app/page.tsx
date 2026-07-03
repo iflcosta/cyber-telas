@@ -13,6 +13,7 @@ import QualificationForm from '@/components/QualificationForm';
 import ScrollReveal from '@/components/ScrollReveal';
 import Header from '@/components/Header';
 import SchemaOrg from '@/components/SchemaOrg';
+import TrackedWhatsAppLink from '@/components/TrackedWhatsAppLink';
 
 // ============================================
 // Render dinâmico: busca Supabase a cada request
@@ -120,17 +121,20 @@ function Hero() {
                             <polyline points="12 5 19 12 12 19"></polyline>
                         </svg>
                     </a>
-                    <a
-                        href="https://wa.me/5511954369269?text=Ol%C3%A1!%20Vim%20do%20site%20e%20sou%20pessoa%20f%C3%ADsica.%20Quero%20cotar%20lamina%C3%A7%C3%A3o%20OCA%20para%20meu%20aparelho."
+                    <TrackedWhatsAppLink
+                        phone="5511954369269"
+                        message="Olá! Vim do site e sou pessoa física. Quero cotar laminação OCA para o meu aparelho."
+                        source="page_hero_pf"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/15 text-white font-semibold rounded-full hover:bg-white/10 hover:border-circuit-green transition-all text-base"
+                        ariaLabel="WhatsApp pessoa física"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-circuit-green">
                             <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
                         </svg>
                         Sou pessoa física
-                    </a>
+                    </TrackedWhatsAppLink>
                 </div>
 
                 <div className="mt-12 pt-8 border-t border-white/8 flex flex-wrap justify-center gap-6 sm:gap-12 text-sm text-gray-300">
@@ -643,14 +647,17 @@ function Footer() {
               Pessoa física também pode solicitar cotação direta via WhatsApp.
               Avaliamos modelo, valor e prazo do aparelho individualmente.
             </p>
-            <a
-              href="https://wa.me/5511954369269?text=Ol%C3%A1!%20Vim%20do%20site%20e%20sou%20pessoa%20f%C3%ADsica.%20Quero%20cotar%20lamina%C3%A7%C3%A3o%20OCA."
+            <TrackedWhatsAppLink
+              phone="5511954369269"
+              message="Olá! Vim do site e sou pessoa física. Quero cotar laminação OCA."
+              source="page_footer_pf"
               target="_blank"
               rel="noopener noreferrer"
               className="text-sm text-circuit-green hover:underline"
+              ariaLabel="WhatsApp pessoa física"
             >
               Falar no WhatsApp →
-            </a>
+            </TrackedWhatsAppLink>
           </div>
 
           <div>
