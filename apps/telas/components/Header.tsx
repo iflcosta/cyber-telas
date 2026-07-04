@@ -149,17 +149,19 @@ export default function Header() {
             </a>
           </nav>
 
-          {/* Telefone + hamburger */}
+          {/* WhatsApp + hamburger */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            <a
-              href="tel:+5511954369269"
+            <TrackedWhatsAppLink
+              phone="5511954369269"
+              message="Olá! Vim pelo site da laminação OCA e gostaria de um orçamento."
+              source="header"
               className="inline-flex items-center gap-2 px-3 lg:px-4 py-2 bg-cyber-blue/10 border border-cyber-blue/30 text-white text-sm font-semibold rounded-full hover:bg-cyber-blue/20 hover:border-circuit-green transition-all whitespace-nowrap"
-              aria-label="Ligar para Cyber Informática"
+              ariaLabel="Chamar no WhatsApp da Cyber Informática"
             >
               <span className="w-2 h-2 bg-circuit-green rounded-full shadow-[0_0_8px_rgba(0,255,136,0.5)] animate-pulse-ring" />
               <Phone className="w-4 h-4 text-circuit-green" />
               <span className="hidden sm:inline">(11) 95436-9269</span>
-            </a>
+            </TrackedWhatsAppLink>
 
             {/* Hamburger (só mobile, <md) */}
             <button
