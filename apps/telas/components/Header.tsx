@@ -108,7 +108,7 @@ export default function Header() {
           </Link>
 
           {/* Nav desktop (md+) — aparece em tablets/laptops comuns (>=768px) */}
-          <nav aria-label="Navegação principal" className="hidden md:flex items-center gap-0.5">
+          <nav aria-label="Navegação principal" className="items-center gap-0.5 md:!flex hidden" style={{ minWidth: 0 }}>
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.sectionId;
               return (
