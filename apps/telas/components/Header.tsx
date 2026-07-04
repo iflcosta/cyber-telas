@@ -108,7 +108,7 @@ export default function Header() {
           </Link>
 
           {/* Nav desktop (md+) — aparece em tablets/laptops comuns (>=768px) */}
-          <nav aria-label="Navegação principal" className="hidden md:flex items-center gap-0.5" style={{ minWidth: 0 }}>
+          <nav aria-label="Navegação principal" className="nav-show-md items-center gap-0.5" style={{ minWidth: 0 }}>
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.sectionId;
               return (
@@ -165,7 +165,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              className="md:hidden w-10 h-10 inline-flex items-center justify-center bg-white/5 border border-white/10 rounded-md text-white hover:bg-white/10 hover:border-circuit-green transition-all"
+              className="hamburger-show-mobile w-10 h-10 items-center justify-center bg-white/5 border border-white/10 rounded-md text-white hover:bg-white/10 hover:border-circuit-green transition-all"
               aria-label={open ? 'Fechar menu' : 'Abrir menu'}
               aria-expanded={open}
               aria-controls="mobile-drawer"
@@ -183,14 +183,14 @@ export default function Header() {
         <>
           {/* Backdrop */}
           <div
-            className="md:hidden fixed inset-0 top-[72px] sm:top-[80px] bg-black/60 backdrop-blur-sm z-40 animate-fade-up"
+            className="drawer-show-mobile fixed inset-0 top-[72px] sm:top-[80px] bg-black/60 backdrop-blur-sm z-40 animate-fade-up"
             onClick={() => setOpen(false)}
             aria-hidden="true"
           />
           {/* Painel */}
           <div
             id="mobile-drawer"
-            className="md:hidden fixed inset-x-0 top-[72px] sm:top-[80px] z-40 bg-navy-950 border-b border-cyber-blue/30 animate-fade-up max-h-[calc(100vh-72px)] overflow-y-auto"
+            className="drawer-show-mobile fixed inset-x-0 top-[72px] sm:top-[80px] z-40 bg-navy-950 border-b border-cyber-blue/30 animate-fade-up max-h-[calc(100vh-72px)] overflow-y-auto"
             role="dialog"
             aria-modal="true"
             aria-label="Menu de navegação"

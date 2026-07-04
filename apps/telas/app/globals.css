@@ -115,6 +115,37 @@
     text-wrap: balance;
   }
 
+  /* === HEADER NAV — workaround pra bug do Tailwind gerar md:flex em ordem errada === */
+  /* Força display:flex em >=768px SEM depender de hidden md:flex (que não está aplicando) */
+  .nav-show-md {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    .nav-show-md {
+      display: flex !important;
+    }
+  }
+
+  /* Hamburger mobile — esconde em >=768px */
+  .hamburger-show-mobile {
+    display: inline-flex;
+  }
+  @media (min-width: 768px) {
+    .hamburger-show-mobile {
+      display: none !important;
+    }
+  }
+
+  /* Mobile drawer — esconde em >=768px */
+  .drawer-show-mobile {
+    display: block;
+  }
+  @media (min-width: 768px) {
+    .drawer-show-mobile {
+      display: none !important;
+    }
+  }
+
   .reveal {
     @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
   }
