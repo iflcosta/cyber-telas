@@ -7,7 +7,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, Phone, MessageCircle } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import TrackedWhatsAppLink from './TrackedWhatsAppLink';
 
 type NavItem = {
@@ -90,57 +90,10 @@ export default function Header() {
       <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyber-blue to-circuit-green opacity-60" />
 
       {/* ============================================================
-          Sub-bar superior — atalho B2B/B2C + horário + e-mail
-          Mobile: só os 2 atalhos. Desktop: horário + e-mail também.
-          ============================================================ */}
-      <div className="bg-cyber-blue/[0.06] border-b border-white/[0.04]">
-        <div className="container">
-          <div className="flex items-center justify-between h-9 text-[11px] sm:text-xs">
-            <div className="flex items-center gap-3 sm:gap-5 text-gray-400">
-              <span className="hidden sm:inline-flex items-center gap-1.5">
-                <span className="w-1 h-1 bg-circuit-green rounded-full shadow-[0_0_6px_rgba(0,255,136,0.5)]" />
-                Atendimento ativo
-              </span>
-              <a
-                href="#form-section"
-                onClick={(e) => { e.preventDefault(); handleNavClick('#form-section'); }}
-                className="inline-flex items-center gap-1.5 text-gray-200 hover:text-circuit-green transition-colors font-medium"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyber-blue-light">
-                  <path d="M3 7h18M3 12h18M3 17h18" />
-                </svg>
-                <span>Lojistas e Assistências</span>
-              </a>
-              <span className="hidden sm:inline text-white/15">·</span>
-              <TrackedWhatsAppLink
-                phone="5511954369269"
-                message="Olá! Vim do site e sou pessoa física. Quero cotar laminação OCA para o meu aparelho."
-                source="header_pf"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-gray-300 hover:text-circuit-green transition-colors"
-                ariaLabel="WhatsApp pessoa física"
-              >
-                <MessageCircle size={14} className="text-circuit-green" />
-                <span>Pessoa Física</span>
-              </TrackedWhatsAppLink>
-            </div>
-            <div className="hidden md:flex items-center gap-4 text-gray-500">
-              <span>Seg-Sex · 08h às 18h</span>
-              <span className="text-white/15">·</span>
-              <a href="mailto:contato@cyberinformatica.tech" className="hover:text-circuit-green transition-colors">
-                contato@cyberinformatica.tech
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ============================================================
-          Header principal — logo + nav + ações
+          Header principal — logo + nav + ações (estilo cyber-informatica.tech)
           ============================================================ */}
       <div className="container">
-        <div className="flex items-center justify-between py-3 lg:py-4 gap-4 lg:gap-6">
+        <div className="flex items-center justify-between py-4 lg:py-5 gap-4 lg:gap-6">
           {/* Logo */}
           <Link
             href="/"
@@ -224,20 +177,20 @@ export default function Header() {
       </div>
 
       {/* ============================================================
-          Drawer mobile (até lg-1)
+          Drawer mobile (até md-1, abaixo do header principal)
           ============================================================ */}
       {open && (
         <>
           {/* Backdrop */}
           <div
-            className="md:hidden fixed inset-0 top-[108px] sm:top-[124px] bg-black/60 backdrop-blur-sm z-40 animate-fade-up"
+            className="md:hidden fixed inset-0 top-[72px] sm:top-[80px] bg-black/60 backdrop-blur-sm z-40 animate-fade-up"
             onClick={() => setOpen(false)}
             aria-hidden="true"
           />
           {/* Painel */}
           <div
             id="mobile-drawer"
-            className="md:hidden fixed inset-x-0 top-[108px] sm:top-[124px] z-40 bg-navy-950 border-b border-cyber-blue/30 animate-fade-up max-h-[calc(100vh-108px)] overflow-y-auto"
+            className="md:hidden fixed inset-x-0 top-[72px] sm:top-[80px] z-40 bg-navy-950 border-b border-cyber-blue/30 animate-fade-up max-h-[calc(100vh-72px)] overflow-y-auto"
             role="dialog"
             aria-modal="true"
             aria-label="Menu de navegação"
