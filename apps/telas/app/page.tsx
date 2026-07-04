@@ -200,177 +200,202 @@ function MaquinaOCAMockup() {
         aria-hidden
       />
 
-      {/* Card principal com fundo mais claro pra dar contraste com o SVG */}
-      <div className="relative w-full h-full rounded-3xl bg-gradient-to-br from-[#0d2440] to-[#050a14] border border-cyber-blue/30 overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)]">
+      {/* Card principal com borda cyber */}
+      <div className="relative w-full h-full rounded-3xl bg-[#0a1929] border-2 border-cyber-blue/40 overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)]">
         {/* Grid pattern interno */}
         <div
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-30 pointer-events-none"
           style={{
-            backgroundImage: "linear-gradient(rgba(0,255,136,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,136,.15) 1px, transparent 1px)",
+            backgroundImage: "linear-gradient(rgba(0,255,136,.2) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,136,.2) 1px, transparent 1px)",
             backgroundSize: "24px 24px",
           }}
           aria-hidden
         />
 
-        <svg
-          viewBox="0 0 500 400"
-          xmlns="http://www.w3.org/2000/svg"
-          className="absolute inset-0 w-full h-full"
-          style={{ padding: '24px' }}
-          aria-hidden
-        >
-          {/* Chassi principal da máquina — cores sólidas mais vibrantes */}
-          <g transform="translate(40, 30)">
-            {/* Base / pedestal */}
-            <rect x="0" y="290" width="420" height="40" rx="4" fill="#1a3460" stroke="#3385ff" strokeWidth="2" />
-            <rect x="20" y="305" width="60" height="18" rx="2" fill="#0a1929" stroke="#3385ff" strokeWidth="1" />
-            <rect x="340" y="305" width="60" height="18" rx="2" fill="#0a1929" stroke="#3385ff" strokeWidth="1" />
-            {/* Pequenas luzes na base */}
-            <circle cx="100" cy="314" r="2" fill="#00ff88" />
-            <circle cx="110" cy="314" r="2" fill="#00ff88" />
-            <circle cx="120" cy="314" r="2" fill="#ffb020" />
+        {/* Conteúdo principal — versão com divs (sempre renderiza) */}
+        <div className="relative w-full h-full p-4 sm:p-5 flex flex-col gap-2">
+          {/* Header do mockup — barra de título */}
+          <div className="flex items-center justify-between px-3 py-1.5 rounded-md bg-[#112240] border border-cyber-blue/40">
+            <div className="flex items-center gap-1.5">
+              <div className="w-2 h-2 rounded-full bg-[#ff5470]" />
+              <div className="w-2 h-2 rounded-full bg-[#ffb020]" />
+              <div className="w-2 h-2 rounded-full bg-[#00ff88]" />
+            </div>
+            <div className="text-[10px] font-mono font-bold text-circuit-green tracking-wider">CYBER · OCA INDUSTRIAL</div>
+            <div className="flex items-center gap-1">
+              <div className="w-1.5 h-1.5 rounded-full bg-circuit-green animate-pulse" />
+              <span className="text-[9px] font-mono text-circuit-green/80">LIVE</span>
+            </div>
+          </div>
 
-            {/* Torre esquerda — painel de controle */}
-            <rect x="10" y="30" width="130" height="260" rx="8" fill="#1a3460" stroke="#3385ff" strokeWidth="2" />
+          {/* Linha principal — chassi dividido em 3 colunas */}
+          <div className="flex-1 grid grid-cols-[1fr_2fr_1fr] gap-2">
+            {/* Coluna esquerda — Painel de controle */}
+            <div className="rounded-lg bg-[#112240] border border-cyber-blue/40 p-2 flex flex-col gap-1.5">
+              <div className="text-[8px] font-mono font-bold text-cyber-blue-light uppercase tracking-wider">CONTROLE</div>
+              {/* Display touchscreen */}
+              <div className="aspect-[4/3] rounded bg-[#000] border border-cyber-blue/60 p-1.5 flex flex-col justify-between">
+                <div className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-circuit-green animate-pulse" />
+                  <span className="text-[7px] font-mono text-circuit-green">ONLINE</span>
+                </div>
+                {/* Gráfico de barras */}
+                <div className="flex items-end gap-0.5 h-6">
+                  <div className="flex-1 bg-cyber-blue rounded-sm" style={{ height: '40%' }} />
+                  <div className="flex-1 bg-cyber-blue rounded-sm" style={{ height: '70%' }} />
+                  <div className="flex-1 bg-circuit-green rounded-sm" style={{ height: '85%' }} />
+                  <div className="flex-1 bg-circuit-green rounded-sm" style={{ height: '95%' }} />
+                  <div className="flex-1 bg-circuit-green rounded-sm" style={{ height: '100%' }} />
+                </div>
+                <div className="text-[7px] font-mono text-white/80">PRESS: -0.08kPa</div>
+              </div>
+              {/* Botões físicos */}
+              <div className="grid grid-cols-4 gap-1">
+                <div className="aspect-square rounded-full bg-circuit-green border border-white/30" />
+                <div className="aspect-square rounded-full bg-cyber-blue border border-white/30" />
+                <div className="aspect-square rounded-full bg-[#ff5470] border border-white/30" />
+                <div className="aspect-square rounded-full bg-[#0a1929] border border-cyber-blue/60" />
+              </div>
+              {/* LEDs de status */}
+              <div className="flex items-center justify-between text-[7px] font-mono">
+                <div className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-circuit-green" />
+                  <span className="text-circuit-green">OK</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-circuit-green" />
+                  <span className="text-circuit-green">OK</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#ffb020]" />
+                  <span className="text-[#ffb020]">W</span>
+                </div>
+              </div>
+              {/* Logo */}
+              <div className="mt-auto rounded border border-circuit-green/40 px-2 py-1 text-center">
+                <div className="text-[8px] font-mono font-bold text-circuit-green">CYBER · OCA</div>
+              </div>
+            </div>
 
-            {/* Display de controle (touchscreen) com brilho */}
-            <rect x="20" y="50" width="110" height="80" rx="4" fill="#000" />
-            <rect x="24" y="54" width="102" height="72" rx="3" fill="#001a4d" stroke="#0066ff" strokeWidth="1" />
-            {/* UI no display */}
-            <rect x="32" y="62" width="50" height="5" rx="1" fill="#ffffff" opacity="0.85" />
-            <rect x="32" y="73" width="70" height="4" rx="1" fill="#3385ff" opacity="0.7" />
-            <rect x="32" y="83" width="60" height="4" rx="1" fill="#3385ff" opacity="0.5" />
-            {/* Gráfico no display */}
-            <polyline
-              points="32,118 50,108 70,112 90,98 110,102 125,90"
-              fill="none"
-              stroke="#00ff88"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            {/* Status LED grande no display */}
-            <circle cx="115" cy="70" r="4" fill="#00ff88" />
+            {/* Coluna central — Câmara de laminação */}
+            <div className="relative rounded-lg bg-[#112240] border-2 border-cyber-blue/60 p-2 flex flex-col">
+              {/* Moldura externa da câmara com glow */}
+              <div className="absolute inset-1 rounded border border-cyber-blue/30 pointer-events-none" />
 
-            {/* Botões físicos abaixo do display */}
-            <circle cx="35" cy="155" r="7" fill="#00ff88" stroke="#fff" strokeWidth="0.5" />
-            <circle cx="58" cy="155" r="7" fill="#0066ff" stroke="#fff" strokeWidth="0.5" />
-            <circle cx="81" cy="155" r="7" fill="#ff5470" stroke="#fff" strokeWidth="0.5" />
-            <circle cx="104" cy="155" r="7" fill="#0a1929" stroke="#3385ff" strokeWidth="1.5" />
+              {/* Cabeçalho da câmara */}
+              <div className="flex items-center justify-between mb-2">
+                <div className="text-[9px] font-mono font-bold text-cyber-blue-light uppercase tracking-wider">CÂMARA OCA</div>
+                <div className="flex items-center gap-1 text-[8px] font-mono text-circuit-green">
+                  <div className="w-1.5 h-1.5 rounded-full bg-circuit-green animate-pulse" />
+                  <span>ATIVO</span>
+                </div>
+              </div>
 
-            {/* LEDs de status */}
-            <rect x="25" y="180" width="100" height="55" rx="4" fill="#000" />
-            <text x="75" y="195" fill="#3385ff" fontSize="6" fontFamily="monospace" textAnchor="middle" fontWeight="700">STATUS</text>
-            <circle cx="38" cy="210" r="3.5" fill="#00ff88" />
-            <text x="46" y="213" fill="#00ff88" fontSize="6" fontFamily="monospace">OK</text>
-            <circle cx="78" cy="210" r="3.5" fill="#00ff88" />
-            <text x="86" y="213" fill="#00ff88" fontSize="6" fontFamily="monospace">OK</text>
-            <circle cx="38" cy="225" r="3.5" fill="#ffb020" />
-            <text x="46" y="228" fill="#ffb020" fontSize="6" fontFamily="monospace">WAIT</text>
-            <circle cx="78" cy="225" r="3.5" fill="#1a3460" stroke="#3385ff" strokeWidth="0.5" />
-            <text x="86" y="228" fill="#3385ff" fontSize="6" fontFamily="monospace">OFF</text>
+              {/* Braço da autoclave descendo */}
+              <div className="flex justify-center mb-1">
+                <div className="flex flex-col items-center">
+                  <div className="w-10 h-2.5 rounded-sm bg-[#112240] border border-cyber-blue/60 relative">
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-circuit-green animate-pulse" />
+                  </div>
+                  <div className="w-1.5 h-3 bg-cyber-blue rounded-b" />
+                </div>
+              </div>
 
-            {/* Logo na máquina */}
-            <rect x="25" y="250" width="100" height="22" rx="3" fill="none" stroke="#00ff88" strokeWidth="1.5" />
-            <text x="75" y="265" fill="#00ff88" fontSize="9" fontFamily="monospace" fontWeight="700" textAnchor="middle">CYBER · OCA</text>
+              {/* Display sendo laminado (celular dentro da câmara) */}
+              <div className="flex-1 flex items-center justify-center my-1">
+                <div className="relative">
+                  {/* Moldura do display */}
+                  <div className="w-32 sm:w-40 aspect-[10/16] rounded-lg bg-[#000] border-2 border-cyber-blue/80 p-1 shadow-[0_0_30px_rgba(0,255,136,0.4)]">
+                    {/* Tela do display */}
+                    <div className="w-full h-full rounded bg-[#001a4d] flex flex-col items-center justify-center p-2">
+                      {/* Notch */}
+                      <div className="w-12 h-1 rounded-full bg-[#000] mb-2" />
+                      {/* Linhas de UI */}
+                      <div className="w-full space-y-1 mb-2">
+                        <div className="h-1 w-3/4 rounded bg-cyber-blue-light/80" />
+                        <div className="h-0.5 w-full rounded bg-cyber-blue/50" />
+                        <div className="h-0.5 w-2/3 rounded bg-cyber-blue/30" />
+                      </div>
+                      {/* Check verde grande */}
+                      <div className="w-12 h-12 rounded-full border-[3px] border-circuit-green flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7 text-circuit-green">
+                          <polyline points="20 6 9 17 4 12"></polyline>
+                        </svg>
+                      </div>
+                      <div className="mt-2 text-[8px] font-mono font-bold text-circuit-green uppercase tracking-wider">Aprovado</div>
+                    </div>
+                  </div>
+                  {/* Glow embaixo */}
+                  <div className="absolute inset-0 rounded-lg blur-2xl bg-circuit-green/30 -z-10" />
+                </div>
+              </div>
 
-            {/* Câmara de laminação (centro, com display dentro) */}
-            <g transform="translate(150, 50)">
-              {/* Moldura externa com borda brilhante */}
-              <rect x="0" y="0" width="240" height="240" rx="10" fill="#1a3460" stroke="#3385ff" strokeWidth="2.5" />
-              <rect x="2" y="2" width="236" height="236" rx="9" fill="none" stroke="#0066ff" strokeWidth="0.5" opacity="0.5" />
+              {/* Painel de controle embaixo */}
+              <div className="flex items-center gap-1.5">
+                <div className="flex-1 h-7 rounded bg-cyber-blue border border-white/30 flex items-center justify-center text-[9px] font-mono font-bold text-white uppercase tracking-wider">
+                  START
+                </div>
+                <div className="w-7 h-7 rounded bg-[#0a1929] border border-cyber-blue/60" />
+                <div className="w-7 h-7 rounded bg-[#0a1929] border border-cyber-blue/60" />
+                <div className="w-7 h-7 rounded bg-[#0a1929] border border-cyber-blue/60 flex items-center justify-center">
+                  <div className="w-2 h-2 rounded-full bg-circuit-green" />
+                </div>
+              </div>
+            </div>
 
-              {/* Janela de vidro (display sendo laminado) */}
-              <rect x="25" y="25" width="190" height="150" rx="6" fill="#000" />
-              {/* Reflexo de vidro (gradient diagonal sutil) */}
-              <rect x="25" y="25" width="190" height="150" rx="6" fill="#001a4d" opacity="0.6" />
+            {/* Coluna direita — Saída de displays prontos */}
+            <div className="rounded-lg bg-[#112240] border border-cyber-blue/40 p-2 flex flex-col">
+              <div className="text-[8px] font-mono font-bold text-cyber-blue-light uppercase tracking-wider mb-1.5">SAÍDA</div>
+              {/* LEDs de status */}
+              <div className="flex items-center justify-center gap-1 mb-2 py-1 rounded bg-[#0a1929]">
+                <div className="w-1.5 h-1.5 rounded-full bg-circuit-green" />
+                <span className="text-[7px] font-mono text-circuit-green">PRONTO</span>
+              </div>
+              {/* Prateleiras com displays prontos */}
+              {[0, 1, 2].map((i) => (
+                <div key={i} className="flex-1 mb-1.5 rounded bg-[#0a1929] border border-cyber-blue/40 p-1 flex flex-col items-center justify-center">
+                  <div className="w-2/3 aspect-[10/16] rounded-sm bg-[#001a4d] border border-circuit-green/40" />
+                  <div className="mt-1 flex items-center gap-0.5">
+                    <div className="w-1 h-1 rounded-full bg-circuit-green" />
+                    <div className="w-3 h-0.5 rounded bg-cyber-blue-light/50" />
+                  </div>
+                </div>
+              ))}
+              <div className="mt-auto text-center text-[7px] font-mono text-circuit-green/80">+500/mês</div>
+            </div>
+          </div>
 
-              {/* Display dentro da câmara (celular sendo laminado) */}
-              <g transform="translate(50, 50)">
-                {/* Moldura do celular */}
-                <rect x="0" y="0" width="140" height="100" rx="8" fill="#000" />
-                {/* Tela do celular */}
-                <rect x="4" y="4" width="132" height="92" rx="6" fill="#001a4d" />
-                {/* Notch */}
-                <rect x="55" y="2" width="30" height="4" rx="2" fill="#000" />
-                {/* UI no display do celular */}
-                <rect x="14" y="18" width="50" height="4" rx="1" fill="#3385ff" opacity="0.8" />
-                <rect x="14" y="28" width="80" height="3" rx="1" fill="#3385ff" opacity="0.4" />
-                <rect x="14" y="36" width="60" height="3" rx="1" fill="#3385ff" opacity="0.4" />
-                {/* Check verde grande (display aprovado) */}
-                <circle cx="100" cy="68" r="14" fill="none" stroke="#00ff88" strokeWidth="3" />
-                <path d="M92 68 L98 74 L108 62" stroke="#00ff88" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-              </g>
-
-              {/* Braço da autoclave (em cima, com LED verde) */}
-              <rect x="90" y="-15" width="60" height="22" rx="4" fill="#0a1929" stroke="#3385ff" strokeWidth="2" />
-              <rect x="100" y="-30" width="40" height="15" rx="3" fill="#1a3460" stroke="#00ff88" strokeWidth="2" />
-              <circle cx="120" cy="-22" r="4" fill="#00ff88" />
-              {/* Braço descendo */}
-              <line x1="120" y1="-15" x2="120" y2="25" stroke="#3385ff" strokeWidth="8" strokeLinecap="round" />
-              <rect x="115" y="22" width="10" height="8" rx="2" fill="#3385ff" />
-
-              {/* Painel de controle embaixo da câmara */}
-              <rect x="25" y="195" width="190" height="32" rx="4" fill="#000" stroke="#3385ff" strokeWidth="1" />
-              <rect x="35" y="203" width="50" height="16" rx="2" fill="#0066ff" />
-              <text x="60" y="214" fill="#ffffff" fontSize="8" fontFamily="monospace" fontWeight="700" textAnchor="middle">START</text>
-              <rect x="90" y="203" width="40" height="16" rx="2" fill="#1a3460" stroke="#3385ff" strokeWidth="1" />
-              <rect x="135" y="203" width="40" height="16" rx="2" fill="#1a3460" stroke="#3385ff" strokeWidth="1" />
-              <circle cx="170" cy="211" r="3" fill="#00ff88" />
-              <circle cx="182" cy="211" r="3" fill="#ffb020" />
-            </g>
-
-            {/* Torre direita — saída de displays prontos */}
-            <g transform="translate(395, 30)">
-              <rect x="0" y="0" width="30" height="300" rx="6" fill="#1a3460" stroke="#3385ff" strokeWidth="2" />
-              {/* LEDs de status no topo */}
-              <circle cx="15" cy="20" r="3" fill="#00ff88" />
-              <text x="15" y="40" fill="#3385ff" fontSize="6" fontFamily="monospace" fontWeight="700" textAnchor="middle">OUT</text>
-              {/* Prateleiras com displays prontos (estilo slot) */}
-              <rect x="3" y="55" width="24" height="55" rx="2" fill="#0a1929" stroke="#3385ff" strokeWidth="1" />
-              <rect x="6" y="60" width="18" height="42" rx="1" fill="#001a4d" />
-              <rect x="9" y="65" width="12" height="3" rx="1" fill="#00ff88" />
-              <rect x="9" y="71" width="12" height="2" rx="1" fill="#3385ff" />
-              <rect x="9" y="76" width="12" height="2" rx="1" fill="#3385ff" opacity="0.5" />
-
-              <rect x="3" y="120" width="24" height="55" rx="2" fill="#0a1929" stroke="#3385ff" strokeWidth="1" />
-              <rect x="6" y="125" width="18" height="42" rx="1" fill="#001a4d" />
-              <rect x="9" y="130" width="12" height="3" rx="1" fill="#00ff88" />
-              <rect x="9" y="136" width="12" height="2" rx="1" fill="#3385ff" />
-              <rect x="9" y="141" width="12" height="2" rx="1" fill="#3385ff" opacity="0.5" />
-
-              <rect x="3" y="185" width="24" height="55" rx="2" fill="#0a1929" stroke="#3385ff" strokeWidth="1" />
-              <rect x="6" y="190" width="18" height="42" rx="1" fill="#001a4d" />
-              <rect x="9" y="195" width="12" height="3" rx="1" fill="#00ff88" />
-              <rect x="9" y="201" width="12" height="2" rx="1" fill="#3385ff" />
-              <rect x="9" y="206" width="12" height="2" rx="1" fill="#3385ff" opacity="0.5" />
-            </g>
-
-            {/* Partículas/circuit decorativo */}
-            <g>
-              <circle cx="20" cy="15" r="2" fill="#00ff88" />
-              <circle cx="445" cy="20" r="1.5" fill="#0066ff" />
-              <circle cx="450" cy="280" r="2" fill="#00ff88" />
-              <circle cx="15" cy="340" r="1.5" fill="#0066ff" />
-            </g>
-          </g>
-        </svg>
+          {/* Base do mockup — barra de status */}
+          <div className="flex items-center justify-between px-3 py-1.5 rounded-md bg-[#112240] border border-cyber-blue/40">
+            <div className="flex items-center gap-3 text-[9px] font-mono">
+              <div className="flex items-center gap-1">
+                <div className="w-1.5 h-1.5 rounded-full bg-circuit-green animate-pulse" />
+                <span className="text-circuit-green">Sistema operacional</span>
+              </div>
+              <span className="text-white/30">|</span>
+              <span className="text-white/60">Temp: 38°C</span>
+              <span className="text-white/30">|</span>
+              <span className="text-white/60">Vácuo: -0.08kPa</span>
+            </div>
+            <div className="text-[9px] font-mono font-bold text-circuit-green">v2.4.1</div>
+          </div>
+        </div>
 
         {/* Tags flutuantes */}
-        <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2 text-[10px] font-mono pointer-events-none">
-          <span className="px-2 py-1 bg-black/70 backdrop-blur-md border border-circuit-green/40 rounded text-white font-semibold">
+        <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2 text-[10px] font-mono pointer-events-none z-10">
+          <span className="px-2 py-1 bg-black/80 backdrop-blur-md border border-circuit-green/40 rounded text-white font-semibold">
             ⚡ OCA sob vácuo
           </span>
-          <span className="px-2 py-1 bg-black/70 backdrop-blur-md border border-circuit-green/40 rounded text-white font-semibold">
+          <span className="px-2 py-1 bg-black/80 backdrop-blur-md border border-circuit-green/40 rounded text-white font-semibold">
             🔬 ISO 14644-1
           </span>
-          <span className="px-2 py-1 bg-black/70 backdrop-blur-md border border-circuit-green/40 rounded text-white font-semibold hidden sm:inline">
+          <span className="px-2 py-1 bg-black/80 backdrop-blur-md border border-circuit-green/40 rounded text-white font-semibold hidden sm:inline">
             📊 ±0.1mm
           </span>
         </div>
 
         {/* Badge pulsante no canto */}
-        <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-circuit-green/40 text-xs font-bold text-circuit-green flex items-center gap-1.5 pointer-events-none">
+        <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-black/80 backdrop-blur-md border border-circuit-green/40 text-xs font-bold text-circuit-green flex items-center gap-1.5 pointer-events-none z-10">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full rounded-full bg-circuit-green opacity-75 animate-ping" />
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-circuit-green" />
