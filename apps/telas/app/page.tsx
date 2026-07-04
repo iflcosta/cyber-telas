@@ -75,97 +75,293 @@ export default async function HomePage() {
 // ============================================
 function Hero() {
   return (
-    <section className="relative bg-navy-950 text-white py-24 sm:py-32 lg:py-40 overflow-hidden isolate">
-      {/* Grid técnico */}
+    <section className="relative bg-navy-950 text-white pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24 overflow-hidden isolate">
+      {/* Grid técnico de fundo */}
       <div
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 -z-10 opacity-60"
         style={{
           backgroundImage: `
             linear-gradient(rgba(0, 102, 255, 0.06) 1px, transparent 1px),
             linear-gradient(90deg, rgba(0, 102, 255, 0.06) 1px, transparent 1px)
           `,
           backgroundSize: '60px 60px',
-          maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 80%)',
-          WebkitMaskImage: 'radial-gradient(ellipse at center, black 30%, transparent 80%)',
+          maskImage: 'radial-gradient(ellipse 800px 500px at center, black 0%, transparent 70%)',
+          WebkitMaskImage: 'radial-gradient(ellipse 800px 500px at center, black 0%, transparent 70%)',
         }}
       />
 
-      {/* Orbs */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-cyber-blue rounded-full opacity-50 blur-[80px] -z-10 animate-float-orb" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-circuit-green rounded-full opacity-30 blur-[80px] -z-10 animate-float-orb" style={{ animationDirection: 'reverse' }} />
+      {/* Orbs mais sutis */}
+      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-cyber-blue rounded-full opacity-30 blur-[80px] -z-10 animate-float-orb" />
+      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-circuit-green rounded-full opacity-20 blur-[80px] -z-10 animate-float-orb" style={{ animationDirection: 'reverse' }} />
 
       <div className="container relative">
-        <div className="max-w-3xl mx-auto text-center">
-          <span className="inline-flex items-center gap-2 px-5 py-2 bg-cyber-blue/10 border border-cyber-blue/30 rounded-full text-cyber-blue-light font-mono text-xs font-medium tracking-widest uppercase mb-8 backdrop-blur">
-            <span className="w-1.5 h-1.5 bg-circuit-green rounded-full shadow-[0_0_8px_rgba(0,255,136,0.5)]" />
-            Cyber Informática · Laminação OCA Industrial
-          </span>
-
-          <h1 className="text-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6">
-            Centro de <span className="gradient-text">Remanufatura</span><br />
-                    e Laminação Industrial de Displays
-          </h1>
-
-          <p className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-                    <strong className="text-circuit-green">Display original preservado em 24h.</strong>{' '}Laminação OCA industrial para assistências técnicas, lojistas e pessoa física.
-                </p>
-
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-4">
-                    <a
-                        href="#form-section"
-                        className="btn-primary text-base"
-                    >
-                        Solicitar Credenciamento
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
-                            <line x1="5" y1="12" x2="19" y2="12"></line>
-                            <polyline points="12 5 19 12 12 19"></polyline>
-                        </svg>
-                    </a>
-                    <TrackedWhatsAppLink
-                        phone="5511954369269"
-                        message="Olá! Vim do site e sou pessoa física. Quero cotar laminação OCA para o meu aparelho."
-                        source="page_hero_pf"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/15 text-white font-semibold rounded-full hover:bg-white/10 hover:border-circuit-green transition-all text-base"
-                        ariaLabel="WhatsApp pessoa física"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-circuit-green">
-                            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                        </svg>
-                        Sou pessoa física
-                    </TrackedWhatsAppLink>
-                </div>
-
-                <div className="mt-12 pt-8 border-t border-white/8 flex flex-wrap justify-center gap-6 sm:gap-12 text-sm text-gray-300">
-                    <div className="flex items-center gap-2">
-                        <span className="w-8 h-8 bg-circuit-green/10 border border-circuit-green/30 rounded-lg flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-                        </span>
-                        <span><strong className="text-white">Faturamento</strong> CNPJ</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <span className="w-8 h-8 bg-circuit-green/10 border border-circuit-green/30 rounded-lg flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><circle cx="12" cy="12" r="3"/><path d="M12 1v6m0 6v6m11-7h-6m-6 0H1"/></svg>
-                        </span>
-                        <span>Processo <strong className="text-white">OCA</strong> Industrial</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <span className="w-8 h-8 bg-circuit-green/10 border border-circuit-green/30 rounded-lg flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        </span>
-                        <span>Atendimento <strong className="text-white">Nacional</strong></span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <span className="w-8 h-8 bg-circuit-green/10 border border-circuit-green/30 rounded-lg flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                        </span>
-                        <span>Cotação <strong className="text-white">direta</strong></span>
-                    </div>
-                </div>
+        <div className="grid lg:grid-cols-[1.1fr_1fr] gap-10 lg:gap-14 items-center">
+          {/* Coluna texto */}
+          <div>
+            {/* Badge com dot pulsante */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-cyber-blue/10 border border-cyber-blue/30 text-cyber-blue-light font-mono text-[11px] font-medium tracking-widest uppercase backdrop-blur">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-circuit-green opacity-75 animate-ping" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-circuit-green" />
+              </span>
+              Cyber Informática · Laminação OCA Industrial
             </div>
+
+            <h1 className="text-display text-4xl sm:text-5xl lg:text-[56px] font-extrabold leading-[1.05] mb-6 tracking-tight">
+              Centro de <span className="gradient-text">Remanufatura</span><br />
+              e Laminação Industrial de Displays
+            </h1>
+
+            <p className="text-base sm:text-lg text-gray-300 max-w-xl mb-8 leading-relaxed">
+              <strong className="text-circuit-green">Display original preservado em 24h.</strong>{' '}
+              Laminação OCA industrial para assistências técnicas, lojistas e pessoa física.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-8">
+              <a
+                href="#form-section"
+                className="btn-primary text-base justify-center"
+              >
+                Solicitar Credenciamento
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </a>
+              <TrackedWhatsAppLink
+                phone="5511954369269"
+                message="Olá! Vim do site e sou pessoa física. Quero cotar laminação OCA para o meu aparelho."
+                source="page_hero_pf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/5 border border-white/15 text-white font-semibold rounded-lg hover:bg-white/10 hover:border-circuit-green transition-all text-base"
+                ariaLabel="WhatsApp pessoa física"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-circuit-green">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+                Sou pessoa física
+              </TrackedWhatsAppLink>
+            </div>
+
+            {/* Trust badges com ícones */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/[0.08]">
+              {[
+                { label: 'Faturamento', sub: 'CNPJ', icon: 'shield' },
+                { label: 'Processo', sub: 'OCA Industrial', icon: 'cpu' },
+                { label: 'Atendimento', sub: 'Nacional', icon: 'globe' },
+                { label: 'Cotação', sub: 'direta', icon: 'chat' },
+              ].map((b, i) => (
+                <div key={i} className="flex items-center gap-2.5">
+                  <span className="w-9 h-9 bg-circuit-green/10 border border-circuit-green/30 rounded-lg flex items-center justify-center flex-shrink-0">
+                    {b.icon === 'shield' && (
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    )}
+                    {b.icon === 'cpu' && (
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" y2="4"/><line x1="15" y1="2" y2="4"/><line x1="9" y1="20" y2="22"/><line x1="15" y1="20" y2="22"/><line x1="20" y1="9" y2="4"/><line x1="20" y1="14" y2="4"/><line x1="2" y1="9" y2="4"/><line x1="2" y1="14" y2="4"/></svg>
+                    )}
+                    {b.icon === 'globe' && (
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                    )}
+                    {b.icon === 'chat' && (
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                    )}
+                  </span>
+                  <div className="min-w-0">
+                    <div className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold leading-tight">{b.label}</div>
+                    <div className="text-sm font-bold text-white leading-tight truncate">{b.sub}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Coluna visual — mockup SVG da máquina OCA */}
+          <div className="relative">
+            <MaquinaOCAMockup />
+          </div>
         </div>
+      </div>
     </section>
+  );
+}
+
+/**
+ * MaquinaOCAMockup — SVG inline da máquina de laminação OCA industrial.
+ * Não depende de imagem externa — sempre renderiza.
+ */
+function MaquinaOCAMockup() {
+  return (
+    <div className="relative aspect-[5/4] w-full">
+      {/* Glow atrás */}
+      <div
+        className="absolute inset-0 rounded-3xl blur-3xl opacity-50"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(0,255,136,0.25) 0%, transparent 60%)' }}
+        aria-hidden
+      />
+
+      <div className="relative w-full h-full rounded-3xl bg-gradient-to-br from-navy-900 to-navy-950 border border-white/[0.08] overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]">
+        {/* Grid pattern interno */}
+        <div
+          className="absolute inset-0 opacity-[0.05]"
+          style={{
+            backgroundImage: "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
+            backgroundSize: "20px 20px",
+          }}
+          aria-hidden
+        />
+
+        <svg
+          viewBox="0 0 500 400"
+          xmlns="http://www.w3.org/2000/svg"
+          className="absolute inset-0 w-full h-full p-6"
+          aria-hidden
+        >
+          <defs>
+            <linearGradient id="maquina-frame" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#1a3460" />
+              <stop offset="100%" stopColor="#0a1929" />
+            </linearGradient>
+            <linearGradient id="maquina-screen" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#0066ff" stopOpacity="0.6" />
+              <stop offset="100%" stopColor="#00ff88" stopOpacity="0.4" />
+            </linearGradient>
+            <filter id="maquina-glow">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur" />
+              <feMerge>
+                <feMergeNode in="coloredBlur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          {/* Chassi principal da máquina */}
+          <g transform="translate(50, 40)">
+            {/* Base / pedestal */}
+            <rect x="0" y="280" width="400" height="40" rx="4" fill="url(#maquina-frame)" stroke="#1a3460" strokeWidth="2" />
+            <rect x="20" y="295" width="60" height="20" rx="2" fill="#112240" />
+            <rect x="320" y="295" width="60" height="20" rx="2" fill="#112240" />
+
+            {/* Torre esquerda — display + autoclave */}
+            <rect x="10" y="40" width="120" height="240" rx="6" fill="url(#maquina-frame)" stroke="#1a3460" strokeWidth="2" />
+
+            {/* Display de controle (touchscreen) */}
+            <rect x="20" y="55" width="100" height="70" rx="4" fill="#000" opacity="0.6" />
+            <rect x="24" y="59" width="92" height="62" rx="3" fill="url(#maquina-screen)" />
+            {/* UI no display */}
+            <rect x="30" y="68" width="40" height="4" rx="1" fill="#ffffff" opacity="0.7" />
+            <rect x="30" y="78" width="60" height="3" rx="1" fill="#ffffff" opacity="0.3" />
+            <rect x="30" y="86" width="50" height="3" rx="1" fill="#ffffff" opacity="0.3" />
+            <circle cx="100" cy="100" r="6" fill="#00ff88" filter="url(#maquina-glow)">
+              <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite" />
+            </circle>
+
+            {/* Botões físicos abaixo do display */}
+            <circle cx="40" cy="155" r="6" fill="#00ff88" />
+            <circle cx="60" cy="155" r="6" fill="#0066ff" />
+            <circle cx="80" cy="155" r="6" fill="#ff5470" />
+            <circle cx="100" cy="155" r="6" fill="#1a3460" stroke="#2e4670" />
+
+            {/* LEDs de status */}
+            <rect x="25" y="180" width="90" height="50" rx="3" fill="#000" opacity="0.3" />
+            <circle cx="40" cy="200" r="3" fill="#00ff88" filter="url(#maquina-glow)" />
+            <circle cx="55" cy="200" r="3" fill="#00ff88" filter="url(#maquina-glow)" />
+            <circle cx="70" cy="200" r="3" fill="#ffb020" />
+            <circle cx="85" cy="200" r="3" fill="#1a3460" />
+            <rect x="35" y="215" width="70" height="2" rx="1" fill="#ffffff" opacity="0.2" />
+            <rect x="35" y="220" width="50" height="2" rx="1" fill="#ffffff" opacity="0.2" />
+
+            {/* Logo na máquina */}
+            <rect x="25" y="245" width="90" height="20" rx="3" fill="none" stroke="#00ff88" strokeWidth="1" opacity="0.4" />
+            <text x="70" y="259" fill="#00ff88" fontFamily="ui-monospace, monospace" fontSize="9" fontWeight="700" textAnchor="middle" opacity="0.7">CYBER</text>
+
+            {/* Câmara de laminação (centro) */}
+            <g transform="translate(140, 60)">
+              {/* Moldura externa */}
+              <rect x="0" y="0" width="220" height="220" rx="8" fill="url(#maquina-frame)" stroke="#1a3460" strokeWidth="2" />
+
+              {/* Janela de vidro (laminação) */}
+              <rect x="20" y="20" width="180" height="140" rx="6" fill="#000" opacity="0.7" />
+              <rect x="22" y="22" width="176" height="136" rx="5" fill="url(#maquina-screen)" opacity="0.3" />
+
+              {/* Display dentro da câmara */}
+              <g transform="translate(40, 50)">
+                <rect x="0" y="0" width="140" height="80" rx="4" fill="#000" opacity="0.8" />
+                <rect x="8" y="8" width="124" height="64" rx="3" fill="url(#maquina-screen)" />
+                <rect x="50" y="6" width="40" height="3" rx="1.5" fill="#000" />
+                <rect x="14" y="20" width="60" height="4" rx="1" fill="#ffffff" opacity="0.6" />
+                <rect x="14" y="28" width="80" height="3" rx="1" fill="#ffffff" opacity="0.3" />
+                <circle cx="100" cy="55" r="8" fill="none" stroke="#00ff88" strokeWidth="2" opacity="0.7" filter="url(#maquina-glow)" />
+                <path d="M96 55 L100 59 L106 51" stroke="#00ff88" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+              </g>
+
+              {/* Braço da autoclave (em cima) */}
+              <rect x="80" y="-15" width="60" height="20" rx="3" fill="#1a3460" stroke="#0a1929" strokeWidth="2" />
+              <rect x="100" y="-25" width="20" height="10" rx="2" fill="#00ff88" filter="url(#maquina-glow)">
+                <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite" />
+              </rect>
+              <line x1="110" y1="-15" x2="110" y2="20" stroke="#1a3460" strokeWidth="6" />
+
+              {/* Painel de controle embaixo da câmara */}
+              <rect x="20" y="180" width="180" height="30" rx="3" fill="#000" opacity="0.3" />
+              <rect x="30" y="188" width="40" height="14" rx="2" fill="#0066ff" />
+              <rect x="80" y="188" width="40" height="14" rx="2" fill="#1a3460" />
+              <rect x="130" y="188" width="40" height="14" rx="2" fill="#1a3460" />
+              <text x="50" y="199" fill="#ffffff" fontFamily="ui-monospace, monospace" fontSize="8" fontWeight="700" textAnchor="middle">START</text>
+            </g>
+
+            {/* Torre direita — saída de displays prontos */}
+            <g transform="translate(370, 40)">
+              <rect x="0" y="0" width="30" height="280" rx="6" fill="url(#maquina-frame)" stroke="#1a3460" strokeWidth="2" />
+              <rect x="3" y="60" width="24" height="40" rx="2" fill="#112240" />
+              <rect x="6" y="65" width="18" height="30" rx="1" fill="url(#maquina-screen)" opacity="0.4" />
+              <rect x="3" y="120" width="24" height="40" rx="2" fill="#112240" />
+              <rect x="6" y="125" width="18" height="30" rx="1" fill="url(#maquina-screen)" opacity="0.4" />
+              <rect x="3" y="180" width="24" height="40" rx="2" fill="#112240" />
+              <rect x="6" y="185" width="18" height="30" rx="1" fill="url(#maquina-screen)" opacity="0.4" />
+              <circle cx="15" cy="20" r="2" fill="#00ff88" filter="url(#maquina-glow)">
+                <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite" />
+              </circle>
+            </g>
+          </g>
+
+          {/* Partículas decorativas */}
+          <g opacity="0.4">
+            <circle cx="30" cy="50" r="2" fill="#00ff88" filter="url(#maquina-glow)">
+              <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="470" cy="80" r="1.5" fill="#0066ff" filter="url(#maquina-glow)">
+              <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite" />
+            </circle>
+            <circle cx="480" cy="350" r="2" fill="#00ff88" filter="url(#maquina-glow)">
+              <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite" />
+            </circle>
+          </g>
+        </svg>
+
+        {/* Tags flutuantes */}
+        <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2 text-[10px] font-mono">
+          <span className="px-2 py-1 bg-black/60 backdrop-blur-md border border-circuit-green/30 rounded text-white/90">
+            ⚡ OCA sob vácuo
+          </span>
+          <span className="px-2 py-1 bg-black/60 backdrop-blur-md border border-circuit-green/30 rounded text-white/90">
+            🔬 ISO 14644-1
+          </span>
+          <span className="px-2 py-1 bg-black/60 backdrop-blur-md border border-circuit-green/30 rounded text-white/90 hidden sm:inline">
+            📊 ±0.1mm
+          </span>
+        </div>
+
+        {/* Badge pulsante no canto */}
+        <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-circuit-green/30 text-xs font-bold text-circuit-green flex items-center gap-1.5">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-circuit-green opacity-75 animate-ping" />
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-circuit-green" />
+          </span>
+          Em operação
+        </div>
+      </div>
+    </div>
   );
 }
 
