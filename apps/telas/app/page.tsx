@@ -195,18 +195,19 @@ function MaquinaOCAMockup() {
     <div className="relative aspect-[5/4] w-full">
       {/* Glow atrás */}
       <div
-        className="absolute inset-0 rounded-3xl blur-3xl opacity-50"
-        style={{ background: 'radial-gradient(ellipse at center, rgba(0,255,136,0.25) 0%, transparent 60%)' }}
+        className="absolute inset-0 rounded-3xl blur-3xl opacity-60"
+        style={{ background: 'radial-gradient(ellipse at center, rgba(0,255,136,0.3) 0%, transparent 60%)' }}
         aria-hidden
       />
 
-      <div className="relative w-full h-full rounded-3xl bg-gradient-to-br from-navy-900 to-navy-950 border border-white/[0.08] overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]">
+      {/* Card principal com fundo mais claro pra dar contraste com o SVG */}
+      <div className="relative w-full h-full rounded-3xl bg-gradient-to-br from-[#0d2440] to-[#050a14] border border-cyber-blue/30 overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.8)]">
         {/* Grid pattern interno */}
         <div
-          className="absolute inset-0 opacity-[0.05]"
+          className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage: "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
-            backgroundSize: "20px 20px",
+            backgroundImage: "linear-gradient(rgba(0,255,136,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,136,.15) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
           }}
           aria-hidden
         />
@@ -214,146 +215,162 @@ function MaquinaOCAMockup() {
         <svg
           viewBox="0 0 500 400"
           xmlns="http://www.w3.org/2000/svg"
-          className="absolute inset-0 w-full h-full p-6"
+          className="absolute inset-0 w-full h-full"
+          style={{ padding: '24px' }}
           aria-hidden
         >
-          <defs>
-            <linearGradient id="maquina-frame" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stopColor="#1a3460" />
-              <stop offset="100%" stopColor="#0a1929" />
-            </linearGradient>
-            <linearGradient id="maquina-screen" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#0066ff" stopOpacity="0.6" />
-              <stop offset="100%" stopColor="#00ff88" stopOpacity="0.4" />
-            </linearGradient>
-            <filter id="maquina-glow">
-              <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-              <feMerge>
-                <feMergeNode in="coloredBlur" />
-                <feMergeNode in="SourceGraphic" />
-              </feMerge>
-            </filter>
-          </defs>
-
-          {/* Chassi principal da máquina */}
-          <g transform="translate(50, 40)">
+          {/* Chassi principal da máquina — cores sólidas mais vibrantes */}
+          <g transform="translate(40, 30)">
             {/* Base / pedestal */}
-            <rect x="0" y="280" width="400" height="40" rx="4" fill="url(#maquina-frame)" stroke="#1a3460" strokeWidth="2" />
-            <rect x="20" y="295" width="60" height="20" rx="2" fill="#112240" />
-            <rect x="320" y="295" width="60" height="20" rx="2" fill="#112240" />
+            <rect x="0" y="290" width="420" height="40" rx="4" fill="#1a3460" stroke="#3385ff" strokeWidth="2" />
+            <rect x="20" y="305" width="60" height="18" rx="2" fill="#0a1929" stroke="#3385ff" strokeWidth="1" />
+            <rect x="340" y="305" width="60" height="18" rx="2" fill="#0a1929" stroke="#3385ff" strokeWidth="1" />
+            {/* Pequenas luzes na base */}
+            <circle cx="100" cy="314" r="2" fill="#00ff88" />
+            <circle cx="110" cy="314" r="2" fill="#00ff88" />
+            <circle cx="120" cy="314" r="2" fill="#ffb020" />
 
-            {/* Torre esquerda — display + autoclave */}
-            <rect x="10" y="40" width="120" height="240" rx="6" fill="url(#maquina-frame)" stroke="#1a3460" strokeWidth="2" />
+            {/* Torre esquerda — painel de controle */}
+            <rect x="10" y="30" width="130" height="260" rx="8" fill="#1a3460" stroke="#3385ff" strokeWidth="2" />
 
-            {/* Display de controle (touchscreen) */}
-            <rect x="20" y="55" width="100" height="70" rx="4" fill="#000" opacity="0.6" />
-            <rect x="24" y="59" width="92" height="62" rx="3" fill="url(#maquina-screen)" />
+            {/* Display de controle (touchscreen) com brilho */}
+            <rect x="20" y="50" width="110" height="80" rx="4" fill="#000" />
+            <rect x="24" y="54" width="102" height="72" rx="3" fill="#001a4d" stroke="#0066ff" strokeWidth="1" />
             {/* UI no display */}
-            <rect x="30" y="68" width="40" height="4" rx="1" fill="#ffffff" opacity="0.7" />
-            <rect x="30" y="78" width="60" height="3" rx="1" fill="#ffffff" opacity="0.3" />
-            <rect x="30" y="86" width="50" height="3" rx="1" fill="#ffffff" opacity="0.3" />
-            <circle cx="100" cy="100" r="6" fill="#00ff88" filter="url(#maquina-glow)">
-              <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite" />
-            </circle>
+            <rect x="32" y="62" width="50" height="5" rx="1" fill="#ffffff" opacity="0.85" />
+            <rect x="32" y="73" width="70" height="4" rx="1" fill="#3385ff" opacity="0.7" />
+            <rect x="32" y="83" width="60" height="4" rx="1" fill="#3385ff" opacity="0.5" />
+            {/* Gráfico no display */}
+            <polyline
+              points="32,118 50,108 70,112 90,98 110,102 125,90"
+              fill="none"
+              stroke="#00ff88"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            {/* Status LED grande no display */}
+            <circle cx="115" cy="70" r="4" fill="#00ff88" />
 
             {/* Botões físicos abaixo do display */}
-            <circle cx="40" cy="155" r="6" fill="#00ff88" />
-            <circle cx="60" cy="155" r="6" fill="#0066ff" />
-            <circle cx="80" cy="155" r="6" fill="#ff5470" />
-            <circle cx="100" cy="155" r="6" fill="#1a3460" stroke="#2e4670" />
+            <circle cx="35" cy="155" r="7" fill="#00ff88" stroke="#fff" strokeWidth="0.5" />
+            <circle cx="58" cy="155" r="7" fill="#0066ff" stroke="#fff" strokeWidth="0.5" />
+            <circle cx="81" cy="155" r="7" fill="#ff5470" stroke="#fff" strokeWidth="0.5" />
+            <circle cx="104" cy="155" r="7" fill="#0a1929" stroke="#3385ff" strokeWidth="1.5" />
 
             {/* LEDs de status */}
-            <rect x="25" y="180" width="90" height="50" rx="3" fill="#000" opacity="0.3" />
-            <circle cx="40" cy="200" r="3" fill="#00ff88" filter="url(#maquina-glow)" />
-            <circle cx="55" cy="200" r="3" fill="#00ff88" filter="url(#maquina-glow)" />
-            <circle cx="70" cy="200" r="3" fill="#ffb020" />
-            <circle cx="85" cy="200" r="3" fill="#1a3460" />
-            <rect x="35" y="215" width="70" height="2" rx="1" fill="#ffffff" opacity="0.2" />
-            <rect x="35" y="220" width="50" height="2" rx="1" fill="#ffffff" opacity="0.2" />
+            <rect x="25" y="180" width="100" height="55" rx="4" fill="#000" />
+            <text x="75" y="195" fill="#3385ff" fontSize="6" fontFamily="monospace" textAnchor="middle" fontWeight="700">STATUS</text>
+            <circle cx="38" cy="210" r="3.5" fill="#00ff88" />
+            <text x="46" y="213" fill="#00ff88" fontSize="6" fontFamily="monospace">OK</text>
+            <circle cx="78" cy="210" r="3.5" fill="#00ff88" />
+            <text x="86" y="213" fill="#00ff88" fontSize="6" fontFamily="monospace">OK</text>
+            <circle cx="38" cy="225" r="3.5" fill="#ffb020" />
+            <text x="46" y="228" fill="#ffb020" fontSize="6" fontFamily="monospace">WAIT</text>
+            <circle cx="78" cy="225" r="3.5" fill="#1a3460" stroke="#3385ff" strokeWidth="0.5" />
+            <text x="86" y="228" fill="#3385ff" fontSize="6" fontFamily="monospace">OFF</text>
 
             {/* Logo na máquina */}
-            <rect x="25" y="245" width="90" height="20" rx="3" fill="none" stroke="#00ff88" strokeWidth="1" opacity="0.4" />
-            <text x="70" y="259" fill="#00ff88" fontFamily="ui-monospace, monospace" fontSize="9" fontWeight="700" textAnchor="middle" opacity="0.7">CYBER</text>
+            <rect x="25" y="250" width="100" height="22" rx="3" fill="none" stroke="#00ff88" strokeWidth="1.5" />
+            <text x="75" y="265" fill="#00ff88" fontSize="9" fontFamily="monospace" fontWeight="700" textAnchor="middle">CYBER · OCA</text>
 
-            {/* Câmara de laminação (centro) */}
-            <g transform="translate(140, 60)">
-              {/* Moldura externa */}
-              <rect x="0" y="0" width="220" height="220" rx="8" fill="url(#maquina-frame)" stroke="#1a3460" strokeWidth="2" />
+            {/* Câmara de laminação (centro, com display dentro) */}
+            <g transform="translate(150, 50)">
+              {/* Moldura externa com borda brilhante */}
+              <rect x="0" y="0" width="240" height="240" rx="10" fill="#1a3460" stroke="#3385ff" strokeWidth="2.5" />
+              <rect x="2" y="2" width="236" height="236" rx="9" fill="none" stroke="#0066ff" strokeWidth="0.5" opacity="0.5" />
 
-              {/* Janela de vidro (laminação) */}
-              <rect x="20" y="20" width="180" height="140" rx="6" fill="#000" opacity="0.7" />
-              <rect x="22" y="22" width="176" height="136" rx="5" fill="url(#maquina-screen)" opacity="0.3" />
+              {/* Janela de vidro (display sendo laminado) */}
+              <rect x="25" y="25" width="190" height="150" rx="6" fill="#000" />
+              {/* Reflexo de vidro (gradient diagonal sutil) */}
+              <rect x="25" y="25" width="190" height="150" rx="6" fill="#001a4d" opacity="0.6" />
 
-              {/* Display dentro da câmara */}
-              <g transform="translate(40, 50)">
-                <rect x="0" y="0" width="140" height="80" rx="4" fill="#000" opacity="0.8" />
-                <rect x="8" y="8" width="124" height="64" rx="3" fill="url(#maquina-screen)" />
-                <rect x="50" y="6" width="40" height="3" rx="1.5" fill="#000" />
-                <rect x="14" y="20" width="60" height="4" rx="1" fill="#ffffff" opacity="0.6" />
-                <rect x="14" y="28" width="80" height="3" rx="1" fill="#ffffff" opacity="0.3" />
-                <circle cx="100" cy="55" r="8" fill="none" stroke="#00ff88" strokeWidth="2" opacity="0.7" filter="url(#maquina-glow)" />
-                <path d="M96 55 L100 59 L106 51" stroke="#00ff88" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+              {/* Display dentro da câmara (celular sendo laminado) */}
+              <g transform="translate(50, 50)">
+                {/* Moldura do celular */}
+                <rect x="0" y="0" width="140" height="100" rx="8" fill="#000" />
+                {/* Tela do celular */}
+                <rect x="4" y="4" width="132" height="92" rx="6" fill="#001a4d" />
+                {/* Notch */}
+                <rect x="55" y="2" width="30" height="4" rx="2" fill="#000" />
+                {/* UI no display do celular */}
+                <rect x="14" y="18" width="50" height="4" rx="1" fill="#3385ff" opacity="0.8" />
+                <rect x="14" y="28" width="80" height="3" rx="1" fill="#3385ff" opacity="0.4" />
+                <rect x="14" y="36" width="60" height="3" rx="1" fill="#3385ff" opacity="0.4" />
+                {/* Check verde grande (display aprovado) */}
+                <circle cx="100" cy="68" r="14" fill="none" stroke="#00ff88" strokeWidth="3" />
+                <path d="M92 68 L98 74 L108 62" stroke="#00ff88" strokeWidth="3" fill="none" strokeLinecap="round" strokeLinejoin="round" />
               </g>
 
-              {/* Braço da autoclave (em cima) */}
-              <rect x="80" y="-15" width="60" height="20" rx="3" fill="#1a3460" stroke="#0a1929" strokeWidth="2" />
-              <rect x="100" y="-25" width="20" height="10" rx="2" fill="#00ff88" filter="url(#maquina-glow)">
-                <animate attributeName="opacity" values="0.6;1;0.6" dur="1.5s" repeatCount="indefinite" />
-              </rect>
-              <line x1="110" y1="-15" x2="110" y2="20" stroke="#1a3460" strokeWidth="6" />
+              {/* Braço da autoclave (em cima, com LED verde) */}
+              <rect x="90" y="-15" width="60" height="22" rx="4" fill="#0a1929" stroke="#3385ff" strokeWidth="2" />
+              <rect x="100" y="-30" width="40" height="15" rx="3" fill="#1a3460" stroke="#00ff88" strokeWidth="2" />
+              <circle cx="120" cy="-22" r="4" fill="#00ff88" />
+              {/* Braço descendo */}
+              <line x1="120" y1="-15" x2="120" y2="25" stroke="#3385ff" strokeWidth="8" strokeLinecap="round" />
+              <rect x="115" y="22" width="10" height="8" rx="2" fill="#3385ff" />
 
               {/* Painel de controle embaixo da câmara */}
-              <rect x="20" y="180" width="180" height="30" rx="3" fill="#000" opacity="0.3" />
-              <rect x="30" y="188" width="40" height="14" rx="2" fill="#0066ff" />
-              <rect x="80" y="188" width="40" height="14" rx="2" fill="#1a3460" />
-              <rect x="130" y="188" width="40" height="14" rx="2" fill="#1a3460" />
-              <text x="50" y="199" fill="#ffffff" fontFamily="ui-monospace, monospace" fontSize="8" fontWeight="700" textAnchor="middle">START</text>
+              <rect x="25" y="195" width="190" height="32" rx="4" fill="#000" stroke="#3385ff" strokeWidth="1" />
+              <rect x="35" y="203" width="50" height="16" rx="2" fill="#0066ff" />
+              <text x="60" y="214" fill="#ffffff" fontSize="8" fontFamily="monospace" fontWeight="700" textAnchor="middle">START</text>
+              <rect x="90" y="203" width="40" height="16" rx="2" fill="#1a3460" stroke="#3385ff" strokeWidth="1" />
+              <rect x="135" y="203" width="40" height="16" rx="2" fill="#1a3460" stroke="#3385ff" strokeWidth="1" />
+              <circle cx="170" cy="211" r="3" fill="#00ff88" />
+              <circle cx="182" cy="211" r="3" fill="#ffb020" />
             </g>
 
             {/* Torre direita — saída de displays prontos */}
-            <g transform="translate(370, 40)">
-              <rect x="0" y="0" width="30" height="280" rx="6" fill="url(#maquina-frame)" stroke="#1a3460" strokeWidth="2" />
-              <rect x="3" y="60" width="24" height="40" rx="2" fill="#112240" />
-              <rect x="6" y="65" width="18" height="30" rx="1" fill="url(#maquina-screen)" opacity="0.4" />
-              <rect x="3" y="120" width="24" height="40" rx="2" fill="#112240" />
-              <rect x="6" y="125" width="18" height="30" rx="1" fill="url(#maquina-screen)" opacity="0.4" />
-              <rect x="3" y="180" width="24" height="40" rx="2" fill="#112240" />
-              <rect x="6" y="185" width="18" height="30" rx="1" fill="url(#maquina-screen)" opacity="0.4" />
-              <circle cx="15" cy="20" r="2" fill="#00ff88" filter="url(#maquina-glow)">
-                <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite" />
-              </circle>
-            </g>
-          </g>
+            <g transform="translate(395, 30)">
+              <rect x="0" y="0" width="30" height="300" rx="6" fill="#1a3460" stroke="#3385ff" strokeWidth="2" />
+              {/* LEDs de status no topo */}
+              <circle cx="15" cy="20" r="3" fill="#00ff88" />
+              <text x="15" y="40" fill="#3385ff" fontSize="6" fontFamily="monospace" fontWeight="700" textAnchor="middle">OUT</text>
+              {/* Prateleiras com displays prontos (estilo slot) */}
+              <rect x="3" y="55" width="24" height="55" rx="2" fill="#0a1929" stroke="#3385ff" strokeWidth="1" />
+              <rect x="6" y="60" width="18" height="42" rx="1" fill="#001a4d" />
+              <rect x="9" y="65" width="12" height="3" rx="1" fill="#00ff88" />
+              <rect x="9" y="71" width="12" height="2" rx="1" fill="#3385ff" />
+              <rect x="9" y="76" width="12" height="2" rx="1" fill="#3385ff" opacity="0.5" />
 
-          {/* Partículas decorativas */}
-          <g opacity="0.4">
-            <circle cx="30" cy="50" r="2" fill="#00ff88" filter="url(#maquina-glow)">
-              <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="470" cy="80" r="1.5" fill="#0066ff" filter="url(#maquina-glow)">
-              <animate attributeName="opacity" values="1;0.3;1" dur="2.5s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="480" cy="350" r="2" fill="#00ff88" filter="url(#maquina-glow)">
-              <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite" />
-            </circle>
+              <rect x="3" y="120" width="24" height="55" rx="2" fill="#0a1929" stroke="#3385ff" strokeWidth="1" />
+              <rect x="6" y="125" width="18" height="42" rx="1" fill="#001a4d" />
+              <rect x="9" y="130" width="12" height="3" rx="1" fill="#00ff88" />
+              <rect x="9" y="136" width="12" height="2" rx="1" fill="#3385ff" />
+              <rect x="9" y="141" width="12" height="2" rx="1" fill="#3385ff" opacity="0.5" />
+
+              <rect x="3" y="185" width="24" height="55" rx="2" fill="#0a1929" stroke="#3385ff" strokeWidth="1" />
+              <rect x="6" y="190" width="18" height="42" rx="1" fill="#001a4d" />
+              <rect x="9" y="195" width="12" height="3" rx="1" fill="#00ff88" />
+              <rect x="9" y="201" width="12" height="2" rx="1" fill="#3385ff" />
+              <rect x="9" y="206" width="12" height="2" rx="1" fill="#3385ff" opacity="0.5" />
+            </g>
+
+            {/* Partículas/circuit decorativo */}
+            <g>
+              <circle cx="20" cy="15" r="2" fill="#00ff88" />
+              <circle cx="445" cy="20" r="1.5" fill="#0066ff" />
+              <circle cx="450" cy="280" r="2" fill="#00ff88" />
+              <circle cx="15" cy="340" r="1.5" fill="#0066ff" />
+            </g>
           </g>
         </svg>
 
         {/* Tags flutuantes */}
-        <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2 text-[10px] font-mono">
-          <span className="px-2 py-1 bg-black/60 backdrop-blur-md border border-circuit-green/30 rounded text-white/90">
+        <div className="absolute bottom-3 left-3 right-3 flex flex-wrap gap-2 text-[10px] font-mono pointer-events-none">
+          <span className="px-2 py-1 bg-black/70 backdrop-blur-md border border-circuit-green/40 rounded text-white font-semibold">
             ⚡ OCA sob vácuo
           </span>
-          <span className="px-2 py-1 bg-black/60 backdrop-blur-md border border-circuit-green/30 rounded text-white/90">
+          <span className="px-2 py-1 bg-black/70 backdrop-blur-md border border-circuit-green/40 rounded text-white font-semibold">
             🔬 ISO 14644-1
           </span>
-          <span className="px-2 py-1 bg-black/60 backdrop-blur-md border border-circuit-green/30 rounded text-white/90 hidden sm:inline">
+          <span className="px-2 py-1 bg-black/70 backdrop-blur-md border border-circuit-green/40 rounded text-white font-semibold hidden sm:inline">
             📊 ±0.1mm
           </span>
         </div>
 
         {/* Badge pulsante no canto */}
-        <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-black/60 backdrop-blur-md border border-circuit-green/30 text-xs font-bold text-circuit-green flex items-center gap-1.5">
+        <div className="absolute top-3 right-3 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-circuit-green/40 text-xs font-bold text-circuit-green flex items-center gap-1.5 pointer-events-none">
           <span className="relative flex h-1.5 w-1.5">
             <span className="absolute inline-flex h-full w-full rounded-full bg-circuit-green opacity-75 animate-ping" />
             <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-circuit-green" />

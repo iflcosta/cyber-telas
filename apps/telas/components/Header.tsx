@@ -1,13 +1,13 @@
 'use client';
 
 // ============================================
-// Header — nav sticky com anchor links + drawer mobile
-// Substitui o Topbar inline do page.tsx.
+// Header — nav sticky com 6 itens + sub-bar de contexto B2B/B2C
+// Inspirado no header do cyberinformatica.tech (cyber-tech)
 // ============================================
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, MessageCircle } from 'lucide-react';
 import TrackedWhatsAppLink from './TrackedWhatsAppLink';
 
 type NavItem = {
@@ -26,20 +26,13 @@ const NAV_ITEMS: NavItem[] = [
   { href: '#form-section', label: 'Credenciamento', sectionId: 'form-section' },
 ];
 
+const MAIN_SITE_URL = 'https://www.cyberinformatica.tech';
+
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('');
 
-  // Fecha o drawer ao redimensionar pra desktop.
-  useEffect(() => {
-    const onResize = () => {
-      if (window.innerWidth >= 1024) setOpen(false);
-    };
-    window.addEventListener('resize', onResize);
-    return () => window.removeEventListener('resize', onResize);
-  }, []);
-
-  // Bloqueia scroll do body quando drawer mobile tá aberto.
+  // Bloqueia scroll do body quando drawer mobile tá aberto
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -51,12 +44,12 @@ export default function Header() {
     };
   }, [open]);
 
-  // Destaca o link da seção atualmente visível (desktop apenas).
-  // Mobile não tem nav visível, então não precisa.
+  // Scrollspy — destaca seção ativa no nav
   useEffect(() => {
     if (typeof IntersectionObserver === 'undefined') return;
 
     const sections = NAV_ITEMS
+      .filter((item) => item.href.startsWith('#'))
       .map((item) => document.getElementById(item.sectionId))
       .filter((el): el is HTMLElement => el !== null);
 
@@ -64,7 +57,6 @@ export default function Header() {
 
     const io = new IntersectionObserver(
       (entries) => {
-        // Pega a seção mais visível no viewport
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
@@ -72,10 +64,7 @@ export default function Header() {
           setActiveSection(visible[0].target.id);
         }
       },
-      {
-        rootMargin: '-30% 0px -50% 0px',
-        threshold: [0, 0.25, 0.5, 0.75, 1],
-      },
+      { rootMargin: '-30% 0px -50% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] }
     );
 
     sections.forEach((s) => io.observe(s));
@@ -84,12 +73,10 @@ export default function Header() {
 
   const handleNavClick = (href: string) => {
     setOpen(false);
-    // O scroll-behavior: smooth no globals.css já cuida da animação.
     if (typeof document !== 'undefined') {
       const id = href.replace('#', '');
       const el = document.getElementById(id);
       if (el) {
-        // Pequeno delay pra deixar o drawer fechar antes do scroll
         setTimeout(() => {
           el.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 100);
@@ -98,15 +85,15 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[rgba(5,10,20,0.85)] backdrop-blur-xl border-b border-cyber-blue/15">
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyber-blue to-circuit-green opacity-50" />
+    <header className="sticky top-0 z-50 bg-navy-950/95 backdrop-blur-xl border-b border-white/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
+      {/* Linha gradient embaixo do header (efeito industrial) */}
+      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyber-blue to-circuit-green opacity-60" />
 
       {/* ============================================================
-          Sub-bar acima do header — contexto de persona (B2B + B2C)
-          Facilita a navegação deixando claro pra quem é cada caminho.
-          Mobile: mostra só os 2 atalhos. Desktop: horário também.
+          Sub-bar superior — atalho B2B/B2C + horário + e-mail
+          Mobile: só os 2 atalhos. Desktop: horário + e-mail também.
           ============================================================ */}
-      <div className="bg-cyber-blue/[0.06] border-b border-cyber-blue/15">
+      <div className="bg-cyber-blue/[0.06] border-b border-white/[0.04]">
         <div className="container">
           <div className="flex items-center justify-between h-9 text-[11px] sm:text-xs">
             <div className="flex items-center gap-3 sm:gap-5 text-gray-400">
@@ -120,7 +107,7 @@ export default function Header() {
                 className="inline-flex items-center gap-1.5 text-gray-200 hover:text-circuit-green transition-colors font-medium"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyber-blue-light">
-                  <path d="M3 7h18M3 12h18M3 17h18"/>
+                  <path d="M3 7h18M3 12h18M3 17h18" />
                 </svg>
                 <span>Lojistas e Assistências</span>
               </a>
@@ -134,9 +121,7 @@ export default function Header() {
                 className="inline-flex items-center gap-1.5 text-gray-300 hover:text-circuit-green transition-colors"
                 ariaLabel="WhatsApp pessoa física"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-circuit-green">
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
-                </svg>
+                <MessageCircle size={14} className="text-circuit-green" />
                 <span>Pessoa Física</span>
               </TrackedWhatsAppLink>
             </div>
@@ -151,6 +136,9 @@ export default function Header() {
         </div>
       </div>
 
+      {/* ============================================================
+          Header principal — logo + nav + ações
+          ============================================================ */}
       <div className="container">
         <div className="flex items-center justify-between py-3 lg:py-4 gap-4 lg:gap-6">
           {/* Logo */}
@@ -162,43 +150,57 @@ export default function Header() {
             <img
               src="/logo-horizontal-header.png"
               alt="Cyber Informática"
-              className="h-12 sm:h-16 lg:h-20 w-auto"
+              className="h-12 sm:h-14 lg:h-16 w-auto"
             />
           </Link>
 
           {/* Nav desktop (lg+) */}
-          <nav aria-label="Navegação principal" className="hidden lg:flex flex-1 justify-center">
-            <ul className="flex items-center gap-1">
-              {NAV_ITEMS.map((item) => {
-                const isActive = activeSection === item.sectionId;
-                return (
-                  <li key={item.href}>
-                    <a
-                      href={item.href}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick(item.href);
-                      }}
-                      className={`px-3 py-2 text-sm font-medium rounded-md transition-all ${
-                        isActive
-                          ? 'text-circuit-green bg-circuit-green/10'
-                          : 'text-gray-300 hover:text-white hover:bg-white/5'
-                      }`}
-                      aria-current={isActive ? 'true' : undefined}
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
+          <nav aria-label="Navegação principal" className="hidden lg:flex items-center gap-0.5">
+            {NAV_ITEMS.map((item) => {
+              const isActive = activeSection === item.sectionId;
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavClick(item.href);
+                  }}
+                  className={`relative px-3 py-2 text-sm font-medium rounded-md transition-colors ${
+                    isActive
+                      ? 'text-circuit-green'
+                      : 'text-gray-300 hover:text-white'
+                  }`}
+                  aria-current={isActive ? 'true' : undefined}
+                >
+                  {item.label}
+                  <span
+                    className={`absolute bottom-0.5 left-3 right-3 h-0.5 bg-circuit-green rounded-full transition-transform origin-left ${
+                      isActive ? 'scale-x-100' : 'scale-x-0'
+                    }`}
+                  />
+                </a>
+              );
+            })}
+            {/* Cross-link pro site principal */}
+            <a
+              href={MAIN_SITE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-2 pl-4 border-l border-white/[0.08] px-3 py-2 text-sm font-medium text-circuit-green/80 hover:text-circuit-green transition-colors inline-flex items-center gap-1.5"
+              aria-label="Loja física Cyber Informática — site principal"
+            >
+              <span className="w-1.5 h-1.5 bg-circuit-green rounded-full animate-pulse" />
+              Loja física
+              <span aria-hidden className="text-[10px]">↗</span>
+            </a>
           </nav>
 
-          {/* Telefone (sempre visível) */}
+          {/* Telefone + hamburger */}
           <div className="flex items-center gap-2 flex-shrink-0">
             <a
               href="tel:+5511954369269"
-              className="inline-flex items-center gap-2 px-3 lg:px-4 py-2 bg-cyber-blue/8 border border-cyber-blue/25 text-white text-sm font-semibold rounded-full hover:bg-cyber-blue/15 hover:border-circuit-green transition-all whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-3 lg:px-4 py-2 bg-cyber-blue/10 border border-cyber-blue/30 text-white text-sm font-semibold rounded-full hover:bg-cyber-blue/20 hover:border-circuit-green transition-all whitespace-nowrap"
               aria-label="Ligar para Cyber Informática"
             >
               <span className="w-2 h-2 bg-circuit-green rounded-full shadow-[0_0_8px_rgba(0,255,136,0.5)] animate-pulse-ring" />
@@ -206,7 +208,7 @@ export default function Header() {
               <span className="hidden sm:inline">(11) 95436-9269</span>
             </a>
 
-            {/* Hamburger (mobile apenas) */}
+            {/* Hamburger (mobile/tablet) */}
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
@@ -221,7 +223,9 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Drawer mobile */}
+      {/* ============================================================
+          Drawer mobile (até lg-1)
+          ============================================================ */}
       {open && (
         <>
           {/* Backdrop */}
@@ -233,7 +237,7 @@ export default function Header() {
           {/* Painel */}
           <div
             id="mobile-drawer"
-            className="lg:hidden fixed inset-x-0 top-[108px] sm:top-[124px] z-40 bg-navy-950 border-b border-cyber-blue/30 animate-fade-up"
+            className="lg:hidden fixed inset-x-0 top-[108px] sm:top-[124px] z-40 bg-navy-950 border-b border-cyber-blue/30 animate-fade-up max-h-[calc(100vh-108px)] overflow-y-auto"
             role="dialog"
             aria-modal="true"
             aria-label="Menu de navegação"
@@ -261,9 +265,22 @@ export default function Header() {
                     </li>
                   );
                 })}
+                <li>
+                  <a
+                    href={MAIN_SITE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setOpen(false)}
+                    className="block px-4 py-3 text-base font-medium text-circuit-green hover:bg-circuit-green/10 rounded-lg inline-flex items-center gap-2"
+                  >
+                    <span className="w-1.5 h-1.5 bg-circuit-green rounded-full animate-pulse" />
+                    Loja física · PC, notebook e celular
+                    <span aria-hidden className="text-xs">↗</span>
+                  </a>
+                </li>
               </ul>
 
-              <div className="mt-4 pt-4 border-t border-white/8">
+              <div className="mt-4 pt-4 border-t border-white/[0.08]">
                 <TrackedWhatsAppLink
                   phone="5511954369269"
                   message="Olá! Vim do site e quero saber mais sobre credenciamento."
@@ -275,19 +292,6 @@ export default function Header() {
                 >
                   Falar no WhatsApp
                 </TrackedWhatsAppLink>
-              </div>
-
-              {/* Cross-link pro site principal */}
-              <div className="mt-3 pt-3 border-t border-white/8">
-                <a
-                  href="https://www.cyberinformatica.tech"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setOpen(false)}
-                  className="block w-full px-4 py-3 text-sm text-gray-400 hover:text-circuit-green transition-colors text-center"
-                >
-                  ← Loja física · PC, notebook e celular
-                </a>
               </div>
             </nav>
           </div>
