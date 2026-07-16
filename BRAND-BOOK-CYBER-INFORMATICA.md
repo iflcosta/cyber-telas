@@ -245,27 +245,51 @@ Linha decorativa horizontal de ~280-300px, com gradiente de Circuit Green → Cy
 
 ---
 
-## 11. CONFORMIDADE B2B (Google Ads)
+## 11. CONFORMIDADE EM ADS — ESTRATÉGIA DE TRANSPARÊNCIA
 
-Toda comunicação visual e textual deve reforçar o **posicionamento B2B** da marca:
+> **Mudança de abordagem (v1.1).** A v1.0 orientava esconder termos de
+> consumidor e reparo para "driblar" a política de suporte técnico do Google.
+> Essa abordagem foi abandonada: disfarçar B2C como B2B é **contorno de
+> sistema**, que gera suspensão permanente de conta no Google. A política real
+> mira **golpes de suporte remoto** (remoção de vírus, recuperação de dados,
+> reset de senha à distância) — **não** o reparo físico transparente. A marca
+> passa a competir por **transparência**, que é o que de fato aprova.
 
-✅ **Permitido** (no texto e na composição):
-- Linguagem industrial (laminação, OCA, autoclare, atmosfera controlada)
-- Referência a CNPJ, faturamento PJ
-- Vocabulário B2B (parceiros, lojistas, atacadistas, lotes)
-- Estética corporativa/industrial
-- Cores sóbrias e profissionais
+### Dois públicos, duas páginas
+- **B2B — página `/` (industrial):** linguagem de lojista/CNPJ, lotes,
+  credenciamento. Mantém a estética corporativa/industrial.
+- **B2C — página `/consumidor`:** linguagem de dono do celular. Aqui os termos
+  de consumidor e reparo físico são **permitidos e desejáveis**.
 
-❌ **Proibido** (risco de reprovação Google Ads):
-- "Reparo", "conserto", "troca na hora"
-- "Cliente final", "consumidor", "pessoa física"
-- "Orçamento grátis", "agende seu reparo"
-- Linguagem B2C / varejo
-- Marcas de terceiros (Apple, Samsung, etc.)
-- "Loja física", "traga seu telefone"
+### Canais
+- **Meta Ads** carrega a aquisição de consumidor (não sofre a restrição de
+  suporte técnico). É o motor principal.
+- **Google** entra por **Search transparente + Google Business Profile**, só
+  após a página deixar clara a identidade do negócio.
+
+✅ **Permitido / recomendado:**
+- "Troca de vidro", "recuperação de display", "laminação OCA", "reparo físico"
+- "Cliente final", "consumidor", "pessoa física" (na página B2C)
+- Citar modelos (iPhone, Galaxy) **com** aviso de que são marcas de terceiros
+  e de que a Cyber **não é autorizada** do fabricante
+- Declarar endereço físico, garantia e processo (sinais de legitimidade)
+
+❌ **Evitar (gatilhos reais da política / risco de suspensão):**
+- Enquadrar o serviço como "suporte técnico", "recuperação de dados",
+  "remoção de vírus" ou suporte **remoto/online**
+- Se passar por assistência **autorizada** Apple/Samsung ou usar branding do
+  fabricante como se fosse oficial
+- Qualquer fachada que esconda a natureza real do negócio para enganar a
+  revisão do anúncio (contorno de sistema)
+
+### Obrigatório em toda página de destino de anúncio
+- Disclaimer visível: **"Não somos assistência autorizada Apple/Samsung"**
+- Aviso de marcas registradas (citação apenas para identificar modelos)
 
 ---
 
-**Versão do Brand Book**: 1.0
-**Data**: 10/06/2026
-**Baseado em**: Plano B2B Google_Meta Ads.pdf + Diretrizes de Branding Cyber Informática
+**Versão do Brand Book**: 1.1
+**Data**: 16/07/2026
+**Baseado em**: Diretrizes de Branding Cyber Informática + política oficial do
+Google Ads ("Suporte técnico terceirizado ao consumidor") e reestruturação de
+tráfego pago (Meta como motor B2C, Google transparente)
