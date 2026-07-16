@@ -62,9 +62,9 @@ const OG_IMAGE = `${SITE_URL}/og-image.png`;
 // Meta tags otimizadas (alvos: title ≤60, description ≤125)
 // Anteriores: title 77, description 153 (truncavam em X/LinkedIn/mobile)
 // ============================================
-const TITLE = 'Laminação OCA Industrial de Displays · Cyber Informática';
+const TITLE = 'Troca de Vidro de Tela · Laminação OCA · Cyber Informática';
 const DESCRIPTION =
-  'Laminação OCA industrial B2B. Para assistências técnicas e lojistas. Apenas CNPJ. Lotes prontos em 24h.';
+  'Laboratório independente de laminação OCA: trocamos só o vidro quebrado e preservamos seu display original de fábrica. 90 dias de garantia.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -74,15 +74,15 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   keywords: [
-    'remanufatura de displays',
-    'laminação industrial',
+    'troca de vidro de tela',
     'laminação OCA',
-    'processamento de lotes eletrônicos',
+    'recuperação de display',
+    'reparo de tela original',
+    'trocar só o vidro da tela',
+    'display original preservado',
     'OCA a vácuo',
     'Cyber Informática',
-    'B2B',
-    'assistência técnica',
-    'lojista de tecnologia',
+    'laboratório independente de displays',
   ],
   authors: [{ name: 'Cyber Informática' }],
   creator: 'Cyber Informática',
