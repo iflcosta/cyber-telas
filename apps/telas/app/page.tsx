@@ -16,12 +16,13 @@ import SchemaOrg from '@/components/SchemaOrg';
 import TrackedWhatsAppLink from '@/components/TrackedWhatsAppLink';
 
 // ============================================
-// Render dinâmico: busca Supabase a cada request
-// Garante dados fresh (modelos + faixas) sempre
-// Sem cache de fetch persistente (que estava quebrando)
+// ISR (Incremental Static Regeneration): a página é servida do cache da CDN
+// e revalidada no servidor a cada 5 min. Preços/modelos não mudam a cada
+// request, então isso derruba o TTFB (importante para Quality Score de Ads)
+// sem sacrificar frescor relevante. É cache de ROTA — não o fetch-cache do
+// Supabase que dava problema antes.
 // ============================================
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 300;
 
 // ============================================
 // Server Component (RSC) - renderizado no servidor
@@ -126,8 +127,8 @@ function Hero() {
               Cyber Informática · Laminação OCA Industrial
             </div>
 
-            <h1 className="text-display text-4xl sm:text-5xl lg:text-[56px] font-extrabold leading-[1.05] mb-6 tracking-tight">
-              Centro de <span className="gradient-text">Remanufatura</span><br />
+            <h1 className="text-display text-balance text-4xl sm:text-5xl lg:text-[56px] font-extrabold leading-tight lg:leading-[1.05] mb-6 tracking-tight">
+              Centro de <span className="gradient-text">Remanufatura</span>{' '}
               e Laminação Industrial de Displays
             </h1>
 
@@ -187,7 +188,7 @@ function Hero() {
                     )}
                   </span>
                   <div className="min-w-0">
-                    <div className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold leading-tight">{b.label}</div>
+                    <div className="text-[11px] uppercase tracking-wider text-gray-400 font-semibold leading-tight">{b.label}</div>
                     <div className="text-sm font-bold text-white leading-tight truncate">{b.sub}</div>
                   </div>
                 </div>
@@ -724,7 +725,7 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
               }`}
             >
               <div className="flex items-baseline justify-between gap-2 mb-1">
-                <span className="text-xs font-mono uppercase tracking-wider text-cyber-blue">
+                <span className="text-xs font-mono uppercase tracking-wider text-cyber-blue-hover">
                   {lvl.badge}
                 </span>
                 <span className="text-xs text-gray-500">{lvl.sub}</span>
@@ -737,7 +738,42 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
         </div>
 
         {/* Tabela por faixa */}
-        <div className="max-w-5xl mx-auto bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)]">
+        <div className="max-w-5xl mx-auto">
+          {/* Mobile: cards empilhados (evita scroll horizontal da tabela) */}
+          <div className="md:hidden space-y-3">
+            {PRICING_TIERS.map((tier) => {
+              const finalRange = formatPriceRange(
+                calcularPrecoTier(tier.refMin, 'final'),
+                isFinite(tier.refMax) ? calcularPrecoTier(tier.refMax, 'final') : Number.POSITIVE_INFINITY,
+              );
+              const lojistaRange = formatPriceRange(
+                calcularPrecoTier(tier.refMin, 'lojista'),
+                isFinite(tier.refMax) ? calcularPrecoTier(tier.refMax, 'lojista') : Number.POSITIVE_INFINITY,
+              );
+              return (
+                <div key={tier.id} className="bg-white rounded-xl border border-gray-200 p-4 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)]">
+                  <div className="text-display text-base font-semibold text-navy-900">{tier.label}</div>
+                  <div className="text-xs text-gray-600 mt-0.5 leading-snug">{tier.tagline}</div>
+                  <div className="grid grid-cols-2 gap-2.5 mt-3">
+                    <div className="rounded-lg bg-gray-50 border border-gray-100 px-3 py-2.5">
+                      <div className="text-[10px] font-mono uppercase tracking-wider text-gray-500 mb-0.5">Cliente Final</div>
+                      <div className="text-display text-base font-semibold text-navy-900 leading-tight">{finalRange}</div>
+                    </div>
+                    <div className="rounded-lg bg-cyber-blue/5 border border-cyber-blue/15 px-3 py-2.5">
+                      <div className="text-[10px] font-mono uppercase tracking-wider text-cyber-blue-hover mb-0.5">Lojista</div>
+                      <div className="text-display text-base font-semibold text-cyber-blue-hover leading-tight">{lojistaRange}</div>
+                    </div>
+                  </div>
+                  <div className="text-[11px] text-gray-400 mt-2.5">
+                    Ref. assistência: {formatPriceRange(tier.refMin, tier.refMax)} · por unidade
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop: tabela completa */}
+          <div className="hidden md:block bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)]">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-navy-950 text-white">
@@ -785,7 +821,7 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
                       </div>
                     </td>
                     <td className="px-6 py-5 text-right">
-                      <div className="text-display text-lg font-semibold text-cyber-blue">
+                      <div className="text-display text-lg font-semibold text-cyber-blue-hover">
                         {formatPriceRange(
                           calcularPrecoTier(tier.refMin, 'lojista'),
                           isFinite(tier.refMax) ? calcularPrecoTier(tier.refMax, 'lojista') : Number.POSITIVE_INFINITY,
@@ -804,6 +840,12 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
             <strong className="text-navy-900">Como ler:</strong> a referência é o valor
             médio de mercado da troca completa em assistência (peça + mão de obra).
             Cliente final paga <strong>70%</strong>, lojista credenciado paga <strong>35%</strong>.
+          </div>
+          </div>
+
+          {/* Nota "Como ler" no mobile (a tabela desktop fica oculta em telas pequenas) */}
+          <div className="md:hidden mt-3 px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-xs text-gray-500 leading-relaxed">
+            <strong className="text-navy-900">Como ler:</strong> a referência é o valor médio de mercado da troca completa em assistência (peça + mão de obra). Cliente final paga <strong>70%</strong>, lojista credenciado paga <strong>35%</strong>.
           </div>
         </div>
 

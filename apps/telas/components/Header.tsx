@@ -155,7 +155,7 @@ export default function Header() {
               phone="5511954369269"
               message="Olá! Vim pelo site da laminação OCA e gostaria de um orçamento."
               source="header"
-              className="inline-flex items-center gap-2 px-3 lg:px-4 py-2 bg-cyber-blue/10 border border-cyber-blue/30 text-white text-sm font-semibold rounded-full hover:bg-cyber-blue/20 hover:border-circuit-green transition-all whitespace-nowrap"
+              className="inline-flex items-center gap-2 px-3 lg:px-4 py-2.5 min-h-[44px] bg-cyber-blue/10 border border-cyber-blue/30 text-white text-sm font-semibold rounded-full hover:bg-cyber-blue/20 hover:border-circuit-green transition-all whitespace-nowrap"
               ariaLabel="Chamar no WhatsApp da Cyber Informática"
             >
               <span className="w-2 h-2 bg-circuit-green rounded-full shadow-[0_0_8px_rgba(0,255,136,0.5)] animate-pulse-ring" />
@@ -167,7 +167,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
-              className="hamburger-show-mobile w-10 h-10 items-center justify-center bg-white/5 border border-white/10 rounded-md text-white hover:bg-white/10 hover:border-circuit-green transition-all"
+              className="hamburger-show-mobile w-11 h-11 items-center justify-center bg-white/5 border border-white/10 rounded-md text-white hover:bg-white/10 hover:border-circuit-green transition-all"
               aria-label={open ? 'Fechar menu' : 'Abrir menu'}
               aria-expanded={open}
               aria-controls="mobile-drawer"
