@@ -65,6 +65,8 @@ export default async function HomePage() {
 
       <FormSection modelosPorMarca={modelosPorMarca} />
 
+      <AboutSection />
+
       <Footer />
     </>
   );
@@ -841,6 +843,45 @@ function FormSection({ modelosPorMarca }: { modelosPorMarca: Record<string, any[
 // ============================================
 // Footer
 // ============================================
+// ============================================
+// About / Transparência
+// ============================================
+function AboutSection() {
+  return (
+    <section id="quem-somos" className="section bg-white border-t border-gray-100">
+      <div className="container max-w-3xl">
+        <h2 className="section-title text-display text-3xl sm:text-4xl font-bold tracking-tight text-navy-900 leading-tight mb-6">
+          Quem somos
+        </h2>
+        <div className="space-y-4 text-base sm:text-lg text-gray-600 leading-relaxed">
+          <p>
+            A <strong className="text-navy-900">Cyber Informática</strong> é um{' '}
+            <strong className="text-navy-900">laboratório independente de recuperação de displays</strong>,
+            especializado em <strong className="text-navy-900">laminação OCA</strong> — a troca apenas do
+            vidro externo danificado, preservando o display OLED/AMOLED original de fábrica do seu aparelho.
+          </p>
+          <p>
+            <strong className="text-navy-900">Não somos assistência técnica autorizada</strong> pela Apple,
+            Samsung ou qualquer outro fabricante, e não representamos essas marcas. Somos um prestador de
+            serviço independente de reparo físico de hardware. As garantias oficiais de fábrica não são
+            administradas por nós.
+          </p>
+          <p>
+            Trabalhamos com endereço físico e processo documentado, com{' '}
+            <strong className="text-navy-900">90 dias de garantia</strong> sobre o serviço de laminação que
+            realizamos.
+          </p>
+          <p className="text-sm text-gray-500 pt-2 border-t border-gray-100">
+            Apple e iPhone são marcas registradas da Apple Inc.; Samsung e Galaxy são marcas registradas da
+            Samsung Electronics Co., Ltd. Os nomes das marcas são citados apenas para identificar os modelos
+            de aparelho que atendemos.
+          </p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function Footer() {
   return (
     <footer className="bg-navy-950 text-white py-12 border-t border-cyber-blue/15">
@@ -925,8 +966,8 @@ function Footer() {
 
         <div className="pt-8 border-t border-white/8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
           <div className="text-center sm:text-left">
-            <p>© 2026 Cyber Informática · Centro de Remanufatura e Laminação Industrial de Displays. Todos os direitos reservados.</p>
-            <p className="mt-1">Atendemos empresas (CNPJ, faturamento mensal) e pessoas físicas (cotação direta via WhatsApp). Cadastro sujeito a verificação cadastral.</p>
+            <p>© 2026 Cyber Informática · Laboratório independente de recuperação de displays (laminação OCA / troca de vidro). Todos os direitos reservados.</p>
+            <p className="mt-1"><strong className="text-gray-400">Não somos assistência autorizada Apple, Samsung ou de qualquer fabricante.</strong> Apple® e iPhone® são marcas da Apple Inc.; Samsung® e Galaxy® são marcas da Samsung Electronics. Marcas citadas apenas para identificação de modelos. Serviço com 90 dias de garantia.</p>
           </div>
           <nav aria-label="Documentos legais" className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
             <Link
