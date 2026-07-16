@@ -116,7 +116,7 @@ export default function QualificationForm({
 
   if (success && cotacaoFinal) {
     return (
-      <div className="text-center py-8">
+      <div role="status" aria-live="polite" className="text-center py-8">
         <div className="w-20 h-20 mx-auto bg-gradient-to-br from-circuit-green to-circuit-green-dark rounded-full flex items-center justify-center mb-6 shadow-[0_10px_30px_rgba(0,255,136,0.4)]">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="w-10 h-10 text-navy-950">
             <polyline points="20 6 9 17 4 12" />
@@ -148,8 +148,9 @@ export default function QualificationForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="form-label">Razão Social <span className="required">*</span></label>
+        <label htmlFor="qf-razao-social" className="form-label">Razão Social <span className="required">*</span></label>
         <input
+          id="qf-razao-social"
           type="text"
           required
           placeholder="Nome empresarial completo"
@@ -161,8 +162,9 @@ export default function QualificationForm({
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
-          <label className="form-label">CNPJ <span className="required">*</span></label>
+          <label htmlFor="qf-cnpj" className="form-label">CNPJ <span className="required">*</span></label>
           <input
+            id="qf-cnpj"
             type="text"
             required
             placeholder="00.000.000/0001-00"
@@ -174,8 +176,9 @@ export default function QualificationForm({
         </div>
 
         <div>
-          <label className="form-label">Telefone Corporativo <span className="required">*</span></label>
+          <label htmlFor="qf-telefone" className="form-label">Telefone Corporativo <span className="required">*</span></label>
           <input
+            id="qf-telefone"
             type="tel"
             required
             placeholder="(00) 00000-0000"
@@ -188,8 +191,9 @@ export default function QualificationForm({
       </div>
 
       <div>
-        <label className="form-label">E-mail Corporativo <span className="required">*</span></label>
+        <label htmlFor="qf-email" className="form-label">E-mail Corporativo <span className="required">*</span></label>
         <input
+          id="qf-email"
           type="email"
           required
           placeholder="seuemail@empresa.com.br"
@@ -200,8 +204,9 @@ export default function QualificationForm({
       </div>
 
       <div>
-        <label className="form-label">Volume Médio de Telas Semanais <span className="required">*</span></label>
+        <label htmlFor="qf-volume" className="form-label">Volume Médio de Telas Semanais <span className="required">*</span></label>
         <select
+          id="qf-volume"
           required
           className="form-select"
           value={form.volume_semanal}
@@ -223,6 +228,7 @@ export default function QualificationForm({
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           <select
             required
+            aria-label="Marca do aparelho"
             className="form-select"
             value={form.marca}
             onChange={(e) => handleChange('marca', e.target.value)}
@@ -238,6 +244,7 @@ export default function QualificationForm({
             type="text"
             required
             list="form-modelos-datalist"
+            aria-label="Modelo do aparelho"
             placeholder="Modelo (ex: iPhone 15 Pro Max)"
             className="form-input sm:col-span-2"
             value={form.modelo_display}
@@ -266,6 +273,7 @@ export default function QualificationForm({
           type="number"
           required
           step="0.01"
+          aria-label="Valor do display novo em reais"
           placeholder="Valor do display novo (R$)"
           className="form-input mt-2"
           value={form.valor_display_novo}
@@ -274,7 +282,7 @@ export default function QualificationForm({
       </div>
 
       {error && (
-        <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-sm text-red-400">
+        <div role="alert" aria-live="assertive" className="p-3 bg-red-500/10 border border-red-500/30 rounded-lg text-sm text-red-400">
           {error}
         </div>
       )}

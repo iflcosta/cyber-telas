@@ -212,7 +212,7 @@ export default function CatalogSection() {
                     Condicao especial via credenciamento CNPJ.
                   </p>
                   <a
-                    href="#form-section"
+                    href="/#form-section"
                     className="inline-flex items-center gap-1 mt-2 text-sm font-semibold text-cyber-blue hover:text-cyber-blue-hover transition-colors"
                   >
                     Solicitar credenciamento

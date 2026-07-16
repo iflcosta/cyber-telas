@@ -16,12 +16,13 @@ import SchemaOrg from '@/components/SchemaOrg';
 import TrackedWhatsAppLink from '@/components/TrackedWhatsAppLink';
 
 // ============================================
-// Render dinâmico: busca Supabase a cada request
-// Garante dados fresh (modelos + faixas) sempre
-// Sem cache de fetch persistente (que estava quebrando)
+// ISR (Incremental Static Regeneration): a página é servida do cache da CDN
+// e revalidada no servidor a cada 5 min. Preços/modelos não mudam a cada
+// request, então isso derruba o TTFB (importante para Quality Score de Ads)
+// sem sacrificar frescor relevante. É cache de ROTA — não o fetch-cache do
+// Supabase que dava problema antes.
 // ============================================
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 300;
 
 // ============================================
 // Server Component (RSC) - renderizado no servidor
@@ -68,6 +69,23 @@ export default async function HomePage() {
       <AboutSection />
 
       <Footer />
+
+      {/* Botão flutuante de WhatsApp — só mobile (no desktop o header já expõe
+          o WhatsApp). Mantém o caminho de conversão sempre visível na rolagem. */}
+      <TrackedWhatsAppLink
+        phone="5511954369269"
+        message="Olá! Vim do site e quero cotar a laminação OCA (troca de vidro) do meu aparelho."
+        source="page_floating_pf"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="md:hidden fixed bottom-4 right-4 z-40 flex items-center justify-center w-14 h-14 rounded-full bg-circuit-green text-navy-950 shadow-[0_6px_20px_rgba(0,255,136,0.45)] hover:brightness-95 transition"
+        ariaLabel="Falar no WhatsApp"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-7 h-7" aria-hidden="true">
+          <path d="M17.5 14.4c-.3-.15-1.77-.87-2.04-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.49s1.07 2.89 1.22 3.09c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.77-.72 2.02-1.42.25-.7.25-1.3.17-1.42-.07-.12-.27-.2-.57-.35z"/>
+          <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.24 8.24 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.24-8.23 8.24z"/>
+        </svg>
+      </TrackedWhatsAppLink>
     </>
   );
 }
@@ -109,8 +127,8 @@ function Hero() {
               Cyber Informática · Laminação OCA Industrial
             </div>
 
-            <h1 className="text-display text-4xl sm:text-5xl lg:text-[56px] font-extrabold leading-[1.05] mb-6 tracking-tight">
-              Centro de <span className="gradient-text">Remanufatura</span><br />
+            <h1 className="text-display text-balance text-4xl sm:text-5xl lg:text-[56px] font-extrabold leading-tight lg:leading-[1.05] mb-6 tracking-tight">
+              Centro de <span className="gradient-text">Remanufatura</span>{' '}
               e Laminação Industrial de Displays
             </h1>
 
@@ -140,7 +158,7 @@ function Hero() {
                 ariaLabel="WhatsApp pessoa física"
               >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5 text-circuit-green">
-                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
                 </svg>
                 Sou pessoa física
               </TrackedWhatsAppLink>
@@ -160,17 +178,17 @@ function Hero() {
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                     )}
                     {b.icon === 'cpu' && (
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" y2="4"/><line x1="15" y1="2" y2="4"/><line x1="9" y1="20" y2="22"/><line x1="15" y1="20" y2="22"/><line x1="20" y1="9" y2="4"/><line x1="20" y1="14" y2="4"/><line x1="2" y1="9" y2="4"/><line x1="2" y1="14" y2="4"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="14" x2="22" y2="14"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="14" x2="4" y2="14"/></svg>
                     )}
                     {b.icon === 'globe' && (
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                     )}
                     {b.icon === 'chat' && (
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4 text-circuit-green"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
                     )}
                   </span>
                   <div className="min-w-0">
-                    <div className="text-[10px] uppercase tracking-wider text-gray-500 font-semibold leading-tight">{b.label}</div>
+                    <div className="text-[11px] uppercase tracking-wider text-gray-400 font-semibold leading-tight">{b.label}</div>
                     <div className="text-sm font-bold text-white leading-tight truncate">{b.sub}</div>
                   </div>
                 </div>
@@ -707,7 +725,7 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
               }`}
             >
               <div className="flex items-baseline justify-between gap-2 mb-1">
-                <span className="text-xs font-mono uppercase tracking-wider text-cyber-blue">
+                <span className="text-xs font-mono uppercase tracking-wider text-cyber-blue-hover">
                   {lvl.badge}
                 </span>
                 <span className="text-xs text-gray-500">{lvl.sub}</span>
@@ -720,7 +738,42 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
         </div>
 
         {/* Tabela por faixa */}
-        <div className="max-w-5xl mx-auto bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)]">
+        <div className="max-w-5xl mx-auto">
+          {/* Mobile: cards empilhados (evita scroll horizontal da tabela) */}
+          <div className="md:hidden space-y-3">
+            {PRICING_TIERS.map((tier) => {
+              const finalRange = formatPriceRange(
+                calcularPrecoTier(tier.refMin, 'final'),
+                isFinite(tier.refMax) ? calcularPrecoTier(tier.refMax, 'final') : Number.POSITIVE_INFINITY,
+              );
+              const lojistaRange = formatPriceRange(
+                calcularPrecoTier(tier.refMin, 'lojista'),
+                isFinite(tier.refMax) ? calcularPrecoTier(tier.refMax, 'lojista') : Number.POSITIVE_INFINITY,
+              );
+              return (
+                <div key={tier.id} className="bg-white rounded-xl border border-gray-200 p-4 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)]">
+                  <div className="text-display text-base font-semibold text-navy-900">{tier.label}</div>
+                  <div className="text-xs text-gray-600 mt-0.5 leading-snug">{tier.tagline}</div>
+                  <div className="grid grid-cols-2 gap-2.5 mt-3">
+                    <div className="rounded-lg bg-gray-50 border border-gray-100 px-3 py-2.5">
+                      <div className="text-[10px] font-mono uppercase tracking-wider text-gray-500 mb-0.5">Cliente Final</div>
+                      <div className="text-display text-base font-semibold text-navy-900 leading-tight">{finalRange}</div>
+                    </div>
+                    <div className="rounded-lg bg-cyber-blue/5 border border-cyber-blue/15 px-3 py-2.5">
+                      <div className="text-[10px] font-mono uppercase tracking-wider text-cyber-blue-hover mb-0.5">Lojista</div>
+                      <div className="text-display text-base font-semibold text-cyber-blue-hover leading-tight">{lojistaRange}</div>
+                    </div>
+                  </div>
+                  <div className="text-[11px] text-gray-400 mt-2.5">
+                    Ref. assistência: {formatPriceRange(tier.refMin, tier.refMax)} · por unidade
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop: tabela completa */}
+          <div className="hidden md:block bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)]">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-navy-950 text-white">
@@ -768,7 +821,7 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
                       </div>
                     </td>
                     <td className="px-6 py-5 text-right">
-                      <div className="text-display text-lg font-semibold text-cyber-blue">
+                      <div className="text-display text-lg font-semibold text-cyber-blue-hover">
                         {formatPriceRange(
                           calcularPrecoTier(tier.refMin, 'lojista'),
                           isFinite(tier.refMax) ? calcularPrecoTier(tier.refMax, 'lojista') : Number.POSITIVE_INFINITY,
@@ -787,6 +840,12 @@ function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
             <strong className="text-navy-900">Como ler:</strong> a referência é o valor
             médio de mercado da troca completa em assistência (peça + mão de obra).
             Cliente final paga <strong>70%</strong>, lojista credenciado paga <strong>35%</strong>.
+          </div>
+          </div>
+
+          {/* Nota "Como ler" no mobile (a tabela desktop fica oculta em telas pequenas) */}
+          <div className="md:hidden mt-3 px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-xs text-gray-500 leading-relaxed">
+            <strong className="text-navy-900">Como ler:</strong> a referência é o valor médio de mercado da troca completa em assistência (peça + mão de obra). Cliente final paga <strong>70%</strong>, lojista credenciado paga <strong>35%</strong>.
           </div>
         </div>
 

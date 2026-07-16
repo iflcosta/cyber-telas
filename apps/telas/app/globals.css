@@ -5,6 +5,9 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Compensa o header sticky (~96px) ao pular para âncoras (#pricing etc.),
+       evitando que o título da seção fique escondido atrás do header. */
+    scroll-padding-top: 6rem;
     -webkit-text-size-adjust: 100%;
     /* Avisa o browser que o site é dark → controles nativos (select, scrollbar,
        campos de data) adotam tema escuro automaticamente. Sem isso, <select>
@@ -49,6 +52,16 @@
 
   .gradient-text {
     @apply bg-gradient-to-br from-cyber-blue to-circuit-green bg-clip-text text-transparent;
+  }
+
+  /* Rótulo-guia (mono, uppercase) exibido acima do título de cada seção.
+     Anteriormente usado no JSX mas nunca definido no CSS do app — renderizava
+     como texto preto sem estilo. Âncoras nos tons de marca mais escuros para
+     manter contraste tanto em fundo claro quanto no navy. */
+  .section-eyebrow {
+    @apply inline-block font-mono text-xs font-bold uppercase tracking-widest mb-3
+           bg-gradient-to-r from-cyber-blue-hover to-circuit-green-dark
+           bg-clip-text text-transparent;
   }
 
   .text-mono {
