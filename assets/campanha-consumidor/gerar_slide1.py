@@ -71,7 +71,7 @@ def make_slide_1():
 
     # Scrim inferior — legibilidade do headline/subtexto
     bottom_scrim = Image.new("RGB", (W, H), NAVY_950)
-    bottom_alpha = vertical_gradient_alpha((W, H), [(0.0, 0), (0.52, 0), (0.68, 150), (0.82, 235), (1.0, 250)])
+    bottom_alpha = vertical_gradient_alpha((W, H), [(0.0, 0), (0.44, 0), (0.60, 150), (0.76, 235), (1.0, 250)])
     img.paste(bottom_scrim, (0, 0), bottom_alpha)
 
     draw = ImageDraw.Draw(img)
@@ -80,18 +80,23 @@ def make_slide_1():
     draw = ImageDraw.Draw(img)
     eyebrow_badge(draw, W / 2, 140, "LAMINAÇÃO OCA · 1 / 3")
 
-    f_h1 = font(F_DISPLAY_BOLD, 60)
-    y = H - 400
-    draw_centered(draw, W / 2, y, "Vidro trincado.", f_h1, WHITE)
-    y += 76
-    gradient_text(img, (W / 2, y), "Display 100% original.", f_h1, CYBER_BLUE_LIGHT, CIRCUIT_GREEN, anchor="ma")
+    # Copy espelha o H1 do site (Hero, apps/telas/app/page.tsx): "Seu celular
+    # trincou a tela mas funciona normalmente? Então você só precisa trocar
+    # o vidro." — para reconhecimento imediato de quem já viu o site/anúncio.
+    f_h1 = font(F_DISPLAY_BOLD, 56)
+    y = H - 430
+    draw_centered(draw, W / 2, y, "Tela trincou,", f_h1, WHITE)
+    y += 66
+    draw_centered(draw, W / 2, y, "mas funciona normal?", f_h1, WHITE)
+    y += 66
+    gradient_text(img, (W / 2, y), "Troque só o vidro.", f_h1, CYBER_BLUE_LIGHT, CIRCUIT_GREEN, anchor="ma")
     draw = ImageDraw.Draw(img)
-    y += 92
+    y += 88
 
     f_sub = font(F_BODY_REG, 27)
-    draw_centered(draw, W / 2, y, "Sem tela paralela. Trocamos só o vidro", f_sub, GRAY_300)
+    draw_centered(draw, W / 2, y, "Se o toque e as cores continuam normais,", f_sub, GRAY_300)
     y += 36
-    draw_centered(draw, W / 2, y, "externo — o display de fábrica continua o mesmo.", f_sub, GRAY_300)
+    draw_centered(draw, W / 2, y, "seu display original está ótimo.", f_sub, GRAY_300)
 
     f_hint = font(F_MONO_REG, 22)
     draw_centered(draw, W / 2, H - 90, "Arraste e veja a diferença →", f_hint, CYBER_BLUE_LIGHT)
