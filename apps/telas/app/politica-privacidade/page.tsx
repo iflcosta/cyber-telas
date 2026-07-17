@@ -54,6 +54,11 @@ export default function PoliticaPrivacidadePage() {
             <p>Coletamos apenas os dados estritamente necessários para:</p>
             <ul className="list-disc pl-6 space-y-1.5 mt-3">
               <li>
+                <strong>Cotação (pessoa física)</strong>: nome, telefone/WhatsApp
+                e o modelo do aparelho, informados voluntariamente para
+                orçamento e execução do serviço de laminação.
+              </li>
+              <li>
                 <strong>Credenciamento B2B</strong>: nome, e-mail, telefone,
                 CNPJ, razão social, endereço comercial, segmento de atuação.
               </li>
@@ -64,8 +69,8 @@ export default function PoliticaPrivacidadePage() {
               </li>
               <li>
                 <strong>Comunicação</strong>: registros de contatos feitos
-                via formulário, e-mail ou telefone para fins de execução do
-                contrato.
+                via formulário, WhatsApp, e-mail ou telefone para fins de
+                cotação e execução do serviço.
               </li>
             </ul>
           </Section>

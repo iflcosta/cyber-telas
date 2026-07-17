@@ -6,6 +6,12 @@ const nextConfig = {
       { protocol: 'https', hostname: 'xxx.supabase.co' },
     ],
   },
+  async redirects() {
+    return [
+      // A landing do consumidor passou a ser a página principal "/".
+      { source: '/consumidor', destination: '/', permanent: true },
+    ];
+  },
   async headers() {
     return [
       {
