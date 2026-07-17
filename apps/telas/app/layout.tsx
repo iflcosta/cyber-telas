@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Space_Grotesk, JetBrains_Mono } from 'next/font/google';
 import CookieConsent from '@/components/CookieConsent';
 import UTMTracker from '@/components/UTMTracker';
+import MetaPixel from '@/components/MetaPixel';
 import './globals.css';
 
 // ============================================
@@ -220,6 +221,8 @@ export default function RootLayout({
       <body>
         {/* UTM tracker — popula sessionStorage a partir dos params da URL */}
         <UTMTracker />
+        {/* Meta Pixel — carrega só com consentimento de marketing e se configurado */}
+        <MetaPixel />
         {children}
         <CookieConsent />
         <script

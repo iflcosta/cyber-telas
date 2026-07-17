@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import Image from 'next/image';
-import CatalogSection from '@/components/CatalogSection';
 import ScrollReveal from '@/components/ScrollReveal';
 import TrackedWhatsAppLink from '@/components/TrackedWhatsAppLink';
 
@@ -17,7 +16,7 @@ const SITE_URL = 'https://telas.cyberinformatica.tech';
 
 const TITLE = 'Troca de Vidro de Tela — Salve seu Display Original | Cyber Informática';
 const DESCRIPTION =
-  'Quebrou o vidro do seu iPhone ou Galaxy? Trocamos só o vidro externo e preservamos seu display original de fábrica — cores, toque e biometria. 90 dias de garantia.';
+  'Quebrou o vidro da tela do seu celular? Trocamos só o vidro externo e preservamos seu display original de fábrica — cores, toque e biometria. 90 dias de garantia.';
 
 export const revalidate = 300;
 
@@ -108,7 +107,7 @@ export default function ConsumidorPage() {
       <WhatIsLamination />
       <ParallelObjection />
       <HowItWorks />
-      <CatalogSection />
+      <Cotacao />
       <About />
       <Faq />
       <FinalCta />
@@ -196,15 +195,19 @@ function Hero() {
           </div>
 
           <h1 className="text-display text-balance text-4xl sm:text-5xl lg:text-[54px] font-extrabold leading-tight tracking-tight mb-6">
-            Quebrou o vidro do seu iPhone ou Galaxy?{' '}
+            Quebrou o vidro da tela do seu celular?{' '}
             <span className="gradient-text">A gente salva o seu display original.</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-gray-300 max-w-2xl mb-8 leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-300 max-w-2xl mb-4 leading-relaxed">
             Trocamos <strong className="text-white">apenas o vidro externo</strong> que quebrou e preservamos
             o seu display de fábrica. Não é tela nova, não é paralela: é a{' '}
             <strong className="text-circuit-green">sua tela original</strong>, com o vidro novo por cima —
             mantendo cores, toque e biometria.
+          </p>
+
+          <p className="text-sm text-gray-400 mb-8">
+            Atendemos <strong className="text-gray-200">iPhone, Samsung Galaxy, Xiaomi, Motorola, Google Pixel</strong> e outros modelos.
           </p>
 
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-10">
@@ -226,7 +229,7 @@ function Hero() {
               href="#cotacao"
               className="inline-flex items-center justify-center gap-2 px-6 py-4 bg-white/5 border border-white/15 text-white font-semibold rounded-lg hover:bg-white/10 hover:border-circuit-green transition-all text-base"
             >
-              Ver quanto custa pro meu modelo
+              Fazer meu orçamento
             </a>
           </div>
 
@@ -403,6 +406,46 @@ function HowItWorks() {
               <p className="text-sm text-gray-600 leading-relaxed">{s.desc}</p>
             </ScrollReveal>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ============================================================
+// Cotação — orçamento direto no WhatsApp (sem tabela de preços)
+// ============================================================
+function Cotacao() {
+  return (
+    <section id="cotacao" className="section bg-white">
+      <div className="container">
+        <div className="max-w-3xl mx-auto rounded-3xl bg-navy-950 text-white p-8 sm:p-12 relative overflow-hidden text-center">
+          <div className="absolute top-0 right-0 w-[300px] h-[300px] max-w-full bg-circuit-green rounded-full opacity-15 blur-[80px] -z-0" />
+          <div className="relative">
+            <span className="section-eyebrow">Orçamento</span>
+            <h2 className="text-display text-3xl sm:text-4xl font-bold tracking-tight leading-tight mb-4 text-balance">
+              Descubra o valor para o seu aparelho
+            </h2>
+            <p className="text-lg text-gray-300 mb-8 max-w-xl mx-auto">
+              Cada modelo tem um valor. Manda o modelo do seu celular no WhatsApp
+              e a gente responde com o orçamento e o prazo — sem compromisso.
+            </p>
+            <TrackedWhatsAppLink
+              phone={WHATSAPP_PHONE}
+              message="Olá! Vim do site e quero um orçamento de laminação OCA (troca de vidro). O modelo do meu aparelho é:"
+              source="consumidor_cotacao"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-circuit-green text-navy-950 font-bold rounded-lg hover:brightness-95 transition-all shadow-[0_8px_28px_-4px_rgba(0,255,136,0.45)] text-base"
+              ariaLabel="Pedir orçamento no WhatsApp"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
+                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2z"/>
+              </svg>
+              Pedir orçamento no WhatsApp
+            </TrackedWhatsAppLink>
+            <p className="text-xs text-gray-400 mt-4">Seg–Sex · 08h às 18h · Resposta em poucas horas.</p>
+          </div>
         </div>
       </div>
     </section>
