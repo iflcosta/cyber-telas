@@ -16,7 +16,7 @@ const SITE_URL = 'https://telas.cyberinformatica.tech';
 
 const TITLE = 'Troca de Vidro de Tela — Salve seu Display Original | Cyber Informática';
 const DESCRIPTION =
-  'Quebrou o vidro da tela do seu celular? Trocamos só o vidro externo e preservamos seu display original de fábrica — cores, toque e biometria. 90 dias de garantia.';
+  'Quebrou o vidro? A gente salva a tela original. Trocamos só o vidro externo e preservamos seu display de fábrica — cores, toque e biometria. 90 dias de garantia.';
 
 export const revalidate = 300;
 
@@ -191,8 +191,8 @@ function Hero() {
           </div>
 
           <h1 className="text-display text-balance text-4xl sm:text-5xl lg:text-[54px] font-extrabold leading-tight tracking-tight mb-6">
-            Quebrou o vidro da tela do seu celular?{' '}
-            <span className="gradient-text">A gente salva o seu display original.</span>
+            Quebrou o vidro?{' '}
+            <span className="gradient-text">A gente salva a tela original.</span>
           </h1>
 
           <p className="text-base sm:text-lg text-gray-300 max-w-2xl mb-4 leading-relaxed">
