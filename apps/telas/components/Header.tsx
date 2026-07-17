@@ -17,12 +17,13 @@ type NavItem = {
   sectionId: string;
 };
 
+// Antes tinha "#pricing" (seção de preço pública removida) e "#cotacao"
+// (âncora que nunca existiu na página — link morto). Trimado para as
+// seções que de fato existem, reduzindo portas de saída do funil.
 const NAV_ITEMS: NavItem[] = [
   { href: '#credentials', label: 'Credenciais', sectionId: 'credentials' },
   { href: '#advantages', label: 'Vantagens', sectionId: 'advantages' },
   { href: '#logistics', label: 'Logística', sectionId: 'logistics' },
-  { href: '#pricing', label: 'Preços', sectionId: 'pricing' },
-  { href: '#cotacao', label: 'Cotação', sectionId: 'cotacao' },
   { href: '#form-section', label: 'Credenciamento', sectionId: 'form-section' },
 ];
 
