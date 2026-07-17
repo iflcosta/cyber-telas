@@ -28,8 +28,8 @@ import {
   type PricingTier,
 } from '@/lib/pricing-tiers';
 import TrackedWhatsAppLink from './TrackedWhatsAppLink';
+import { trackViewContent } from '@/lib/track';
 
-const WHATSAPP_BASE = 'https://wa.me/5511954369269';
 const WHATSAPP_FALLBACK_MSG =
   'Olá! Vim do site e quero cotar laminação OCA para o meu aparelho.';
 
@@ -65,14 +65,6 @@ export default function CatalogSection() {
     if (!tier) return null;
     const finalPrice = calcularPrecoTier(selected.full, 'final');
     return { tier, finalPrice };
-  }, [selected]);
-
-  // WhatsApp com modelo pré-preenchido
-  const whatsappUrl = useMemo(() => {
-    const msg = selected
-      ? `Olá! Vim do site e quero cotar laminação OCA para o ${selected.brand} ${selected.model} (referência de troca em assistência R$ ${formatBRLShort(selected.full).replace('R$', 'R$ ')}).`
-      : WHATSAPP_FALLBACK_MSG;
-    return `${WHATSAPP_BASE}${encodeURIComponent(msg)}`;
   }, [selected]);
 
   return (
@@ -111,7 +103,10 @@ export default function CatalogSection() {
               <select
                 id="modelo-select"
                 value={selectedKey}
-                onChange={(e) => setSelectedKey(e.target.value)}
+                onChange={(e) => {
+                  setSelectedKey(e.target.value);
+                  if (e.target.value) trackViewContent('estimador_modelo_lojista');
+                }}
                 className="appearance-none w-full bg-white border-2 border-gray-200 rounded-xl px-4 py-3.5 pr-12 text-base text-navy-900 font-medium focus:border-cyber-blue focus:ring-4 focus:ring-cyber-blue/10 focus:outline-none transition-all cursor-pointer"
               >
                 <option value="" disabled>

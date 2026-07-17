@@ -16,7 +16,7 @@ const SITE_URL = 'https://telas.cyberinformatica.tech';
 
 const TITLE = 'Troca de Vidro de Tela — Salve seu Display Original | Cyber Informática';
 const DESCRIPTION =
-  'Quebrou o vidro da tela do seu celular? Trocamos só o vidro externo e preservamos seu display original de fábrica — cores, toque e biometria. 90 dias de garantia.';
+  'Tela trincada mas funcionando normalmente? Você só precisa trocar o vidro. Preservamos seu display original de fábrica — cores, toque e biometria. 90 dias de garantia.';
 
 export const revalidate = 300;
 
@@ -56,7 +56,7 @@ const FAQ_ITEMS: { q: string; a: string }[] = [
   },
   {
     q: 'Quanto eu economizo em relação a uma tela nova?',
-    a: 'Como você paga pela recuperação do vidro e não por um display novo inteiro, o valor fica muito abaixo do orçamento de troca completa em assistência. Selecione seu modelo acima para ver a estimativa e confirme o valor exato no WhatsApp.',
+    a: 'Como você paga pela recuperação do vidro e não por um display novo inteiro, a laminação chega a ser até 70% mais barata que uma tela nova na assistência autorizada. Manda o modelo do seu aparelho no WhatsApp e confirmamos o valor exato.',
   },
   {
     q: 'Tem garantia?',
@@ -76,12 +76,8 @@ export default function ConsumidorPage() {
         '@type': 'Service',
         name: 'Laminação OCA / Troca de vidro de display',
         serviceType: 'Recuperação de display de celular',
-        provider: {
-          '@type': 'LocalBusiness',
-          name: 'Cyber Informática',
-          url: SITE_URL,
-        },
-        areaServed: 'BR',
+        provider: { '@id': `${SITE_URL}/#business` },
+        areaServed: { '@type': 'Country', name: 'Brasil' },
         description: DESCRIPTION,
       },
       {
@@ -195,15 +191,15 @@ function Hero() {
           </div>
 
           <h1 className="text-display text-balance text-4xl sm:text-5xl lg:text-[54px] font-extrabold leading-tight tracking-tight mb-6">
-            Quebrou o vidro da tela do seu celular?{' '}
-            <span className="gradient-text">A gente salva o seu display original.</span>
+            Seu celular trincou a tela mas funciona normalmente?{' '}
+            <span className="gradient-text">Então você só precisa trocar o vidro.</span>
           </h1>
 
           <p className="text-base sm:text-lg text-gray-300 max-w-2xl mb-4 leading-relaxed">
-            Trocamos <strong className="text-white">apenas o vidro externo</strong> que quebrou e preservamos
-            o seu display de fábrica. Não é tela nova, não é paralela: é a{' '}
-            <strong className="text-circuit-green">sua tela original</strong>, com o vidro novo por cima —
-            mantendo cores, toque e biometria.
+            Se o toque, as cores e a leitura de digital continuam normais, o seu{' '}
+            <strong className="text-circuit-green">display original</strong> está ótimo — só o vidro quebrou.
+            A gente troca <strong className="text-white">apenas ele</strong> e devolve o aparelho com a
+            tela de fábrica, sem tela paralela.
           </p>
 
           <p className="text-sm text-gray-400 mb-8">
@@ -426,9 +422,12 @@ function Cotacao() {
             <h2 className="text-display text-3xl sm:text-4xl font-bold tracking-tight leading-tight mb-4 text-balance">
               Descubra o valor para o seu aparelho
             </h2>
-            <p className="text-lg text-gray-300 mb-8 max-w-xl mx-auto">
+            <p className="text-lg text-gray-300 mb-3 max-w-xl mx-auto">
               Cada modelo tem um valor. Manda o modelo do seu celular no WhatsApp
               e a gente responde com o orçamento e o prazo — sem compromisso.
+            </p>
+            <p className="text-sm text-circuit-green font-semibold mb-8">
+              Até 70% mais barato que uma tela nova na autorizada.
             </p>
             <TrackedWhatsAppLink
               phone={WHATSAPP_PHONE}
