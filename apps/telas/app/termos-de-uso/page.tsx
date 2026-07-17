@@ -4,7 +4,7 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: 'Termos de Uso',
   description:
-    'Termos de Uso da Cyber Informática — condições para credenciamento e contratação dos serviços de laminação OCA industrial B2B.',
+    'Termos de Uso da Cyber Informática — condições de contratação dos serviços de laminação OCA / troca de vidro de displays para pessoa física e para lojistas (CNPJ).',
   alternates: {
     canonical: '/termos-de-uso',
   },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   },
 };
 
-const UPDATED_AT = '2026-06-26';
+const UPDATED_AT = '2026-07-17';
 
 export default function TermosDeUsoPage() {
   return (
@@ -30,7 +30,7 @@ export default function TermosDeUsoPage() {
             Termos de Uso
           </h1>
           <p className="text-sm text-gray-500">
-            Última atualização: <strong>{UPDATED_AT}</strong> · Versão 1.0
+            Última atualização: <strong>{UPDATED_AT}</strong> · Versão 1.1
           </p>
         </div>
 
@@ -56,24 +56,39 @@ export default function TermosDeUsoPage() {
           <Section title="2. Sobre o serviço">
             <p>
               A Cyber Informática oferece serviço de{' '}
-              <strong>laminação OCA industrial de displays</strong>{' '}
-              (remanufatura de telas de smartphones, tablets e dispositivos
-              correlatos), destinado <strong>exclusivamente a pessoas jurídicas</strong>{' '}
-              (CNPJ) do ramo de eletroeletrônicos — em particular,{' '}
-              <strong>assistências técnicas e lojistas de tecnologia</strong>.
+              <strong>laminação OCA / troca de vidro de displays</strong>{' '}
+              (recuperação do vidro externo de telas de smartphones, tablets e
+              dispositivos correlatos, preservando o display original de fábrica).
+              O serviço é destinado tanto ao{' '}
+              <strong>consumidor final (pessoa física)</strong>, dono do
+              aparelho, quanto a <strong>pessoas jurídicas (CNPJ)</strong> do
+              ramo — em particular assistências técnicas e lojistas de tecnologia.
             </p>
             <p>
-              O serviço <strong>não é destinado ao consumidor final</strong>.
-              Este site é apenas institucional e não realiza vendas online,
-              cobrança ou processamento de pagamento ao consumidor.
+              A Cyber Informática é um{' '}
+              <strong>laboratório independente de recuperação de displays</strong>
+              {' '}e <strong>não é assistência técnica autorizada</strong> pela
+              Apple, Samsung ou qualquer outro fabricante, não representando essas
+              marcas nem administrando suas garantias oficiais de fábrica.
+            </p>
+            <p>
+              Este site é informativo: a cotação e a contratação ocorrem por
+              canais diretos de atendimento (WhatsApp), não havendo venda,
+              cobrança ou processamento de pagamento online por meio do site.
             </p>
           </Section>
 
-          <Section title="3. Credenciamento">
+          <Section title="3. Formas de contratação">
             <p>
-              Para utilizar os serviços da Cyber Informática, o interessado
-              deve solicitar credenciamento por meio do formulário de
-              contato. O credenciamento está sujeito a:
+              <strong>Pessoa física (consumidor final):</strong> a contratação
+              é direta, sem necessidade de credenciamento — o cliente solicita a
+              cotação e combina o serviço pelos canais de atendimento (WhatsApp).
+            </p>
+            <p className="mt-3">
+              <strong>Lojistas e assistências técnicas (CNPJ):</strong> para
+              acesso às condições de parceria, o interessado deve solicitar
+              credenciamento por meio do formulário de contato. O credenciamento
+              está sujeito a:
             </p>
             <ul className="list-disc pl-6 space-y-1.5 mt-3">
               <li>Análise cadastral do CNPJ (até 24h úteis);</li>
@@ -94,8 +109,15 @@ export default function TermosDeUsoPage() {
             </p>
           </Section>
 
-          <Section title="4. Obrigações do contratante (parceiro credenciado)">
-            <ul className="list-disc pl-6 space-y-1.5">
+          <Section title="4. Obrigações do contratante">
+            <p>
+              Aplicam-se a todo contratante (pessoa física ou jurídica):
+              fornecer informações verdadeiras sobre o aparelho e o serviço
+              desejado, e, quando houver envio do dispositivo, embalá-lo de forma
+              adequada e antichoque. As obrigações abaixo aplicam-se
+              especialmente aos <strong>parceiros credenciados (CNPJ)</strong>:
+            </p>
+            <ul className="list-disc pl-6 space-y-1.5 mt-3">
               <li>
                 Fornecer informações verdadeiras, completas e atualizadas no
                 credenciamento.
@@ -198,12 +220,20 @@ export default function TermosDeUsoPage() {
 
           <Section title="9. Propriedade intelectual">
             <p>
-              Todo o conteúdo deste site — textos, marcas, logos, imagens,
-              gráficos, código-fonte e layout — é de titularidade da Cyber
-              Informática ou licenciado a ela, sendo protegido pela
-              legislação brasileira de direitos autorais e propriedade
-              industrial. É vedada a reprodução, distribuição ou
+              O conteúdo próprio deste site — textos, logotipo da Cyber
+              Informática, imagens, gráficos, código-fonte e layout — é de
+              titularidade da Cyber Informática ou licenciado a ela, sendo
+              protegido pela legislação brasileira de direitos autorais e
+              propriedade industrial. É vedada a reprodução, distribuição ou
               modificação sem autorização prévia e por escrito.
+            </p>
+            <p>
+              Nomes e marcas de terceiros eventualmente citados (por exemplo,
+              Apple, iPhone, Samsung, Galaxy) são marcas registradas de seus
+              respectivos titulares e são mencionados <strong>apenas para
+              identificar os modelos de aparelho atendidos</strong>, não
+              implicando qualquer vínculo, autorização, patrocínio ou
+              afiliação com a Cyber Informática.
             </p>
           </Section>
 
