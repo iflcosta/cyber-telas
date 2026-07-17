@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import { validarCNPJ, validarEmail, validarTelefone, maskCNPJ, maskTelefone } from '@/lib/validators';
 import { trackLead } from '@/lib/track';
 import { createBrowserSupabaseClient } from '@/lib/supabase-client';
-import { calcularPreco, parseBRL, FAIXAS_PADRAO, formatBRL } from '@/lib/pricing';
+import { calcularPreco, parseBRL, FAIXAS_PADRAO } from '@/lib/pricing';
 import type { Modelo } from '@/lib/supabase-client';
 import { Phone } from 'lucide-react';
 import TrackedWhatsAppLink from './TrackedWhatsAppLink';
@@ -20,7 +20,6 @@ export default function QualificationForm({
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [cotacaoFinal, setCotacaoFinal] = useState<{ preco: number; faixa: string } | null>(null);
 
   const [form, setForm] = useState({
     razao_social: '',
@@ -106,7 +105,6 @@ export default function QualificationForm({
         return;
       }
 
-      setCotacaoFinal({ preco, faixa: faixa.label });
       setSuccess(true);
       trackLead('form_lojista_credenciamento');
     } catch (err) {
@@ -116,7 +114,7 @@ export default function QualificationForm({
     }
   };
 
-  if (success && cotacaoFinal) {
+  if (success) {
     return (
       <div role="status" aria-live="polite" className="text-center py-8">
         <div className="w-20 h-20 mx-auto bg-gradient-to-br from-circuit-green to-circuit-green-dark rounded-full flex items-center justify-center mb-6 shadow-[0_10px_30px_rgba(0,255,136,0.4)]">
@@ -129,7 +127,7 @@ export default function QualificationForm({
           A equipe da <strong>Cyber Informática</strong> entrará em contato em até 24h úteis.
         </p>
         <p className="text-sm text-gray-400 mb-6">
-          Preço cotado: <strong className="text-circuit-green">R$ {cotacaoFinal.preco.toFixed(2)}</strong> ({cotacaoFinal.faixa})
+          A tabela de preços de parceiro é enviada após a análise do cadastro.
         </p>
         <TrackedWhatsAppLink
           phone="5511954369269"
@@ -225,7 +223,7 @@ export default function QualificationForm({
 
       <div className="p-4 bg-white/5 border border-white/10 rounded-lg">
         <div className="text-xs text-gray-400 mb-3">
-          <strong className="text-circuit-green">Cotação rápida:</strong> selecione marca + modelo
+          <strong className="text-circuit-green">Ajuda a preparar sua proposta:</strong> selecione marca + modelo
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           <select
@@ -263,11 +261,12 @@ export default function QualificationForm({
               }
             }}
           />
+          {/* Datalist NÃO deve exibir preço — o autocomplete nativo do
+              navegador mostraria o valor a qualquer visitante anônimo,
+              antes do credenciamento. Só o nome do modelo. */}
           <datalist id="form-modelos-datalist">
             {modelosFiltrados.map((m) => (
-              <option key={m.id} value={m.modelo}>
-                {formatBRL(m.valor_display_novo)}
-              </option>
+              <option key={m.id} value={m.modelo} />
             ))}
           </datalist>
         </div>

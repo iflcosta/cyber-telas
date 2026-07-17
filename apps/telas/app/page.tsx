@@ -3,6 +3,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import ScrollReveal from '@/components/ScrollReveal';
 import TrackedWhatsAppLink from '@/components/TrackedWhatsAppLink';
+import WhatsAppIcon from '@/components/WhatsAppIcon';
+import AboutTransparency from '@/components/AboutTransparency';
+import LegalDisclaimer from '@/components/LegalDisclaimer';
 
 // ============================================================
 // Página principal (/) — Landing B2C, destino do tráfego pago de
@@ -104,7 +107,7 @@ export default function ConsumidorPage() {
       <ParallelObjection />
       <HowItWorks />
       <Cotacao />
-      <About />
+      <AboutTransparency />
       <Faq />
       <FinalCta />
       <ConsumerFooter />
@@ -157,9 +160,7 @@ function ConsumerHeader() {
               className="inline-flex items-center gap-2 px-4 py-2.5 min-h-[44px] bg-circuit-green text-navy-950 text-sm font-bold rounded-full hover:brightness-95 transition-all whitespace-nowrap"
               ariaLabel="Chamar no WhatsApp"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4" aria-hidden="true">
-                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2z"/>
-              </svg>
+              <WhatsAppIcon className="w-4 h-4" />
               <span className="hidden sm:inline">Cotar no WhatsApp</span>
               <span className="sm:hidden">WhatsApp</span>
             </TrackedWhatsAppLink>
@@ -216,9 +217,7 @@ function Hero() {
               className="inline-flex items-center justify-center gap-2 px-7 py-4 bg-circuit-green text-navy-950 font-bold rounded-lg hover:brightness-95 transition-all shadow-[0_8px_28px_-4px_rgba(0,255,136,0.45)] text-base"
               ariaLabel="Pedir orçamento no WhatsApp"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
-                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2z"/>
-              </svg>
+              <WhatsAppIcon className="w-5 h-5" />
               Pedir orçamento no WhatsApp
             </TrackedWhatsAppLink>
             <a
@@ -438,9 +437,7 @@ function Cotacao() {
               className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-circuit-green text-navy-950 font-bold rounded-lg hover:brightness-95 transition-all shadow-[0_8px_28px_-4px_rgba(0,255,136,0.45)] text-base"
               ariaLabel="Pedir orçamento no WhatsApp"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
-                <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2z"/>
-              </svg>
+              <WhatsAppIcon className="w-5 h-5" />
               Pedir orçamento no WhatsApp
             </TrackedWhatsAppLink>
             <p className="text-xs text-gray-400 mt-4">Seg–Sex · 08h às 18h · Resposta em poucas horas.</p>
@@ -454,40 +451,6 @@ function Cotacao() {
 // ============================================================
 // Quem somos / transparência
 // ============================================================
-function About() {
-  return (
-    <section id="quem-somos" className="section bg-white border-t border-gray-100">
-      <div className="container max-w-3xl">
-        <ScrollReveal>
-          <span className="section-eyebrow">Quem somos</span>
-          <h2 className="text-display text-3xl sm:text-4xl font-bold tracking-tight text-navy-900 leading-tight mb-6">
-            Um laboratório independente, transparente com você
-          </h2>
-          <div className="space-y-4 text-base sm:text-lg text-gray-600 leading-relaxed">
-            <p>
-              A <strong className="text-navy-900">Cyber Informática</strong> é um{' '}
-              <strong className="text-navy-900">laboratório independente de recuperação de displays</strong>,
-              especializado em laminação OCA — a troca apenas do vidro externo danificado, preservando o
-              display OLED/AMOLED original de fábrica do seu aparelho.
-            </p>
-            <p>
-              <strong className="text-navy-900">Não somos assistência técnica autorizada</strong> pela Apple,
-              Samsung ou qualquer outro fabricante, e não representamos essas marcas. Somos um prestador de
-              serviço independente de reparo físico de hardware, com endereço físico, processo documentado e{' '}
-              <strong className="text-navy-900">90 dias de garantia</strong> sobre o serviço que realizamos.
-            </p>
-            <p className="text-sm text-gray-500 pt-2 border-t border-gray-100">
-              Apple e iPhone são marcas registradas da Apple Inc.; Samsung e Galaxy são marcas registradas da
-              Samsung Electronics Co., Ltd. Os nomes das marcas são citados apenas para identificar os modelos
-              de aparelho que atendemos.
-            </p>
-          </div>
-        </ScrollReveal>
-      </div>
-    </section>
-  );
-}
-
 // ============================================================
 // FAQ — <details> nativo (acessível, sem JS)
 // ============================================================
@@ -544,9 +507,7 @@ function FinalCta() {
           className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-circuit-green text-navy-950 font-bold rounded-lg hover:brightness-95 transition-all shadow-[0_8px_28px_-4px_rgba(0,255,136,0.45)] text-base"
           ariaLabel="Pedir orçamento no WhatsApp"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
-            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.86 9.86 0 0 0 12.04 2z"/>
-          </svg>
+          <WhatsAppIcon className="w-5 h-5" />
           Pedir orçamento no WhatsApp
         </TrackedWhatsAppLink>
       </div>
@@ -571,12 +532,7 @@ function ConsumerFooter() {
             <Link href="/termos-de-uso" className="text-gray-400 hover:text-circuit-green transition-colors">Termos</Link>
           </nav>
         </div>
-        <p className="mt-6 pt-6 border-t border-white/[0.08] text-xs text-gray-500 leading-relaxed text-center sm:text-left">
-          © 2026 Cyber Informática — laboratório independente de recuperação de displays (laminação OCA / troca de vidro).{' '}
-          <strong className="text-gray-400">Não somos assistência autorizada Apple, Samsung ou de qualquer fabricante.</strong>{' '}
-          Apple® e iPhone® são marcas da Apple Inc.; Samsung® e Galaxy® são marcas da Samsung Electronics.
-          Marcas citadas apenas para identificação de modelos. Serviço com 90 dias de garantia.
-        </p>
+        <LegalDisclaimer className="mt-6 pt-6 border-t border-white/[0.08] text-xs text-gray-500 leading-relaxed text-center sm:text-left" />
       </div>
     </footer>
   );
