@@ -16,7 +16,7 @@ const SITE_URL = 'https://telas.cyberinformatica.tech';
 
 const TITLE = 'Troca de Vidro de Tela — Salve seu Display Original | Cyber Informática';
 const DESCRIPTION =
-  'Quebrou o vidro? A gente salva a tela original. Trocamos só o vidro externo e preservamos seu display de fábrica — cores, toque e biometria. 90 dias de garantia.';
+  'Tela trincada mas funcionando normalmente? Você só precisa trocar o vidro. Preservamos seu display original de fábrica — cores, toque e biometria. 90 dias de garantia.';
 
 export const revalidate = 300;
 
@@ -191,15 +191,15 @@ function Hero() {
           </div>
 
           <h1 className="text-display text-balance text-4xl sm:text-5xl lg:text-[54px] font-extrabold leading-tight tracking-tight mb-6">
-            Quebrou o vidro?{' '}
-            <span className="gradient-text">A gente salva a tela original.</span>
+            Seu celular trincou a tela mas funciona normalmente?{' '}
+            <span className="gradient-text">Então você só precisa trocar o vidro.</span>
           </h1>
 
           <p className="text-base sm:text-lg text-gray-300 max-w-2xl mb-4 leading-relaxed">
-            Trocamos <strong className="text-white">apenas o vidro externo</strong> que quebrou e preservamos
-            o seu display de fábrica. Não é tela nova, não é paralela: é a{' '}
-            <strong className="text-circuit-green">sua tela original</strong>, com o vidro novo por cima —
-            mantendo cores, toque e biometria.
+            Se o toque, as cores e a leitura de digital continuam normais, o seu{' '}
+            <strong className="text-circuit-green">display original</strong> está ótimo — só o vidro quebrou.
+            A gente troca <strong className="text-white">apenas ele</strong> e devolve o aparelho com a
+            tela de fábrica, sem tela paralela.
           </p>
 
           <p className="text-sm text-gray-400 mb-8">
