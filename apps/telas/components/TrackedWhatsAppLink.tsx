@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ReactNode } from "react";
+import { getStoredConsent } from "@/lib/consent";
 
 interface Props {
   phone: string;
@@ -16,6 +17,7 @@ interface Props {
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
+    fbq?: (...args: unknown[]) => void;
   }
 }
 
@@ -64,12 +66,45 @@ export default function TrackedWhatsAppLink({
   }, [phone, message, source]);
 
   const handleClick = () => {
-    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+    if (typeof window === "undefined") return;
+
+    // GA4
+    if (typeof window.gtag === "function") {
       window.gtag("event", "click_whatsapp", {
         event_category: "engagement",
         event_label: source,
         transport_type: "beacon",
       });
+    }
+
+    // Meta (Pixel + Conversions API) — só com consentimento de marketing.
+    const consent = getStoredConsent();
+    if (!consent?.marketing) return;
+
+    const eventId =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+    // Pixel (client-side)
+    if (typeof window.fbq === "function") {
+      window.fbq("track", "Lead", { content_name: source }, { eventID: eventId });
+    }
+
+    // Conversions API (server-side) — mesmo event_id p/ deduplicar. Fire-and-forget.
+    try {
+      fetch("/api/meta/capi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          eventName: "Lead",
+          eventId,
+          eventSourceUrl: window.location.href,
+        }),
+        keepalive: true,
+      }).catch(() => {});
+    } catch {
+      // ignore
     }
   };
 
