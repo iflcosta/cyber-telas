@@ -126,60 +126,72 @@ def make_slide_2():
     wordmark_header(draw, dot_index=1)
     y = eyebrow_badge(draw, W / 2, BADGE_Y, "LAMINAÇÃO OCA · 2 / 3")
 
-    f_h1 = font(F_DISPLAY_BOLD, 60)
-    y2 = y + 60
+    f_h1 = font(F_DISPLAY_BOLD, 66)
+    y2 = y + 66
     draw_centered(draw, W / 2, y2, "Não é tela nova.", f_h1, WHITE)
-    y2 += 78
+    y2 += 86
     draw_centered(draw, W / 2, y2, "Não é paralela.", f_h1, WHITE)
-    y2 += 88
+    y2 += 96
     gradient_text(img, (W / 2, y2), "É a SUA tela original.", f_h1, CYBER_BLUE_LIGHT, CIRCUIT_GREEN, anchor="ma")
     draw = ImageDraw.Draw(img)
 
-    col_y = y2 + 130
+    col_y = y2 + 110
     col_w = (W - 64 * 2 - 24) / 2
-    col_h = 820
+    col_h = 900
     left_x = 64
     right_x = 64 + col_w + 24
 
-    rounded_rect(draw, [left_x, col_y, left_x + col_w, col_y + col_h], radius=30,
+    # Título ocupa os primeiros ~190px do card; os 3 itens dividem o
+    # restante em fatias iguais (em vez de ficarem colados no topo com
+    # uma sobra vazia embaixo).
+    title_zone = 190
+    bottom_pad = 60
+    item_zone_h = col_h - title_zone - bottom_pad
+    slot_h = item_zone_h / 3
+    f_col_title = font(F_BODY_BOLD, 40)
+    f_item = font(F_BODY_REG, 34)
+    icon_r = 30
+    line_gap = 46
+
+    rounded_rect(draw, [left_x, col_y, left_x + col_w, col_y + col_h], radius=32,
                  fill=(30, 14, 14), outline=(120, 40, 40), width=2)
-    f_col_title = font(F_BODY_BOLD, 33)
-    draw.text((left_x + 34, col_y + 38), "Tela paralela", font=f_col_title, fill=(252, 165, 165), anchor="la")
+    draw.text((left_x + 36, col_y + 46), "Tela paralela", font=f_col_title, fill=(252, 165, 165), anchor="la")
 
     items_bad = [
         "Cores desbotadas,\nbrilho fraco no sol",
         "Toque que falha\nou digita sozinho",
         "Digital na tela\npara de funcionar",
     ]
-    iy = col_y + 150
-    f_item = font(F_BODY_REG, 27)
-    for it in items_bad:
-        cross_icon(draw, left_x + 50, iy + 20, 23, RED)
+    for i, it in enumerate(items_bad):
+        slot_top = col_y + title_zone + i * slot_h
+        item_h = icon_r * 2 if len(it.split("\n")) == 1 else line_gap * len(it.split("\n"))
+        iy = slot_top + (slot_h - item_h) / 2
+        cross_icon(draw, left_x + 58, iy + icon_r - 6, icon_r, RED)
         lines = it.split("\n")
         ly = iy
         for line in lines:
-            draw.text((left_x + 96, ly), line, font=f_item, fill=GRAY_300, anchor="la")
-            ly += 36
-        iy += 170
+            draw.text((left_x + 112, ly), line, font=f_item, fill=GRAY_300, anchor="la")
+            ly += line_gap
 
-    rounded_rect(draw, [right_x, col_y, right_x + col_w, col_y + col_h], radius=30,
+    rounded_rect(draw, [right_x, col_y, right_x + col_w, col_y + col_h], radius=32,
                  fill=(8, 36, 26), outline=CIRCUIT_GREEN_DARK, width=2)
-    draw.text((right_x + 34, col_y + 38), "Display original", font=f_col_title, fill=CIRCUIT_GREEN, anchor="la")
+    draw.text((right_x + 36, col_y + 46), "Display original", font=f_col_title, fill=CIRCUIT_GREEN, anchor="la")
 
     items_good = [
-        "Cores e brilho\nidênticos aos de fábrica",
-        "Toque original,\npreciso, sem fantasma",
+        "Cores e brilho\nidênticos de fábrica",
+        "Toque original,\npreciso, sem falha",
         "Biometria\nfuncionando 100%",
     ]
-    iy = col_y + 150
-    for it in items_good:
-        check_icon(draw, right_x + 50, iy + 20, 23, CIRCUIT_GREEN)
+    for i, it in enumerate(items_good):
+        slot_top = col_y + title_zone + i * slot_h
+        item_h = icon_r * 2 if len(it.split("\n")) == 1 else line_gap * len(it.split("\n"))
+        iy = slot_top + (slot_h - item_h) / 2
+        check_icon(draw, right_x + 58, iy + icon_r - 6, icon_r, CIRCUIT_GREEN)
         lines = it.split("\n")
         ly = iy
         for line in lines:
-            draw.text((right_x + 96, ly), line, font=f_item, fill=WHITE, anchor="la")
-            ly += 36
-        iy += 170
+            draw.text((right_x + 112, ly), line, font=f_item, fill=WHITE, anchor="la")
+            ly += line_gap
 
     f_hint = font(F_MONO_REG, 24)
     draw_centered(draw, W / 2, SAFE_BOTTOM, "Arraste para o orçamento →", f_hint, CYBER_BLUE_LIGHT)
