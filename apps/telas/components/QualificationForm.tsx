@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import { validarCNPJ, validarEmail, validarTelefone, maskCNPJ, maskTelefone } from '@/lib/validators';
+import { trackLead } from '@/lib/track';
 import { createBrowserSupabaseClient } from '@/lib/supabase-client';
 import { calcularPreco, parseBRL, FAIXAS_PADRAO, formatBRL } from '@/lib/pricing';
 import type { Modelo } from '@/lib/supabase-client';
@@ -107,6 +108,7 @@ export default function QualificationForm({
 
       setCotacaoFinal({ preco, faixa: faixa.label });
       setSuccess(true);
+      trackLead('form_lojista_credenciamento');
     } catch (err) {
       setError('Erro de conexão. Verifique sua internet.');
     } finally {

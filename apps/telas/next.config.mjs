@@ -3,7 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     remotePatterns: [
-      { protocol: 'https', hostname: 'xxx.supabase.co' },
+      { protocol: 'https', hostname: '*.supabase.co' },
     ],
   },
   async redirects() {

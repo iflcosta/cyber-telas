@@ -136,54 +136,43 @@ export const metadata: Metadata = {
 // JSON-LD Schema.org — LocalBusiness + Service
 // (Google rich results + melhor indexação)
 // ============================================
+// Entidade única do negócio (@id compartilhado). Os serviços específicos
+// (B2C em "/", B2B em "/lojista") são declarados nas próprias páginas,
+// referenciando este @id — evita schema duplicado/contraditório.
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@graph': [
+  '@type': 'LocalBusiness',
+  '@id': `${SITE_URL}/#business`,
+  name: 'Cyber Informática',
+  description: DESCRIPTION,
+  url: SITE_URL,
+  telephone: '+55-11-95436-9269',
+  email: 'contato@cyberinformatica.tech',
+  image: OG_IMAGE,
+  logo: `${SITE_URL}/logo-monograma-256.png`,
+  priceRange: '$$',
+  address: {
+    '@type': 'PostalAddress',
+    addressCountry: 'BR',
+    addressLocality: 'São Paulo',
+    addressRegion: 'SP',
+  },
+  areaServed: {
+    '@type': 'Country',
+    name: 'Brasil',
+  },
+  openingHoursSpecification: [
     {
-      '@type': 'LocalBusiness',
-      '@id': `${SITE_URL}/#business`,
-      name: 'Cyber Informática',
-      alternateName: 'Unidade de Engenharia de Componentes Eletrônicos S/A',
-      description: DESCRIPTION,
-      url: SITE_URL,
-      telephone: '+55-11-95436-9269',
-      email: 'contato@cyberinformatica.tech',
-      image: OG_IMAGE,
-      logo: `${SITE_URL}/logo-monograma-256.png`,
-      priceRange: '$$',
-      address: {
-        '@type': 'PostalAddress',
-        addressCountry: 'BR',
-        addressLocality: 'São Paulo',
-        addressRegion: 'SP',
-      },
-      areaServed: {
-        '@type': 'Country',
-        name: 'Brasil',
-      },
-      openingHoursSpecification: [
-        {
-          '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-          opens: '08:00',
-          closes: '18:00',
-        },
-      ],
-      sameAs: [
-        'https://www.cyberinformatica.tech',
-        'https://www.instagram.com/cyberinfo.brag',
-        'https://www.facebook.com/cyberinformatica',
-      ],
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '18:00',
     },
-    {
-      '@type': 'Service',
-      '@id': `${SITE_URL}/#service`,
-      serviceType: 'Laminação OCA Industrial de Displays',
-      provider: { '@id': `${SITE_URL}/#business` },
-      areaServed: { '@type': 'Country', name: 'Brasil' },
-      description:
-        'Remanufatura e laminação OCA sob vácuo para displays de smartphones. Processamento de lotes para assistências técnicas e lojistas de tecnologia. Exclusivo B2B.',
-    },
+  ],
+  sameAs: [
+    'https://www.cyberinformatica.tech',
+    'https://www.instagram.com/cyberinfo.brag',
+    'https://www.facebook.com/cyberinformatica',
   ],
 };
 

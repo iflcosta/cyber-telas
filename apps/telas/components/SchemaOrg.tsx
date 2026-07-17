@@ -1,52 +1,31 @@
 // ============================================
-// SchemaOrg — JSON-LD para SEO orgânico
+// SchemaOrg — JSON-LD B2B (usado em /lojista)
 //
-// Server component (sem 'use client') que injeta Schema.org
-// markup com os 76 modelos atendidos. Visível pro Google,
-// invisível pro usuário — alimenta B2B-SEO de "laminação
-// iPhone 17 SP", "troca tela Galaxy S25" etc.
+// Server component que declara o Service B2B e o catálogo de
+// modelos atendidos (bom para SEO orgânico: "laminação iPhone 17",
+// "troca vidro Galaxy S25"). Referencia a entidade única do negócio
+// (@id definido no layout) — não redefine a organização.
 //
-// Preço público = valor cliente final (70% do full).
-// NUNCA expõe valor lojista (35%) — confidencial.
+// NÃO expõe preços (valores em auditoria / confidenciais).
 // ============================================
 
 import { MODEL_GROUPS } from '@/lib/pricing-models';
-import { calcularPrecoTier, findTier } from '@/lib/pricing-tiers';
 
 const SITE_URL = 'https://telas.cyberinformatica.tech';
 
 export default function SchemaOrg() {
   const items = MODEL_GROUPS.flatMap((group) =>
-    group.models.map((model) => {
-      const tier = findTier(model.full);
-      const finalPrice = calcularPrecoTier(model.full, 'final');
-      return {
-        '@type': 'ListItem' as const,
-        position: 0, // preenchido depois
-        item: {
-          '@type': 'Service' as const,
-          name: `Laminação OCA — ${group.brand} ${model.model}`,
-          serviceType: 'Laminação OCA Industrial de Displays',
-          category: tier ? tier.label : 'Laminação OCA',
-          provider: {
-            '@type': 'Organization' as const,
-            name: 'Cyber Informática',
-          },
-          areaServed: {
-            '@type': 'Country' as const,
-            name: 'Brasil',
-          },
-          offers: {
-            '@type': 'Offer' as const,
-            price: finalPrice.toString(),
-            priceCurrency: 'BRL',
-            availability: 'https://schema.org/InStock',
-            priceValidUntil: '2026-12-31',
-            url: `${SITE_URL}/#cotacao`,
-          },
-        },
-      };
-    }),
+    group.models.map((model) => ({
+      '@type': 'ListItem' as const,
+      position: 0, // preenchido depois
+      item: {
+        '@type': 'Service' as const,
+        name: `Laminação OCA — ${group.brand} ${model.model}`,
+        serviceType: 'Laminação OCA / troca de vidro de display',
+        provider: { '@id': `${SITE_URL}/#business` },
+        areaServed: { '@type': 'Country' as const, name: 'Brasil' },
+      },
+    })),
   );
 
   // Preenche position sequencial
@@ -56,54 +35,23 @@ export default function SchemaOrg() {
 
   const schema = {
     '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'Organization',
-        '@id': `${SITE_URL}#organization`,
-        name: 'Cyber Informática',
-        alternateName: 'Cyber Informatica',
-        url: SITE_URL,
-        logo: `${SITE_URL}/logo-horizontal.png`,
-        description:
-          'Centro de Remanufatura e Laminação Industrial de Displays. Sala limpa controlada, tecnologia OCA sob vácuo.',
-        telephone: '+55-11-95436-9269',
-        email: 'contato@cyberinformatica.tech',
-        areaServed: {
-          '@type': 'Country',
-          name: 'Brasil',
-        },
-        address: {
-          '@type': 'PostalAddress',
-          addressCountry: 'BR',
-          addressLocality: 'São Paulo',
-          addressRegion: 'SP',
-        },
-        sameAs: [
-          'https://cyberinformatica.tech',
-        ],
-      },
-      {
-        '@type': 'Service',
-        '@id': `${SITE_URL}#service-laminacao-oca`,
-        name: 'Laminação OCA Industrial de Displays',
-        serviceType: 'Laminação OCA',
-        description:
-          'Laminação OCA (Optically Clear Adhesive) industrial de displays em sala limpa controlada. Tecnologia sob vácuo com autoclave industrial.',
-        provider: {
-          '@id': `${SITE_URL}#organization`,
-        },
-        areaServed: {
-          '@type': 'Country',
-          name: 'Brasil',
-        },
-        hasOfferCatalog: {
-          '@type': 'OfferCatalog',
-          name: 'Modelos atendidos — Laminação OCA',
-          numberOfItems: items.length,
-          itemListElement: items,
-        },
-      },
-    ],
+    '@type': 'Service',
+    '@id': `${SITE_URL}/#service-lojista`,
+    name: 'Laminação OCA para lojistas e assistências técnicas',
+    serviceType: 'Laminação OCA / troca de vidro de display',
+    description:
+      'Laminação OCA — troca do vidro externo preservando o display original — para assistências técnicas e lojistas credenciados (CNPJ).',
+    provider: { '@id': `${SITE_URL}/#business` },
+    areaServed: {
+      '@type': 'Country',
+      name: 'Brasil',
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Modelos atendidos — Laminação OCA',
+      numberOfItems: items.length,
+      itemListElement: items,
+    },
   };
 
   return (

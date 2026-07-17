@@ -2,14 +2,6 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { createAdminClient } from '@/lib/supabase-server';
 import { agruparPorMarca } from '@/lib/pricing';
-import {
-  PRICING_TIERS,
-  CUSTOMER_LEVEL_DESCRIPTIONS,
-  type CustomerLevel,
-  calcularPrecoTier,
-  formatPriceRange,
-} from '@/lib/pricing-tiers';
-import CatalogSection from '@/components/CatalogSection';
 import QualificationForm from '@/components/QualificationForm';
 import ScrollReveal from '@/components/ScrollReveal';
 import Header from '@/components/Header';
@@ -83,8 +75,6 @@ export default async function LojistaPage() {
       <LogisticsSection />
 
       <PricingSection modelos={modelos} />
-
-      <CatalogSection />
 
       <FormSection modelosPorMarca={modelosPorMarca} />
 
@@ -289,7 +279,7 @@ function MaquinaOCAMockup() {
                   <div className="flex-1 bg-circuit-green rounded-sm" style={{ height: '95%' }} />
                   <div className="flex-1 bg-circuit-green rounded-sm" style={{ height: '100%' }} />
                 </div>
-                <div className="text-[7px] font-mono text-white/80">PRESS: -0.08kPa</div>
+                <div className="text-[7px] font-mono text-white/80">PRENSA OCA</div>
               </div>
               {/* Botões físicos */}
               <div className="grid grid-cols-4 gap-1">
@@ -412,14 +402,14 @@ function MaquinaOCAMockup() {
             <div className="flex items-center gap-3 text-[9px] font-mono">
               <div className="flex items-center gap-1">
                 <div className="w-1.5 h-1.5 rounded-full bg-circuit-green animate-pulse" />
-                <span className="text-circuit-green">Sistema operacional</span>
+                <span className="text-circuit-green">Laminação OCA</span>
               </div>
               <span className="text-white/30">|</span>
-              <span className="text-white/60">Temp: 38°C</span>
+              <span className="text-white/60">Prensa a vácuo</span>
               <span className="text-white/30">|</span>
-              <span className="text-white/60">Vácuo: -0.08kPa</span>
+              <span className="text-white/60">Controle de qualidade</span>
             </div>
-            <div className="text-[9px] font-mono font-bold text-circuit-green">v2.4.1</div>
+            <div className="text-[9px] font-mono font-bold text-circuit-green">OCA</div>
           </div>
         </div>
 
@@ -429,10 +419,10 @@ function MaquinaOCAMockup() {
             ⚡ OCA sob vácuo
           </span>
           <span className="px-2 py-1 bg-black/80 backdrop-blur-md border border-circuit-green/40 rounded text-white font-semibold">
-            🔬 ISO 14644-1
+            🔬 Processo OCA
           </span>
           <span className="px-2 py-1 bg-black/80 backdrop-blur-md border border-circuit-green/40 rounded text-white font-semibold hidden sm:inline">
-            📊 ±0.1mm
+            📊 Controle de qualidade
           </span>
         </div>
 
@@ -454,10 +444,10 @@ function MaquinaOCAMockup() {
 // ============================================
 function StatsBand() {
   const stats = [
-    { value: 'R$ 175', label: 'Cliente Final · a partir de', tone: 'default' as const },
-    { value: 'R$ 87', label: 'Lojista · a partir de',       tone: 'cool' as const },
-    { value: '60-70%', label: 'Margem do Parceiro',          tone: 'premium' as const },
-    { value: '24h',    label: 'Análise de CNPJ',             tone: 'default' as const },
+    { value: 'CNPJ', label: 'Credenciamento de parceiros', tone: 'default' as const },
+    { value: 'OCA', label: 'Laminação a vácuo',            tone: 'cool' as const },
+    { value: '90 dias', label: 'Garantia do serviço',      tone: 'premium' as const },
+    { value: '24h',    label: 'Análise de CNPJ',            tone: 'default' as const },
   ];
 
   return (
@@ -465,7 +455,7 @@ function StatsBand() {
       <div className="container">
         <div className="text-center mb-8">
           <span className="font-mono text-xs text-cyber-blue-light uppercase tracking-widest">
-            {'//'} Dois níveis claros de preço · Mais uma curadoria estratégica
+            {'//'} Condições de parceria para lojistas e assistências
           </span>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
@@ -488,8 +478,8 @@ function StatsBand() {
           ))}
         </div>
         <p className="text-center text-xs text-gray-500 mt-6 max-w-2xl mx-auto">
-          Valores aplicados ao serviço completo de laminação OCA industrial.
-          Referência: troca completa em assistência técnica (peça + mão de obra).
+          A tabela de valores por modelo é enviada aos parceiros após o
+          credenciamento por CNPJ.
         </p>
       </div>
     </section>
@@ -501,22 +491,22 @@ function StatsBand() {
 // ============================================
 function CredentialsSection() {
   const cards = [
-    { icon: 'shield', title: 'Sala Limpa Controlada', desc: 'Ambiente classe 1000 com filtragem HEPA e controle de temperatura/umidade.', tag: 'ISO 14644-1' },
-    { icon: 'cpu', title: 'Tecnologia OCA Sob Vácuo', desc: 'Laminação com Optically Clear Adhesive e autoclave industrial.', tag: '±0.1mm precisão' },
-    { icon: 'package', title: 'Processamento de Lotes', desc: 'Capacidade industrial de processamento em escala para parceiros.', tag: '500+ telas/mês' },
-    { icon: 'file-check', title: 'Rastreabilidade Total', desc: 'Processos documentados com controle de qualidade em cada etapa.', tag: 'Garantia 90 dias' },
+    { icon: 'shield', title: 'Display Original Preservado', desc: 'Troca apenas do vidro externo, mantendo o display OLED/AMOLED de fábrica do cliente.', tag: 'Sem tela paralela' },
+    { icon: 'cpu', title: 'Tecnologia OCA a Vácuo', desc: 'Laminação com adesivo opticamente transparente (OCA) e prensa a vácuo.', tag: 'Processo OCA' },
+    { icon: 'package', title: 'Volume para Parceiros', desc: 'Fluxo de trabalho pensado para o volume recorrente de lojistas e assistências.', tag: 'Escala B2B' },
+    { icon: 'file-check', title: 'Controle de Qualidade', desc: 'Processo documentado com teste de toque, brilho e uniformidade em cada peça.', tag: 'Garantia 90 dias' },
   ];
 
   return (
     <section className="section" id="credentials">
       <div className="container">
         <div className="section-head max-w-3xl mx-auto text-center mb-16">
-          <span className="section-eyebrow">Credenciais Técnicas</span>
+          <span className="section-eyebrow">Como trabalhamos</span>
           <h2 className="section-title text-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-navy-900 leading-tight mb-4">
-            Unidade de Engenharia de Componentes Eletrônicos S/A
+            Infraestrutura de laminação que você não precisa comprar
           </h2>
           <p className="section-description text-lg text-gray-600">
-            Laboratório equipado com maquinário de atmosfera controlada e laminação OCA sob vácuo.
+            Laboratório independente de laminação OCA. Você atende o cliente; a gente cuida da recuperação do display.
           </p>
         </div>
 
@@ -560,7 +550,7 @@ function CredentialsSection() {
 function AdvantagesSection() {
   const advantages = [
     { n: '01', title: 'Sem Investimento em Maquinário', desc: 'Elimine o investimento de dezenas de milhares de reais. Utilize nossa infraestrutura fabril completa.' },
-    { n: '02', title: 'Dois Níveis de Preço', desc: 'R$ 175 por unidade para o cliente final. R$ 87 para lojistas credenciados.' },
+    { n: '02', title: 'Preço de Parceiro', desc: 'Condição exclusiva de lojista credenciado, com margem sobre o preço que você pratica com o cliente final.' },
     { n: '03', title: 'Display Original Preservado', desc: 'Recupere o display original do cliente. Sem retorno por touch falho ou brilho irregular.' },
     { n: '04', title: 'Pagamento PJ Flexível', desc: 'Condições de 14, 30 ou 60 dias conforme volume. Prazos estendidos para grandes volumes.' },
   ];
@@ -608,21 +598,21 @@ function AdvantagesSection() {
 
             <div className="relative">
               <div className="font-mono text-xs text-cyber-blue-light uppercase tracking-widest mb-2">
-                Cliente Final
+                Parceria B2B
               </div>
-              <div className="text-display text-5xl sm:text-6xl font-bold gradient-text leading-none mb-2">
-                R$ 175
+              <div className="text-display text-4xl sm:text-5xl font-bold gradient-text leading-tight mb-3">
+                Preço de parceiro
               </div>
               <p className="text-gray-300 mb-6 text-sm">
-                Valor inicial para smartphones de entrada. Tabela completa por modelo abaixo.
+                A tabela completa por modelo é liberada após o credenciamento por CNPJ.
               </p>
 
               <div className="space-y-2">
                 {[
-                  { label: 'Cliente Final',        val: 'a partir de R$ 175', positive: true },
-                  { label: 'Lojista Credenciado',  val: 'a partir de R$ 87', positive: true },
-                  { label: 'Margem do Parceiro',   val: '60-70%',             positive: true },
-                  { label: 'Display do Cliente',   val: 'Preservado',         positive: true },
+                  { label: 'Condição de lojista',   val: 'Após credenciamento', positive: true },
+                  { label: 'Display do cliente',    val: 'Preservado',          positive: true },
+                  { label: 'Garantia do serviço',   val: '90 dias',             positive: true },
+                  { label: 'Pagamento PJ',          val: '14 / 30 / 60 dias',   positive: true },
                 ].map((row, i) => (
                   <div key={i} className="flex justify-between items-center px-4 py-3 bg-white/[0.04] rounded-md text-sm">
                     <span className="text-gray-300">{row.label}</span>
@@ -647,7 +637,7 @@ function LogisticsSection() {
   const steps = [
     { n: '01', icon: 'package', title: 'Envio do Lote', desc: 'Envie displays em embalagens antichoque via transportadora ou motoboy.' },
     { n: '02', icon: 'check', title: 'Recebimento', desc: 'Inspeção técnica inicial em ambiente controlado. Cada display é catalogado.' },
-    { n: '03', icon: 'cpu', title: 'Processamento OCA', desc: 'Laminação sob vácuo com autoclave industrial. Precisão milimétrica.' },
+    { n: '03', icon: 'cpu', title: 'Processamento OCA', desc: 'Laminação OCA com prensa a vácuo, preservando o display original do cliente.' },
     { n: '04', icon: 'shield', title: 'Controle de Qualidade', desc: 'Verificação técnica rigorosa com teste de touch, brilho e uniformidade.' },
     { n: '05', icon: 'truck', title: 'Devolução', desc: 'Embalagem antichoque industrial pronta para montagem, devolvida via transportadora.' },
   ];
@@ -716,168 +706,41 @@ function LogisticsSection() {
 // Pricing Section (Tabela de Faixas — 2 níveis públicos + curadoria)
 // ============================================
 function PricingSection({ modelos: _modelos }: { modelos: any[] }) {
-  const levels: { id: CustomerLevel; badge: string; sub: string; tone: 'default' | 'cool' }[] = [
-    { id: 'final',   badge: 'Cliente Final', sub: 'A partir de R$ 175 por unidade', tone: 'default' },
-    { id: 'lojista', badge: 'Lojista',       sub: 'A partir de R$ 87 por unidade', tone: 'cool' },
+  const steps = [
+    { t: 'Credencie o CNPJ', d: 'Preencha o formulário com os dados da empresa. Análise em até 24h úteis.' },
+    { t: 'Receba a tabela', d: 'Enviamos a tabela completa por modelo, com a condição exclusiva de lojista.' },
+    { t: 'Comece a enviar', d: 'Combine a logística e mande os primeiros aparelhos para laminação.' },
   ];
 
   return (
     <section id="pricing" className="section bg-gray-50">
       <div className="container">
-        <div className="section-head max-w-3xl mx-auto text-center mb-12">
-          <span className="section-eyebrow">Tabela de Preços</span>
+        <div className="section-head max-w-3xl mx-auto text-center mb-10">
+          <span className="section-eyebrow">Tabela de preços</span>
           <h2 className="section-title text-display text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-navy-900 leading-tight mb-4">
-            Dois níveis de preço, uma única tecnologia
+            Tabela exclusiva para parceiros credenciados
           </h2>
           <p className="section-description text-lg text-gray-600">
-            Calculado como percentual da troca completa em assistência técnica (peça + mão de obra).
-            Cliente final e lojista têm tabelas próprias.
+            A tabela de valores por modelo — com a condição de lojista — é enviada
+            após o credenciamento por CNPJ. Assim garantimos preço de parceiro só
+            para quem é do ramo.
           </p>
         </div>
 
-        {/* Legenda dos 2 níveis */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-3xl mx-auto mb-10">
-          {levels.map((lvl) => (
-            <div
-              key={lvl.id}
-              className={`rounded-xl px-5 py-4 border ${
-                lvl.tone === 'cool'
-                  ? 'bg-cyber-blue/5 border-cyber-blue/20'
-                  : 'bg-white border-gray-200'
-              }`}
-            >
-              <div className="flex items-baseline justify-between gap-2 mb-1">
-                <span className="text-xs font-mono uppercase tracking-wider text-cyber-blue-hover">
-                  {lvl.badge}
-                </span>
-                <span className="text-xs text-gray-500">{lvl.sub}</span>
-              </div>
-              <p className="text-sm text-gray-700 leading-snug">
-                {CUSTOMER_LEVEL_DESCRIPTIONS[lvl.id]}
-              </p>
+        <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
+          {steps.map((s, i) => (
+            <div key={i} className="bg-white border border-gray-200 rounded-2xl p-6 text-left">
+              <div className="text-display text-2xl font-bold text-cyber-blue-hover mb-2">{i + 1}</div>
+              <div className="text-display text-base font-semibold text-navy-900 mb-1">{s.t}</div>
+              <p className="text-sm text-gray-600 leading-snug">{s.d}</p>
             </div>
           ))}
         </div>
 
-        {/* Tabela por faixa */}
-        <div className="max-w-5xl mx-auto">
-          {/* Mobile: cards empilhados (evita scroll horizontal da tabela) */}
-          <div className="md:hidden space-y-3">
-            {PRICING_TIERS.map((tier) => {
-              const finalRange = formatPriceRange(
-                calcularPrecoTier(tier.refMin, 'final'),
-                isFinite(tier.refMax) ? calcularPrecoTier(tier.refMax, 'final') : Number.POSITIVE_INFINITY,
-              );
-              const lojistaRange = formatPriceRange(
-                calcularPrecoTier(tier.refMin, 'lojista'),
-                isFinite(tier.refMax) ? calcularPrecoTier(tier.refMax, 'lojista') : Number.POSITIVE_INFINITY,
-              );
-              return (
-                <div key={tier.id} className="bg-white rounded-xl border border-gray-200 p-4 shadow-[0_2px_12px_-4px_rgba(0,0,0,0.06)]">
-                  <div className="text-display text-base font-semibold text-navy-900">{tier.label}</div>
-                  <div className="text-xs text-gray-600 mt-0.5 leading-snug">{tier.tagline}</div>
-                  <div className="grid grid-cols-2 gap-2.5 mt-3">
-                    <div className="rounded-lg bg-gray-50 border border-gray-100 px-3 py-2.5">
-                      <div className="text-[10px] font-mono uppercase tracking-wider text-gray-500 mb-0.5">Cliente Final</div>
-                      <div className="text-display text-base font-semibold text-navy-900 leading-tight">{finalRange}</div>
-                    </div>
-                    <div className="rounded-lg bg-cyber-blue/5 border border-cyber-blue/15 px-3 py-2.5">
-                      <div className="text-[10px] font-mono uppercase tracking-wider text-cyber-blue-hover mb-0.5">Lojista</div>
-                      <div className="text-display text-base font-semibold text-cyber-blue-hover leading-tight">{lojistaRange}</div>
-                    </div>
-                  </div>
-                  <div className="text-[11px] text-gray-400 mt-2.5">
-                    Ref. assistência: {formatPriceRange(tier.refMin, tier.refMax)} · por unidade
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Desktop: tabela completa */}
-          <div className="hidden md:block bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06)]">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="bg-navy-950 text-white">
-                <tr>
-                  <th className="text-left px-6 py-4 font-mono text-xs uppercase tracking-widest">Faixa</th>
-                  <th className="text-left px-6 py-4 font-mono text-xs uppercase tracking-widest hidden md:table-cell">Referência</th>
-                  <th className="text-right px-6 py-4 font-mono text-xs uppercase tracking-widest">Cliente Final</th>
-                  <th className="text-right px-6 py-4 font-mono text-xs uppercase tracking-widest">Lojista</th>
-                </tr>
-              </thead>
-              <tbody>
-                {PRICING_TIERS.map((tier, i) => (
-                  <tr
-                    key={tier.id}
-                    className={`border-t border-gray-100 ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}
-                  >
-                    <td className="px-6 py-5">
-                      <div className="text-display text-base font-semibold text-navy-900">
-                        {tier.label}
-                      </div>
-                      <div className="text-xs text-gray-500 mt-1 md:hidden">
-                        Ref: {formatPriceRange(tier.refMin, tier.refMax)}
-                      </div>
-                      <div className="text-xs text-gray-600 mt-1 leading-snug hidden md:block">
-                        {tier.tagline}
-                      </div>
-                    </td>
-                    <td className="px-6 py-5 hidden md:table-cell">
-                      <div className="text-sm font-medium text-gray-700">
-                        {formatPriceRange(tier.refMin, tier.refMax)}
-                      </div>
-                      <div className="text-xs text-gray-500 mt-1 leading-snug">
-                        {tier.tagline}
-                      </div>
-                    </td>
-                    <td className="px-6 py-5 text-right">
-                      <div className="text-display text-lg font-semibold text-navy-900">
-                        {formatPriceRange(
-                          calcularPrecoTier(tier.refMin, 'final'),
-                          isFinite(tier.refMax) ? calcularPrecoTier(tier.refMax, 'final') : Number.POSITIVE_INFINITY,
-                        )}
-                      </div>
-                      <div className="text-xs text-gray-500 mt-1">
-                        por unidade
-                      </div>
-                    </td>
-                    <td className="px-6 py-5 text-right">
-                      <div className="text-display text-lg font-semibold text-cyber-blue-hover">
-                        {formatPriceRange(
-                          calcularPrecoTier(tier.refMin, 'lojista'),
-                          isFinite(tier.refMax) ? calcularPrecoTier(tier.refMax, 'lojista') : Number.POSITIVE_INFINITY,
-                        )}
-                      </div>
-                      <div className="text-xs text-gray-500 mt-1">
-                        por unidade
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 text-xs text-gray-500 leading-relaxed">
-            <strong className="text-navy-900">Como ler:</strong> a referência é o valor
-            médio de mercado da troca completa em assistência (peça + mão de obra).
-            Cliente final paga <strong>70%</strong>, lojista credenciado paga <strong>35%</strong>.
-          </div>
-          </div>
-
-          {/* Nota "Como ler" no mobile (a tabela desktop fica oculta em telas pequenas) */}
-          <div className="md:hidden mt-3 px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-xs text-gray-500 leading-relaxed">
-            <strong className="text-navy-900">Como ler:</strong> a referência é o valor médio de mercado da troca completa em assistência (peça + mão de obra). Cliente final paga <strong>70%</strong>, lojista credenciado paga <strong>35%</strong>.
-          </div>
-        </div>
-
-        <div className="text-center mt-10">
-          <a
-            href="#cotacao"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-cyber-blue text-cyber-blue font-semibold rounded-lg hover:bg-cyber-blue hover:text-white transition-all"
-          >
-            Ver cotação para pessoa física
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="w-4 h-4">
+        <div className="text-center">
+          <a href="#form-section" className="btn-primary text-base justify-center">
+            Solicitar credenciamento e receber a tabela
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
