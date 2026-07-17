@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import CatalogSection from '@/components/CatalogSection';
 import ScrollReveal from '@/components/ScrollReveal';
 import TrackedWhatsAppLink from '@/components/TrackedWhatsAppLink';
@@ -176,7 +177,8 @@ function Hero() {
       <div className="absolute bottom-0 left-0 w-[300px] h-[300px] max-w-full bg-circuit-green rounded-full opacity-20 blur-[80px] -z-10 animate-float-orb" style={{ animationDirection: 'reverse' }} />
 
       <div className="container relative">
-        <div className="max-w-3xl">
+        <div className="grid lg:grid-cols-[1.05fr_0.9fr] gap-10 lg:gap-14 items-center">
+          <div>
           <div className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-circuit-green/10 border border-circuit-green/30 text-circuit-green font-mono text-[11px] font-medium tracking-widest uppercase backdrop-blur">
             <span className="relative flex h-2 w-2">
               <span className="absolute inline-flex h-full w-full rounded-full bg-circuit-green opacity-75 animate-ping" />
@@ -232,6 +234,22 @@ function Hero() {
                 <div className="text-sm font-bold text-white leading-tight">{b.sub}</div>
               </div>
             ))}
+          </div>
+          </div>
+
+          {/* Coluna imagem — foto do processo de laminação */}
+          <div className="relative">
+            <div className="relative aspect-[3/4] w-full max-w-md mx-auto lg:max-w-none rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] ring-1 ring-circuit-green/10">
+              <Image
+                src="/hero-laminacao.jpg"
+                alt="Técnico realizando a laminação do vidro sobre o display original em máquina OCA de laboratório"
+                fill
+                priority
+                sizes="(max-width: 1024px) 90vw, 42vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-950/50 via-transparent to-transparent" />
+            </div>
           </div>
         </div>
       </div>
