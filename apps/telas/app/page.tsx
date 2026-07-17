@@ -249,7 +249,7 @@ function Hero() {
           <div className="relative">
             <div className="relative aspect-[3/4] w-full max-w-md mx-auto lg:max-w-none rounded-2xl overflow-hidden border border-white/10 shadow-[0_20px_60px_-15px_rgba(0,0,0,0.6)] ring-1 ring-circuit-green/10">
               <Image
-                src="/hero-laminacao.jpg"
+                src="/hero-laminacao.png"
                 alt="Técnico realizando a laminação do vidro sobre o display original em máquina OCA de laboratório"
                 fill
                 priority
