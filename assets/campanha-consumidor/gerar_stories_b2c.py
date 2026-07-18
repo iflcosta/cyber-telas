@@ -30,13 +30,13 @@ from gerar_slide1 import crop_to_ratio, vertical_gradient_alpha, SRC_PHOTO  # no
 W, H = 1080, 1920
 OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "stories")
 
-# Cabeçalho posicionado com folga de ~190px do topo — Stories/Reels reservam
-# essa faixa para o chip de perfil/botão fechar sobrepostos pelo Instagram.
-HEADER_Y = 170
-DOT_Y = 184
-BADGE_Y = 260
-# Rodapé com folga simétrica — reservada para a barra de resposta do Stories.
-SAFE_BOTTOM = H - 220
+# Cabeçalho e rodapé respeitam a faixa de ~250px que o Instagram reserva em
+# Stories/Reels pagos para sobrepor UI nativa (chip de perfil/fechar no topo,
+# barra de resposta/CTA no rodapé) — nada de conteúdo relevante entra nela.
+HEADER_Y = 250
+DOT_Y = 264
+BADGE_Y = 340
+SAFE_BOTTOM = H - 290
 
 
 def base_canvas_dark():
@@ -96,7 +96,7 @@ def make_slide_1():
     eyebrow_badge(draw, W / 2, BADGE_Y, "LAMINAÇÃO OCA · 1 / 3")
 
     f_h1 = font(F_DISPLAY_BOLD, 58)
-    y = 1370
+    y = 1300
     draw_centered(draw, W / 2, y, "Tela trincou,", f_h1, WHITE)
     y += 70
     draw_centered(draw, W / 2, y, "mas funciona normal?", f_h1, WHITE)
@@ -137,7 +137,7 @@ def make_slide_2():
 
     col_y = y2 + 110
     col_w = (W - 64 * 2 - 24) / 2
-    col_h = 900
+    col_h = 760
     left_x = 64
     right_x = 64 + col_w + 24
 
@@ -180,7 +180,7 @@ def make_slide_2():
     items_good = [
         "Cores e brilho\nidênticos de fábrica",
         "Toque original,\npreciso, sem falha",
-        "Biometria\nfuncionando 100%",
+        "Biometria\npreservada",
     ]
     for i, it in enumerate(items_good):
         slot_top = col_y + title_zone + i * slot_h
@@ -210,43 +210,43 @@ def make_slide_3():
     y = eyebrow_badge(draw, W / 2, BADGE_Y, "ORÇAMENTO · 3 / 3")
 
     f_h1 = font(F_DISPLAY_BOLD, 66)
-    y2 = y + 170
+    y2 = y + 130
     draw_centered(draw, W / 2, y2, "Salve seu", f_h1, WHITE)
     y2 += 84
     gradient_text(img, (W / 2, y2), "display original.", f_h1, CYBER_BLUE_LIGHT, CIRCUIT_GREEN, anchor="ma")
     draw = ImageDraw.Draw(img)
-    y2 += 110
+    y2 += 100
 
     f_sub = font(F_BODY_REG, 30)
     draw_centered(draw, W / 2, y2, "Trocamos só o vidro externo — sua tela", f_sub, GRAY_300)
-    y2 += 42
+    y2 += 40
     draw_centered(draw, W / 2, y2, "de fábrica continua a mesma.", f_sub, GRAY_300)
-    y2 += 160
+    y2 += 130
 
     card_x, card_w = 64, W - 128
-    card_y, card_h = y2, 360
+    card_y, card_h = y2, 340
     rounded_rect(draw, [card_x, card_y, card_x + card_w, card_y + card_h], radius=30,
                  fill=NAVY_800, outline=(51, 92, 158), width=1)
 
     f_price_label = font(F_MONO_BOLD, 20)
-    draw_centered(draw, W / 2, card_y + 42, "ECONOMIA", f_price_label, GRAY_400)
+    draw_centered(draw, W / 2, card_y + 40, "ECONOMIA", f_price_label, GRAY_400)
     f_price = font(F_DISPLAY_BOLD, 50)
-    draw_centered(draw, W / 2, card_y + 74, "Até 70% mais barato", f_price, CIRCUIT_GREEN)
+    draw_centered(draw, W / 2, card_y + 70, "Até 70% mais barato", f_price, CIRCUIT_GREEN)
     f_price_sub = font(F_BODY_REG, 27)
-    draw_centered(draw, W / 2, card_y + 148, "que uma tela nova na autorizada", f_price_sub, GRAY_300)
+    draw_centered(draw, W / 2, card_y + 140, "que uma tela nova na autorizada", f_price_sub, GRAY_300)
 
-    draw.line([(card_x + 44, card_y + 228), (card_x + card_w - 44, card_y + 228)], fill=(51, 92, 158), width=1)
+    draw.line([(card_x + 44, card_y + 216), (card_x + card_w - 44, card_y + 216)], fill=(51, 92, 158), width=1)
 
     f_garantia = font(F_BODY_BOLD, 27)
     garantia_txt = "90 dias de garantia do serviço"
     gw = text_w(draw, garantia_txt, f_garantia)
     icon_r = 16
     gx0 = W / 2 - gw / 2 - icon_r * 2 - 12
-    check_icon(draw, gx0, card_y + 284, icon_r, CIRCUIT_GREEN)
-    draw.text((W / 2 - gw / 2 + icon_r, card_y + 270), garantia_txt, font=f_garantia, fill=WHITE, anchor="la")
+    check_icon(draw, gx0, card_y + 268, icon_r, CIRCUIT_GREEN)
+    draw.text((W / 2 - gw / 2 + icon_r, card_y + 254), garantia_txt, font=f_garantia, fill=WHITE, anchor="la")
 
-    btn_y = card_y + card_h + 130
-    btn_w, btn_h = card_w, 150
+    btn_y = card_y + card_h + 100
+    btn_w, btn_h = card_w, 140
     btn_x = card_x
     rounded_rect(draw, [btn_x, btn_y, btn_x + btn_w, btn_y + btn_h], radius=btn_h // 2, fill=CIRCUIT_GREEN)
     f_btn = font(F_BODY_BOLD, 37)
@@ -254,12 +254,12 @@ def make_slide_3():
                font=f_btn, fill=NAVY_950, anchor="mm")
 
     f_hours = font(F_MONO_REG, 23)
-    draw_centered(draw, W / 2, btn_y + btn_h + 40, "Seg–Sex · Resposta em poucas horas", f_hours, GRAY_400)
+    draw_centered(draw, W / 2, btn_y + btn_h + 34, "Seg–Sex · Resposta em poucas horas", f_hours, GRAY_400)
 
     f_disc = font(F_BODY_REG, 21)
-    disc_y = btn_y + btn_h + 140
-    draw_centered(draw, W / 2, disc_y, "Laboratório independente — não somos autorizados", f_disc, GRAY_500)
-    draw_centered(draw, W / 2, disc_y + 34, "Apple ou Samsung.", f_disc, GRAY_500)
+    disc_y = btn_y + btn_h + 120
+    draw_centered(draw, W / 2, disc_y, "Laboratório independente — não somos", f_disc, GRAY_500)
+    draw_centered(draw, W / 2, disc_y + 32, "autorizados de fábrica.", f_disc, GRAY_500)
 
     return img
 

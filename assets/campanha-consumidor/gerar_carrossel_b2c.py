@@ -215,8 +215,8 @@ def make_slide_2():
 
     items_good = [
         "Cores e brilho\nidênticos aos de fábrica",
-        "Toque original,\npreciso, sem fantasma",
-        "Biometria\nfuncionando 100%",
+        "Toque original,\npreciso, sem falha",
+        "Biometria\npreservada",
     ]
     iy = col_y + 110
     for it in items_good:
@@ -298,8 +298,8 @@ def make_slide_3():
 
     # Disclaimer de transparência (compliance)
     f_disc = font(F_BODY_REG, 18)
-    draw_centered(draw, W / 2, H - 70, "Laboratório independente — não somos autorizados", f_disc, GRAY_500)
-    draw_centered(draw, W / 2, H - 46, "Apple ou Samsung.", f_disc, GRAY_500)
+    draw_centered(draw, W / 2, H - 70, "Laboratório independente — não somos", f_disc, GRAY_500)
+    draw_centered(draw, W / 2, H - 46, "autorizados de fábrica.", f_disc, GRAY_500)
 
     return img
 
