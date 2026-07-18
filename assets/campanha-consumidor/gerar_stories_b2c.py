@@ -88,7 +88,7 @@ def make_slide_1():
     img.paste(top_scrim, (0, 0), top_alpha)
 
     bottom_scrim = Image.new("RGB", (W, H), NAVY_950)
-    bottom_alpha = vertical_gradient_alpha((W, H), [(0.0, 0), (0.58, 0), (0.70, 150), (0.84, 235), (1.0, 250)])
+    bottom_alpha = vertical_gradient_alpha((W, H), [(0.0, 0), (0.48, 0), (0.60, 170), (0.76, 235), (1.0, 250)])
     img.paste(bottom_scrim, (0, 0), bottom_alpha)
 
     draw = ImageDraw.Draw(img)
@@ -153,7 +153,7 @@ def make_slide_2():
     icon_r = 30
     line_gap = 46
 
-    rounded_rect(draw, [left_x, col_y, left_x + col_w, col_y + col_h], radius=32,
+    rounded_rect(draw, [left_x, col_y, left_x + col_w, col_y + col_h], radius=30,
                  fill=(30, 14, 14), outline=(120, 40, 40), width=2)
     draw.text((left_x + 36, col_y + 46), "Tela paralela", font=f_col_title, fill=(252, 165, 165), anchor="la")
 
@@ -173,7 +173,7 @@ def make_slide_2():
             draw.text((left_x + 112, ly), line, font=f_item, fill=GRAY_300, anchor="la")
             ly += line_gap
 
-    rounded_rect(draw, [right_x, col_y, right_x + col_w, col_y + col_h], radius=32,
+    rounded_rect(draw, [right_x, col_y, right_x + col_w, col_y + col_h], radius=30,
                  fill=(8, 36, 26), outline=CIRCUIT_GREEN_DARK, width=2)
     draw.text((right_x + 36, col_y + 46), "Display original", font=f_col_title, fill=CIRCUIT_GREEN, anchor="la")
 
@@ -218,9 +218,9 @@ def make_slide_3():
     y2 += 100
 
     f_sub = font(F_BODY_REG, 30)
-    draw_centered(draw, W / 2, y2, "Trocamos só o vidro externo — sua tela", f_sub, GRAY_300)
+    draw_centered(draw, W / 2, y2, "Trocamos só o vidro externo —", f_sub, GRAY_300)
     y2 += 40
-    draw_centered(draw, W / 2, y2, "de fábrica continua a mesma.", f_sub, GRAY_300)
+    draw_centered(draw, W / 2, y2, "sua tela de fábrica continua a mesma.", f_sub, GRAY_300)
     y2 += 130
 
     card_x, card_w = 64, W - 128
@@ -240,8 +240,8 @@ def make_slide_3():
     f_garantia = font(F_BODY_BOLD, 27)
     garantia_txt = "90 dias de garantia do serviço"
     gw = text_w(draw, garantia_txt, f_garantia)
-    icon_r = 16
-    gx0 = W / 2 - gw / 2 - icon_r * 2 - 12
+    icon_r = 26
+    gx0 = W / 2 - gw / 2 - icon_r * 2 - 14
     check_icon(draw, gx0, card_y + 268, icon_r, CIRCUIT_GREEN)
     draw.text((W / 2 - gw / 2 + icon_r, card_y + 254), garantia_txt, font=f_garantia, fill=WHITE, anchor="la")
 
@@ -257,7 +257,7 @@ def make_slide_3():
     draw_centered(draw, W / 2, btn_y + btn_h + 34, "Seg–Sex · Resposta em poucas horas", f_hours, GRAY_400)
 
     f_disc = font(F_BODY_REG, 21)
-    disc_y = btn_y + btn_h + 120
+    disc_y = btn_y + btn_h + 150
     draw_centered(draw, W / 2, disc_y, "Laboratório independente — não somos", f_disc, GRAY_500)
     draw_centered(draw, W / 2, disc_y + 32, "autorizados de fábrica.", f_disc, GRAY_500)
 
